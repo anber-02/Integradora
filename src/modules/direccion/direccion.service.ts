@@ -4,7 +4,6 @@ import { UpdateDireccionDto } from './dto/update-direccion.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Direccion } from './entities/direccion.entity';
 import { Repository } from 'typeorm';
-import { Dir } from 'fs';
 
 
 @Injectable()

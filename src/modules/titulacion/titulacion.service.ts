@@ -1,26 +1,80 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { CreateTitulacionDto } from './dto/create-titulacion.dto';
 import { UpdateTitulacionDto } from './dto/update-titulacion.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Repository } from 'typeorm';
+import { Titulacion } from './entities/titulacion.entity';
 
 @Injectable()
 export class TitulacionService {
-  create(createTitulacionDto: CreateTitulacionDto) {
-    return 'This action adds a new titulacion';
+
+  constructor(
+    @InjectRepository(Titulacion)
+    private tituRepo:Repository<Titulacion>
+  ){}
+
+  async create(createTitulacionDto: CreateTitulacionDto) {
+    try{
+      const Titulacion = this.tituRepo.create(
+        createTitulacionDto
+      )
+      await this.tituRepo.save(Titulacion)
+      return Titulacion
+    }
+    catch(error){
+      throw new InternalServerErrorException(error);
+    }
   }
 
   findAll() {
-    return `This action returns all titulacion`;
+    try{
+      const Titulacion = this.tituRepo.find();
+      return Titulacion;
+    }
+    catch(error){
+      throw new InternalServerErrorException(error);
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} titulacion`;
+  async findOne(id: number) {
+    const Titulacion = await this.tituRepo.findOne({
+      where:{
+        id
+      }
+    });
+    if(!Titulacion){
+      throw new NotFoundException('titu no encontrado');
+    }
+
+    return Titulacion;
   }
 
-  update(id: number, updateTitulacionDto: UpdateTitulacionDto) {
-    return `This action updates a #${id} titulacion`;
+  async update(id: number, updateTitulacionDto: UpdateTitulacionDto) {
+    try{
+      const Titulacion=await this.tituRepo.preload({
+        id,
+        ...updateTitulacionDto
+      });
+      await this.tituRepo.save(Titulacion)
+      return Titulacion;
+    }
+    catch(error){
+      throw new InternalServerErrorException(error);
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} titulacion`;
+  async remove(id: number) {
+    const Titulacion = await this.tituRepo.findOne({
+      where:{
+        id
+      }
+    });
+    if(!Titulacion){
+      throw new NotFoundException('titulacion no encontrado perro malditoooo');
+    }
+    await this.tituRepo.delete(id);
+    return{
+      Message:'Se a eliminado'
+    }
   }
 }

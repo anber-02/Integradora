@@ -1,26 +1,81 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { CreateDocumentacionDto } from './dto/create-documentacion.dto';
 import { UpdateDocumentacionDto } from './dto/update-documentacion.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Documentacion } from './entities/documentacion.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class DocumentacionService {
-  create(createDocumentacionDto: CreateDocumentacionDto) {
-    return 'This action adds a new documentacion';
+
+  constructor(
+    @InjectRepository(Documentacion)
+    private docuRepo:Repository<Documentacion>
+  ){}
+
+  async create(createDocumentacionDto: CreateDocumentacionDto) {
+    try{
+      const Documentacion = this.docuRepo.create(
+        createDocumentacionDto
+      )
+      await this.docuRepo.save(Documentacion)
+      return Documentacion
+    }
+    catch(error){
+      throw new InternalServerErrorException(error);
+
+    }
   }
 
   findAll() {
-    return `This action returns all documentacion`;
+    try{
+      const Documentacion = this.docuRepo.find();
+      return Documentacion;
+    }
+    catch(error){
+      throw new InternalServerErrorException(error);
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} documentacion`;
+  async findOne(id: number) {
+    const Documentacion = await this.docuRepo.findOne({
+      where:{
+        id
+      }
+    });
+    if(!Documentacion){
+      throw new NotFoundException('producto no encontrado');
+    }
+
+    return Documentacion;
   }
 
-  update(id: number, updateDocumentacionDto: UpdateDocumentacionDto) {
-    return `This action updates a #${id} documentacion`;
+  async update(id: number, updateDocumentacionDto: UpdateDocumentacionDto) {
+    try{
+      const Documentacion=await this.docuRepo.preload({
+        id,
+        ...updateDocumentacionDto
+      });
+      await this.docuRepo.save(Documentacion)
+      return Documentacion;
+    }
+    catch(error){
+      throw new InternalServerErrorException(error);
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} documentacion`;
+  async remove(id: number) {
+    const Documentacion = await this.docuRepo.findOne({
+      where:{
+        id
+      }
+    });
+    if(!Documentacion){
+      throw new NotFoundException('producto no encontrado');
+    }
+    await this.docuRepo.delete(id);
+    return{
+      Message:'Se a eliminado'
+    }
   }
 }

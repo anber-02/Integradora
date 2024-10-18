@@ -23,7 +23,7 @@ export class CreateDireccionDto {
     @IsString()
     @MinLength(5)
     pais:string;
-    @IsString()
+    @IsNumber()
     @Min(6)
     codigo_postal:number;
 }

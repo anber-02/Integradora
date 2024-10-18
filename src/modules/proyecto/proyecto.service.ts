@@ -1,26 +1,81 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
 import { CreateProyectoDto } from './dto/create-proyecto.dto';
 import { UpdateProyectoDto } from './dto/update-proyecto.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Proyecto } from './entities/proyecto.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class ProyectoService {
-  create(createProyectoDto: CreateProyectoDto) {
-    return 'This action adds a new proyecto';
+
+  constructor(
+    @InjectRepository(Proyecto)
+    private proyeRepo:Repository<Proyecto>
+  ){}
+
+  async create(createProyectoDto: CreateProyectoDto) {
+    try{
+      const Proyecto = this.proyeRepo.create(
+        createProyectoDto
+      )
+      await this.proyeRepo.save(Proyecto)
+      return Proyecto
+    }
+    catch(error){
+      throw new InternalServerErrorException(error);
+
+    }
   }
 
   findAll() {
-    return `This action returns all proyecto`;
+    try{
+      const Proyecto = this.proyeRepo.find();
+      return Proyecto;
+    }
+    catch(error){
+      throw new InternalServerErrorException(error);
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} proyecto`;
+  async findOne(id: number) {
+    const Proyecto = await this.proyeRepo.findOne({
+      where:{
+        id
+      }
+    });
+    if(!Proyecto){
+      throw new NotFoundException('producto no encontrado');
+    }
+
+    return Proyecto;
   }
 
-  update(id: number, updateProyectoDto: UpdateProyectoDto) {
-    return `This action updates a #${id} proyecto`;
+  async update(id: number, updateProyectoDto: UpdateProyectoDto) {
+    try{
+      const Proyecto=await this.proyeRepo.preload({
+        id,
+        ...updateProyectoDto
+      });
+      await this.proyeRepo.save(Proyecto)
+      return Proyecto;
+    }
+    catch(error){
+      throw new InternalServerErrorException(error);
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} proyecto`;
+  async remove(id: number) {
+    const Proyecto = await this.proyeRepo.findOne({
+      where:{
+        id
+      }
+    });
+    if(!Proyecto){
+      throw new NotFoundException('producto no encontrado');
+    }
+    await this.proyeRepo.delete(id);
+    return{
+      Message:'Se a eliminado'
+    }
   }
 }

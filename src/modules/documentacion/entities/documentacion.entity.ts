@@ -11,14 +11,11 @@ export class Documentacion {
     @Column()
     tipo_archivo:string;
 
-    @Column({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP(6)' })
-    fecha_subida: Date;
-
-    @CreateDateColumn({
+    @Column({
         type: 'timestamp',
-        default: () => 'CURRENT_TIMESTAMP(6)'
-    })
-    createdAt: Date;
+        default: () => 'CURRENT_TIMESTAMP',
+      })
+      fecha_subida: Date;
 
     @Column()
     url:string;

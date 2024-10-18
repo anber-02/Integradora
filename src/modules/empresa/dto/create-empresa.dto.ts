@@ -14,7 +14,6 @@ export class CreateEmpresaDto {
     giro:string;
 
     @IsString()
-    @IsPositive()
     @MinLength(3)
     razon_social:string;
 

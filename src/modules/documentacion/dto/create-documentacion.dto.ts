@@ -9,9 +9,9 @@ export class CreateDocumentacionDto {
     @MinLength(5)
     tipo_archivo:string;
 
-    @IsDate()
-    @IsOptional()
-    fecha_subida: Date;
+    // @IsDate()
+    // @IsOptional()
+    // fecha_subida: Date;
     
     @IsString()
     @MinLength(3)
