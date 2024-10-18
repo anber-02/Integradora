@@ -1,13 +1,13 @@
-import { Column, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn } from 'typeorm'
+import { Column, Entity, JoinColumn, OneToOne, PrimaryGeneratedColumn } from 'typeorm'
 import { Role } from 'src/modules/roles/entities/role.entity'
 
-@Entity({name:"users"})
+@Entity({name:"usuario"})
 export class User {
   @PrimaryGeneratedColumn()
   id: number
 
   @Column()
-  name: string
+  nombre: string
 
   @Column()
   email: string
@@ -16,7 +16,7 @@ export class User {
   password: string
 
   @Column()
-  phone_number: string
+  num_telefono: string
   
   @Column({
     type: 'timestamp',
@@ -24,19 +24,8 @@ export class User {
   })
   created_at: Date;
 
-  @ManyToMany(() => Role, roles => roles.users)
-  @JoinTable({
-      name: 'rol_user',
-      joinColumn: {
-        name: 'user_id',
-        referencedColumnName: 'id'
-      },
-      inverseJoinColumn: {
-        name: 'rol_id',
-        referencedColumnName: "id"
-      }
-    })
-  roles: Role[]
-
+  @OneToOne(() => Role, rol => rol.user, {cascade: true})
+  @JoinColumn()
+  rol: Role
 }
 

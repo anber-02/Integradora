@@ -16,21 +16,18 @@ export class UserService {
   ) { }
 
   async create(createUserDto: CreateUserDto) {
-    const user =  this.userRepository.create(createUserDto)
+    const user = this.userRepository.create(createUserDto)
+    // Ay que verificar esta funcion
+    const userRole = await this.rolesService.findOneByName('empresa')
 
-    const userRole = await this.rolesService.findOneByName('user')
-    if (userRole) {
-      user.roles = [userRole]
-    }
-
-
+    user.rol = userRole
     await this.userRepository.save(user)
     return user
   }
 
   findAll() {
     return this.userRepository.find({
-      relations: { roles: true }
+      relations: { rol: true }
     })
   }
 
@@ -38,7 +35,7 @@ export class UserService {
     return this.userRepository.findOne({
       where: { id: id },
       relations: {
-        roles: true
+        rol: true
       }
     })
   }
@@ -47,7 +44,7 @@ export class UserService {
     return this.userRepository.findOne({
       where: { email },
       relations: {
-        roles: true
+        rol: true
       }
     })
   }
@@ -72,7 +69,7 @@ export class UserService {
   }
   async assignRolToUse(data: { user_id: number, rol_id: number }) {
     const { user_id, rol_id } = data
-    const user = await this.userRepository.findOne({ where: { id: user_id }, relations: { roles: true } })
+    const user = await this.userRepository.findOne({ where: { id: user_id }, relations: { rol: true } })
     if (!user) {
       throw new Error('User not found');
     }
@@ -82,9 +79,9 @@ export class UserService {
       throw new Error('Role not found');
     }
 
-    user.roles.push(role)
+    user.rol = role
     await this.userRepository.save(user)
 
-    return {message: 'Role assigned successfully' }
+    return { message: 'Role assigned successfully' }
   }
 }

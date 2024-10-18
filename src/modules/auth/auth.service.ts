@@ -28,7 +28,7 @@ export class AuthService {
 
     const { password, ...user } = await this.usersService.create(registerDto)
 
-    const payload = { sub: user.id, username: user.name, rol: user.roles[0]?.rol ?? "" };
+    const payload = { sub: user.id, username: user.nombre, rol: user.rol };
     const token = this.jwtService.sign(payload)
 
     return {
@@ -50,7 +50,7 @@ export class AuthService {
 
     if (!passwordCorrect) throw new UnauthorizedException({ message: 'user / password incorrect' })
 
-    const payload = { sub: user.id, username: user.name, rol: user.roles[0]?.rol ?? "" };
+    const payload = { sub: user.id, username: user.nombre, rol: user.rol};
     const token = this.jwtService.sign(payload)
 
     response.cookie('token', token, { httpOnly: true });

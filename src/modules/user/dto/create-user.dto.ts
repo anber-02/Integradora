@@ -3,7 +3,7 @@ import { IsEmail, IsPhoneNumber, IsString, MinLength } from 'class-validator'
 export class CreateUserDto {
   @MinLength(3)
   @IsString()
-  name: string
+  nombre: string
 
   @IsEmail()
   email: string
@@ -13,5 +13,5 @@ export class CreateUserDto {
   password: string
 
   @IsPhoneNumber()
-  phone_number: string
+  num_telefono: string
 }

@@ -4,8 +4,8 @@ POST http://localhost:3000/api/auth/register
 Content-Type: application/json
 
 {
-  "name": "anberto",
-  "phone_number": "+52 951 289 09 39",
+  "nombre": "anberto",
+  "num_telefono": "+52 951 289 09 39",
   "email": "ann2@gmail.com",
   "password": "12345678"
 }

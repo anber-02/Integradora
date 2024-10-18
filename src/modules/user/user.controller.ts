@@ -7,10 +7,6 @@ import { UpdateUserDto } from './dto/update-user.dto';
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
-  @Post("assign-rol")
-  assignRolToUser(@Body() data: { user_id: number, rol_id: number }) {
-    return this.userService.assignRolToUse(data);
-  }
 
   @Post()
   create(@Body() createUserDto: CreateUserDto) {

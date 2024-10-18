@@ -26,7 +26,7 @@ export class AuthController {
 
   // EJEMPLO DE COMO VALIDAR RUTAS
   @Get('/profile')
-  @Auth(Role.ADMIN)
+  @Auth(Role.EMPRESA)
   profile() {
     return {message: 'profile'};
   }
