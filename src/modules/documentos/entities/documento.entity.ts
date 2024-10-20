@@ -1,4 +1,5 @@
 import { Empresa } from 'src/modules/empresa/entities/empresa.entity';
+
 import {
   Column,
   Entity,
@@ -20,6 +21,7 @@ export class Documento {
 
   @Column({
     type: 'timestamp',
+
     default: () => 'CURRENT_TIMESTAMP',
   })
   fecha_subida: Date;
