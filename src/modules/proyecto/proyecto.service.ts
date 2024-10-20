@@ -1,4 +1,8 @@
-import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateProyectoDto } from './dto/create-proyecto.dto';
 import { UpdateProyectoDto } from './dto/update-proyecto.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -7,43 +11,37 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class ProyectoService {
-
   constructor(
     @InjectRepository(Proyecto)
-    private proyeRepo:Repository<Proyecto>
-  ){}
+    private proyeRepo: Repository<Proyecto>,
+  ) {}
 
   async create(createProyectoDto: CreateProyectoDto) {
-    try{
-      const Proyecto = this.proyeRepo.create(
-        createProyectoDto
-      )
-      await this.proyeRepo.save(Proyecto)
-      return Proyecto
-    }
-    catch(error){
+    try {
+      const Proyecto = this.proyeRepo.create(createProyectoDto);
+      await this.proyeRepo.save(Proyecto);
+      return Proyecto;
+    } catch (error) {
       throw new InternalServerErrorException(error);
-
     }
   }
 
   findAll() {
-    try{
+    try {
       const Proyecto = this.proyeRepo.find();
       return Proyecto;
-    }
-    catch(error){
+    } catch (error) {
       throw new InternalServerErrorException(error);
     }
   }
 
   async findOne(id: number) {
     const Proyecto = await this.proyeRepo.findOne({
-      where:{
-        id
-      }
+      where: {
+        id,
+      },
     });
-    if(!Proyecto){
+    if (!Proyecto) {
       throw new NotFoundException('producto no encontrado');
     }
 
@@ -51,31 +49,30 @@ export class ProyectoService {
   }
 
   async update(id: number, updateProyectoDto: UpdateProyectoDto) {
-    try{
-      const Proyecto=await this.proyeRepo.preload({
+    try {
+      const Proyecto = await this.proyeRepo.preload({
         id,
-        ...updateProyectoDto
+        ...updateProyectoDto,
       });
-      await this.proyeRepo.save(Proyecto)
+      await this.proyeRepo.save(Proyecto);
       return Proyecto;
-    }
-    catch(error){
+    } catch (error) {
       throw new InternalServerErrorException(error);
     }
   }
 
   async remove(id: number) {
     const Proyecto = await this.proyeRepo.findOne({
-      where:{
-        id
-      }
+      where: {
+        id,
+      },
     });
-    if(!Proyecto){
+    if (!Proyecto) {
       throw new NotFoundException('producto no encontrado');
     }
     await this.proyeRepo.delete(id);
-    return{
-      Message:'Se a eliminado'
-    }
+    return {
+      Message: 'Se a eliminado',
+    };
   }
 }

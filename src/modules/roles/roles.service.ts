@@ -9,43 +9,43 @@ import { Role } from './entities/role.entity';
 export class RolesService {
   constructor(
     @InjectRepository(Role)
-    private readonly rolesRepository: Repository<Role>
-  ) { }
+    private readonly rolesRepository: Repository<Role>,
+  ) {}
 
   async create(value: CreateRoleDto) {
-    const rol = this.rolesRepository.create(value)
+    const rol = this.rolesRepository.create(value);
 
-    await this.rolesRepository.save(rol)
-    return rol
+    await this.rolesRepository.save(rol);
+    return rol;
   }
 
   findAll() {
-    return this.rolesRepository.find()
+    return this.rolesRepository.find();
   }
   findOne(id: number) {
-    return this.rolesRepository.findOne({ where: { id: id } })
+    return this.rolesRepository.findOne({ where: { id: id } });
   }
   findOneByName(name: string) {
-    return this.rolesRepository.findOne({ where: { rol: name } })
+    return this.rolesRepository.findOne({ where: { rol: name } });
   }
 
   async update(id: number, updateUserDto: UpdateRoleDto) {
     const user = await this.rolesRepository.preload({
-      id: id, ...updateUserDto
-    })
-    await this.rolesRepository.save(user)
+      id: id,
+      ...updateUserDto,
+    });
+    await this.rolesRepository.save(user);
 
-    return user
+    return user;
   }
 
   remove(id: number) {
     try {
       this.rolesRepository.delete(id);
     } catch (e) {
-      throw new Error(e)
+      throw new Error(e);
     }
 
-    return { message: 'rol eliminado' }
+    return { message: 'rol eliminado' };
   }
-
 }

@@ -1,4 +1,8 @@
-import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateHabilidadDto } from './dto/create-habilidad.dto';
 import { UpdateHabilidadDto } from './dto/update-habilidad.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -7,43 +11,37 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class HabilidadService {
-
   constructor(
     @InjectRepository(Habilidad)
-    private habiRepo:Repository<Habilidad>
-  ){}
+    private habiRepo: Repository<Habilidad>,
+  ) {}
 
   async create(createHabilidadDto: CreateHabilidadDto) {
-    try{
-      const Habilidad = this.habiRepo.create(
-        createHabilidadDto
-      )
-      await this.habiRepo.save(Habilidad)
-      return Habilidad
-    }
-    catch(error){
+    try {
+      const Habilidad = this.habiRepo.create(createHabilidadDto);
+      await this.habiRepo.save(Habilidad);
+      return Habilidad;
+    } catch (error) {
       throw new InternalServerErrorException(error);
-
     }
   }
 
   findAll() {
-    try{
+    try {
       const Habilidad = this.habiRepo.find();
       return Habilidad;
-    }
-    catch(error){
+    } catch (error) {
       throw new InternalServerErrorException(error);
     }
   }
 
   async findOne(id: number) {
     const Habilidad = await this.habiRepo.findOne({
-      where:{
-        id
-      }
+      where: {
+        id,
+      },
     });
-    if(!Habilidad){
+    if (!Habilidad) {
       throw new NotFoundException('habilidad no encontrado');
     }
 
@@ -51,31 +49,30 @@ export class HabilidadService {
   }
 
   async update(id: number, updateHabilidadDto: UpdateHabilidadDto) {
-    try{
-      const Habilidad=await this.habiRepo.preload({
+    try {
+      const Habilidad = await this.habiRepo.preload({
         id,
-        ...updateHabilidadDto
+        ...updateHabilidadDto,
       });
-      await this.habiRepo.save(Habilidad)
+      await this.habiRepo.save(Habilidad);
       return Habilidad;
-    }
-    catch(error){
+    } catch (error) {
       throw new InternalServerErrorException(error);
     }
   }
 
   async remove(id: number) {
     const Habilidad = await this.habiRepo.findOne({
-      where:{
-        id
-      }
+      where: {
+        id,
+      },
     });
-    if(!Habilidad){
+    if (!Habilidad) {
       throw new NotFoundException('habilidad no encontrado');
     }
     await this.habiRepo.delete(id);
-    return{
-      Message:'Se a eliminado'
-    }
+    return {
+      Message: 'Se a eliminado',
+    };
   }
 }

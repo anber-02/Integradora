@@ -1,0 +1,31 @@
+@url = http://localhost:3000/api/proyecto
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoibHVodWhqIiwiaWF0IjoxNzIxMjM4NzA5LCJleHAiOjE3MjEzMjUxMDl9.41aORqmkyPX-De2mRFZNcGAbd8OgVcvFhRO_kxxNKQ4
+
+###
+GET {{url}}/
+Authorization: Bearer {{token}}
+
+###
+GET {{url}}/
+
+###
+POST {{url}}/ 
+Content-Type: application/json
+
+{
+  "nombre": "Nombre del Proyecto",
+  "descripcion": "Descripción del Proyecto",
+  "participantes_requeridos": 5,
+  "empresa_id": 1
+}
+
+###
+PATCH {{url}}/1
+Content-Type: application/json
+
+{
+  "status": false
+}
+
+###
+DELETE {{url}}/1

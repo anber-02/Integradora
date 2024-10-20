@@ -7,14 +7,15 @@ import { AppService } from './app.service';
 import { UserModule } from './modules/user/user.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { DireccionModule } from './modules/direccion/direccion.module';
-import { DocumentacionModule } from './modules/documentacion/documentacion.module';
-import { EmpleadorModule } from './modules/empleador/empleador.module';
 import { CarreraModule } from './modules/carrera/carrera.module';
 import { EmpresaModule } from './modules/empresa/empresa.module';
 import { HabilidadModule } from './modules/habilidad/habilidad.module';
 import { ProyectoModule } from './modules/proyecto/proyecto.module';
-import { TitulacionModule } from './modules/titulacion/titulacion.module';
-
+import { DocumentosModule } from './modules/documentos/documentos.module';
+import { NivelEducativoModule } from './modules/nivel-educativo/nivel-educativo.module';
+import { AreaDesarrolloModule } from './modules/area-desarrollo/area-desarrollo.module';
+import { ObservacionModule } from './modules/observacion/observacion.module';
+import { SolicitanteModule } from './modules/solicitante/solicitante.module';
 
 @Module({
   imports: [
@@ -33,17 +34,17 @@ import { TitulacionModule } from './modules/titulacion/titulacion.module';
     AuthModule,
     UserModule,
     DireccionModule,
-    DocumentacionModule,
-    EmpleadorModule,
     CarreraModule,
     EmpresaModule,
     HabilidadModule,
     ProyectoModule,
-    TitulacionModule,
+    DocumentosModule,
+    NivelEducativoModule,
+    AreaDesarrolloModule,
+    ObservacionModule,
+    SolicitanteModule,
   ],
   controllers: [AppController],
-  providers: [
-    AppService
-  ]
+  providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

@@ -1,0 +1,34 @@
+@url = http://localhost:3000/api/direccion
+
+###
+GET {{url}}/
+
+###
+GET {{url}}/1
+
+###
+POST {{url}}/category 
+Content-Type: application/json
+
+{
+  "calle": "Cervezas",
+  "num_interior": "Selección de cervezas nacionales e internacionales",
+  "num_exterior": "123",
+  "colonia": "Centro",
+  "municipio": "Municipio Ejemplo",
+  "estado": "Estado Ejemplo",
+  "pais": "México",
+  "codigo_postal": 12345
+}
+
+###
+PATCH {{url}}/1
+Content-Type: application/json
+
+{
+  "calle": "calle de las rosas",
+}
+
+###
+DELETE {{url}}/1
+

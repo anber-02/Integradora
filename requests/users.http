@@ -1,6 +1,6 @@
 ###
 GET http://localhost:3000/api/auth/profile
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6eyJpZCI6Miwicm9sIjoiZW1wcmVzYSJ9LCJpYXQiOjE3MjkyMzIzODMsImV4cCI6MTcyOTMxODc4M30.BwYYuH0d_w82h30di5pUpwCh_47o0QZAXKWkPtiR1M4
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6eyJpZCI6Miwicm9sIjoiZW1wcmVzYSJ9LCJpYXQiOjE3MjkzOTgyMzYsImV4cCI6MTcyOTQ4NDYzNn0.vBoY88wfLmgD08vhZQ0lOGZ1rhmYtmumnHbFAPWWXRM
 
 ###a
 POST http://localhost:3000/api/user/assign-rol

@@ -10,9 +10,7 @@ import { Auth } from './decorator/auth.decorator';
 
 @Controller('auth')
 export class AuthController {
-  constructor(
-    private readonly authService: AuthService
-  ) { }
+  constructor(private readonly authService: AuthService) {}
 
   @Post('/register')
   create(@Body() registerDto: RegisterDto) {
@@ -28,6 +26,6 @@ export class AuthController {
   @Get('/profile')
   @Auth(Role.EMPRESA)
   profile() {
-    return {message: 'profile'};
+    return { message: 'profile' };
   }
 }

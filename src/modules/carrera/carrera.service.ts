@@ -1,4 +1,8 @@
-import { Injectable, InternalServerErrorException, NotFoundException } from '@nestjs/common';
+import {
+  Injectable,
+  InternalServerErrorException,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateCarreraDto } from './dto/create-carrera.dto';
 import { UpdateCarreraDto } from './dto/update-carrera.dto';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -7,44 +11,37 @@ import { Carrera } from './entities/carrera.entity';
 
 @Injectable()
 export class CarreraService {
-
   constructor(
     @InjectRepository(Carrera)
-    private carreRepo:Repository<Carrera>
-  ){}
-
+    private carreRepo: Repository<Carrera>,
+  ) {}
 
   async create(createCarreraDto: CreateCarreraDto) {
-    try{
-      const Carrera = this.carreRepo.create(
-        createCarreraDto
-      )
-      await this.carreRepo.save(Carrera)
-      return Carrera
-    }
-    catch(error){
+    try {
+      const Carrera = this.carreRepo.create(createCarreraDto);
+      await this.carreRepo.save(Carrera);
+      return Carrera;
+    } catch (error) {
       throw new InternalServerErrorException(error);
-
     }
   }
 
   findAll() {
-    try{
+    try {
       const Carrera = this.carreRepo.find();
       return Carrera;
-    }
-    catch(error){
+    } catch (error) {
       throw new InternalServerErrorException(error);
     }
   }
 
   async findOne(id: number) {
     const Carrera = await this.carreRepo.findOne({
-      where:{
-        id
-      }
+      where: {
+        id,
+      },
     });
-    if(!Carrera){
+    if (!Carrera) {
       throw new NotFoundException('producto no encontrado');
     }
 
@@ -52,31 +49,30 @@ export class CarreraService {
   }
 
   async update(id: number, updateCarreraDto: UpdateCarreraDto) {
-    try{
-      const Carrera=await this.carreRepo.preload({
+    try {
+      const Carrera = await this.carreRepo.preload({
         id,
-        ...updateCarreraDto
+        ...updateCarreraDto,
       });
-      await this.carreRepo.save(Carrera)
+      await this.carreRepo.save(Carrera);
       return Carrera;
-    }
-    catch(error){
+    } catch (error) {
       throw new InternalServerErrorException(error);
     }
   }
 
   async remove(id: number) {
     const Carrera = await this.carreRepo.findOne({
-      where:{
-        id
-      }
+      where: {
+        id,
+      },
     });
-    if(!Carrera){
+    if (!Carrera) {
       throw new NotFoundException('carrera no encontrado');
     }
     await this.carreRepo.delete(id);
-    return{
-      Message:'Se a eliminado'
-    }
+    return {
+      Message: 'Se a eliminado',
+    };
   }
 }
