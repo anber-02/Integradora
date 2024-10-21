@@ -1,26 +1,78 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { CreateAreaDesarrolloDto } from './dto/create-area-desarrollo.dto';
 import { UpdateAreaDesarrolloDto } from './dto/update-area-desarrollo.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { AreaDesarrollo } from './entities/area-desarrollo.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class AreaDesarrolloService {
-  create(createAreaDesarrolloDto: CreateAreaDesarrolloDto) {
-    return 'This action adds a new areaDesarrollo';
+  constructor(
+    @InjectRepository(AreaDesarrollo)
+    private areaDesarrolloRepo: Repository<AreaDesarrollo>,
+  ) {}
+
+  async create(createAreaDesarrolloDto: CreateAreaDesarrolloDto) {
+    try {
+      const areaDesarrollo = this.areaDesarrolloRepo.create(
+        createAreaDesarrolloDto,
+      );
+      await this.areaDesarrolloRepo.save(areaDesarrollo);
+      return areaDesarrollo;
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
   }
 
-  findAll() {
-    return `This action returns all areaDesarrollo`;
+  async findAll() {
+    try {
+      const areaDesarrollo = await this.areaDesarrolloRepo.find();
+      return areaDesarrollo;
+    } catch (error) {
+      return new InternalServerErrorException(error);
+    }
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} areaDesarrollo`;
+  async findOne(id: number) {
+    try {
+      const areaDesarrollo = this.areaDesarrolloRepo.findOneBy({ id });
+
+      if (!areaDesarrollo) {
+        throw new Error('Area de desarrollo no encontrada');
+      }
+      return areaDesarrollo;
+    } catch (error) {
+      return new InternalServerErrorException(error);
+    }
   }
 
-  update(id: number, updateAreaDesarrolloDto: UpdateAreaDesarrolloDto) {
-    return `This action updates a #${id} areaDesarrollo`;
+  async update(id: number, updateAreaDesarrolloDto: UpdateAreaDesarrolloDto) {
+    try {
+      const areaDesarrollo = await this.areaDesarrolloRepo.preload({
+        id,
+        ...updateAreaDesarrolloDto,
+      });
+      await this.areaDesarrolloRepo.save(areaDesarrollo);
+      return areaDesarrollo;
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} areaDesarrollo`;
+  async remove(id: number) {
+    const areaDesarrollo = this.areaDesarrolloRepo.findOne({
+      where: {
+        id,
+      },
+    });
+
+    if (!areaDesarrollo) {
+      throw new Error('Area de desarrollo no encontrada');
+    }
+    await this.areaDesarrolloRepo.delete(id);
+
+    return {
+      Message: 'Area de desarrollo eliminada correctamente',
+    };
   }
 }

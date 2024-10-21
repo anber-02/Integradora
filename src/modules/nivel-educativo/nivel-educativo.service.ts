@@ -1,26 +1,81 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, InternalServerErrorException } from '@nestjs/common';
 import { CreateNivelEducativoDto } from './dto/create-nivel-educativo.dto';
 import { UpdateNivelEducativoDto } from './dto/update-nivel-educativo.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { NivelEducativo } from './entities/nivel-educativo.entity';
+import { Repository } from 'typeorm';
 
 @Injectable()
 export class NivelEducativoService {
-  create(createNivelEducativoDto: CreateNivelEducativoDto) {
-    return 'This action adds a new nivelEducativo';
+  constructor(
+    @InjectRepository(NivelEducativo)
+    private nivelEducativoRepo: Repository<NivelEducativo>,
+  ) {}
+  async create(createNivelEducativoDto: CreateNivelEducativoDto) {
+    try {
+      const nivelEducativo = this.nivelEducativoRepo.create(
+        createNivelEducativoDto,
+      );
+      await this.nivelEducativoRepo.save(nivelEducativo);
+      return nivelEducativo;
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
   }
 
   findAll() {
-    return `This action returns all nivelEducativo`;
+    try {
+      const nivelEducativo = this.nivelEducativoRepo.find();
+      return nivelEducativo;
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
   }
 
   findOne(id: number) {
-    return `This action returns a #${id} nivelEducativo`;
+    try {
+      const nivelEducativo = this.nivelEducativoRepo.findOne({
+        where: {
+          id,
+        },
+      });
+
+      if (!nivelEducativo) {
+        throw new Error('Nivel educativo no encontrado');
+      }
+      return nivelEducativo;
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
   }
 
-  update(id: number, updateNivelEducativoDto: UpdateNivelEducativoDto) {
-    return `This action updates a #${id} nivelEducativo`;
+  async update(id: number, updateNivelEducativoDto: UpdateNivelEducativoDto) {
+    try {
+      const nivelEducativo = await this.nivelEducativoRepo.preload({
+        id,
+        ...updateNivelEducativoDto,
+      });
+      await this.nivelEducativoRepo.save(nivelEducativo);
+      return nivelEducativo;
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} nivelEducativo`;
+  async remove(id: number) {
+    const nivelEducativo = this.nivelEducativoRepo.findOne({
+      where: {
+        id,
+      },
+    });
+
+    if (!nivelEducativo) {
+      throw new Error('Nivel educativo no encontrado');
+    }
+    await this.nivelEducativoRepo.delete(id);
+
+    return {
+      Message: 'Nivel educativo eliminado correctamente',
+    };
   }
 }

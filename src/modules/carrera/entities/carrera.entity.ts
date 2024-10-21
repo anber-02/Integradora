@@ -14,7 +14,7 @@ export class Carrera {
   @Column()
   clave: string;
 
-  @Column()
+  @Column('text')
   descripcion: string;
 
   @OneToMany(() => Proyecto, (proyecto) => proyecto.carrera)

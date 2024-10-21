@@ -28,7 +28,9 @@ export class CarreraService {
 
   findAll() {
     try {
-      const Carrera = this.carreRepo.find();
+      const Carrera = this.carreRepo.find({
+        relations: ['nivelEducativo', 'areaDesarrollo'],
+      });
       return Carrera;
     } catch (error) {
       throw new InternalServerErrorException(error);

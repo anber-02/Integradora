@@ -1,10 +1,4 @@
-import {
-  IsNumber,
-  IsPositive,
-  IsString,
-  Min,
-  MinLength,
-} from 'class-validator';
+import { IsString, MaxLength, MinLength } from 'class-validator';
 
 export class CreateCarreraDto {
   @IsString()
@@ -12,7 +6,7 @@ export class CreateCarreraDto {
   nombre: string;
 
   @IsString()
-  @MinLength(5)
+  @MaxLength(5)
   clave: string;
 
   @IsString()
