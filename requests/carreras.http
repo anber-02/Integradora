@@ -1,0 +1,55 @@
+@url = http://localhost:3000/api/carrera
+
+###
+GET {{url}}/
+
+###
+GET {{url}}/1
+
+###
+POST {{url}}/ 
+Content-Type: application/json
+
+{
+  "nombre": "Tecnologias de la informacion",
+  "clave": "TI",
+  "descripcion": "La carrera de Tecnologías de la Información se enfoca en el desarrollo y gestión de sistemas informáticos. Los estudiantes aprenden programación, redes y ciberseguridad, formando profesionales listos para enfrentar desafíos en un entorno digital en constante evolución."
+}
+
+###
+PATCH {{url}}/1
+Content-Type: application/json
+
+{
+  "calle": "calle de las rosas",
+}
+
+###
+DELETE {{url}}/1
+
+
+#carrera [Aptitudes{}, Area_Desarrollo{}, Nivel_Educativo]a
+
+
+###
+POST {{url}}/
+Content-Type: multipart/form-data; boundary=boundary
+
+--boundary
+Content-Disposition: form-data; name="nombre"
+
+Tecnologias de la informacion
+--boundary
+Content-Disposition: form-data; name="clave"
+
+TI
+--boundary
+Content-Disposition: form-data; name="descripcion"
+
+La carrera de Tecnologías de la Información se enfoca en el desarrollo y gestión de sistemas informáticos. Los estudiantes aprenden programación, redes y ciberseguridad, formando profesionales listos para enfrentar desafíos en un entorno digital en constante evolución.
+--boundary
+Content-Disposition: form-data; name="image"; filename="imagen.jpg"
+Content-Type: image/jpeg
+
+< C:\Users\newpr\Downloads\Wallpapers-master\Wallpapers-master\01.png
+--boundary--

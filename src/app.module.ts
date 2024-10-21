@@ -16,6 +16,7 @@ import { NivelEducativoModule } from './modules/nivel-educativo/nivel-educativo.
 import { AreaDesarrolloModule } from './modules/area-desarrollo/area-desarrollo.module';
 import { ObservacionModule } from './modules/observacion/observacion.module';
 import { SolicitanteModule } from './modules/solicitante/solicitante.module';
+import { ImagesModule } from './shared/images/images.module';
 
 @Module({
   imports: [
@@ -30,7 +31,7 @@ import { SolicitanteModule } from './modules/solicitante/solicitante.module';
       autoLoadEntities: true,
       synchronize: true,
     }),
-    // JWT
+
     AuthModule,
     UserModule,
     DireccionModule,
@@ -43,6 +44,7 @@ import { SolicitanteModule } from './modules/solicitante/solicitante.module';
     AreaDesarrolloModule,
     ObservacionModule,
     SolicitanteModule,
+    ImagesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

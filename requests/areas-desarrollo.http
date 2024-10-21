@@ -1,0 +1,31 @@
+@url = http://localhost:3000/api/area-desarrollo
+
+###
+GET {{url}}/
+
+###
+GET {{url}}/1
+
+###
+POST {{url}}/category 
+Content-Type: application/json
+
+{
+  "nombre": "Cervezas",
+  "clave": "Selección de cervezas nacionales e internacionales",
+  "descripcion": "123",
+}
+
+###
+PATCH {{url}}/1
+Content-Type: application/json
+
+{
+  "calle": "calle de las rosas",
+}
+
+###
+DELETE {{url}}/1
+
+
+#carrera [Aptitudes{}, Area_Desarrollo{}, Nivel_Educativo]a

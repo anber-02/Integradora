@@ -4,11 +4,13 @@ import {
   JoinColumn,
   OneToOne,
   PrimaryGeneratedColumn,
+  Unique,
 } from 'typeorm';
 import { Role } from 'src/modules/roles/entities/role.entity';
 import { Empresa } from 'src/modules/empresa/entities/empresa.entity';
 
 @Entity({ name: 'usuario' })
+@Unique(['email', 'num_telefono'])
 export class User {
   @PrimaryGeneratedColumn()
   id: number;
