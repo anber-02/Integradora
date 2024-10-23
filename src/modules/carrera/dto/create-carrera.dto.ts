@@ -10,7 +10,6 @@ export class CreateCarreraDto {
   clave: string;
 
   @IsString()
-  @MinLength(5)
   descripcion: string;
 
   @IsString()

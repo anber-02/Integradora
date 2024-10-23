@@ -15,6 +15,8 @@ import { CreateCarreraDto } from './dto/create-carrera.dto';
 import { UpdateCarreraDto } from './dto/update-carrera.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ImagesService } from 'src/shared/images/images.service';
+import { Auth } from '../auth/decorator/auth.decorator';
+import { Role } from '../auth/enums/rol.enum';
 
 @Controller('carrera')
 export class CarreraController {
@@ -23,6 +25,7 @@ export class CarreraController {
     private readonly imageService: ImagesService,
   ) {}
 
+  @Auth(Role.ADMIN)
   @Post()
   @UseInterceptors(FileInterceptor('image'))
   async create(
@@ -41,7 +44,6 @@ export class CarreraController {
       throw new InternalServerErrorException(error);
     }
   }
-
   @Get()
   findAll() {
     return this.carreraService.findAll();
@@ -52,11 +54,13 @@ export class CarreraController {
     return this.carreraService.findOne(+id);
   }
 
+  @Auth(Role.ADMIN)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateCarreraDto: UpdateCarreraDto) {
     return this.carreraService.update(+id, updateCarreraDto);
   }
 
+  @Auth(Role.ADMIN)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.carreraService.remove(+id);

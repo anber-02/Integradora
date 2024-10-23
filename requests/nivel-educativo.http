@@ -1,19 +1,22 @@
 @url = http://localhost:3000/api/nivel-educativo
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6eyJpZCI6Miwicm9sIjoiYWRtaW4ifSwiaWF0IjoxNzI5Njk2NDUwLCJleHAiOjE3Mjk3ODI4NTB9.vRPwJJUqmKZHbC3G-ruIyan0b83sllp2OCxLE75DRXM
 
 ###
-GET {{url}}/
+GET {{url}}?tipo=Ing
 
 ###
 GET {{url}}/1
 
 ###
-POST {{url}}/category 
+POST {{url}}/
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
-  "nombre": "Cervezas",
-  "clave": "Selección de cervezas nacionales e internacionales",
-  "descripcion": "123",
+  "nombre": "Mecatronica",
+  "descripcion": "Es capaz de diseñar, construir y mantener sistemas mecatrónicos que integran mecánica, electrónica y programación. Posee habilidades en el manejo de herramientas y software para la simulación y diseño de circuitos y sistemas automáticos. Además, puede realizar diagnósticos y reparaciones en equipos, optimizar procesos industriales y colaborar en proyectos de automatización. Su formación le permite trabajar en diversos sectores, como manufactura, robótica y mantenimiento industrial, y adaptarse a tecnologías emergentes en el ámbito de la ingeniería.",
+  "tipo": "TSU",
+  "carrera_id": 4
 }
 
 ###
@@ -21,11 +24,12 @@ PATCH {{url}}/1
 Content-Type: application/json
 
 {
-  "calle": "calle de las rosas",
+  "calle": "calle de las rosas"
 }
 
 ###
 DELETE {{url}}/1
+Authorization: Bearer {{token}}
 
 
 #carrera [Aptitudes{}, Area_Desarrollo{}, Nivel_Educativo]a

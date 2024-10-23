@@ -6,6 +6,7 @@ import { Carrera } from './entities/carrera.entity';
 import { ImagesModule } from 'src/shared/images/images.module';
 import { MulterModule } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
+import { AuthModule } from '../auth/auth.module';
 
 @Module({
   imports: [
@@ -24,8 +25,10 @@ import { diskStorage } from 'multer';
       }),
     }),
     ImagesModule,
+    AuthModule,
   ],
   controllers: [CarreraController],
   providers: [CarreraService],
+  exports: [CarreraService],
 })
 export class CarreraModule {}

@@ -1,4 +1,5 @@
 @url = http://localhost:3000/api/carrera
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6eyJpZCI6Miwicm9sIjoiYWRtaW4ifSwiaWF0IjoxNzI5NjA0NTU4LCJleHAiOjE3Mjk2OTA5NTh9.__ZbVqQS2I-US9L1S2bTOdNc3JUsy4KhPn4YDypYJbo
 
 ###
 GET {{url}}/
@@ -34,22 +35,24 @@ DELETE {{url}}/1
 ###
 POST {{url}}/
 Content-Type: multipart/form-data; boundary=boundary
+Authorization: Bearer {{token}}
 
 --boundary
 Content-Disposition: form-data; name="nombre"
 
-Tecnologias de la informacion
+Gastronomia
 --boundary
 Content-Disposition: form-data; name="clave"
 
-TI
+GA
 --boundary
 Content-Disposition: form-data; name="descripcion"
 
-La carrera de Tecnologías de la Información se enfoca en el desarrollo y gestión de sistemas informáticos. Los estudiantes aprenden programación, redes y ciberseguridad, formando profesionales listos para enfrentar desafíos en un entorno digital en constante evolución.
+La carrera de Gastronomía enseña a crear y preparar platos, gestionar cocinas y entender la cultura alimentaria. Los graduados pueden trabajar en restaurantes, hoteles, catering, medios de comunicación, o emprender su propio negocio. Además, aplican técnicas culinarias, innovan en menús, gestionan recursos y promueven la sostenibilidad, contribuyendo así al bienestar y a las tendencias del sector alimentario.
+
 --boundary
 Content-Disposition: form-data; name="image"; filename="imagen.jpg"
 Content-Type: image/jpeg
 
-< C:\Users\newpr\Downloads\Wallpapers-master\Wallpapers-master\01.png
+< C:\Users\newpr\Downloads\Wallpapers-master\Wallpapers-master\09.jpg
 --boundary--

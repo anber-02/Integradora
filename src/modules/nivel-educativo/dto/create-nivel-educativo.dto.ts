@@ -1,4 +1,4 @@
-import { IsString, MinLength } from 'class-validator';
+import { IsInt, IsString, MinLength } from 'class-validator';
 
 export class CreateNivelEducativoDto {
   @IsString()
@@ -12,4 +12,7 @@ export class CreateNivelEducativoDto {
   @IsString()
   @MinLength(3)
   tipo: string;
+
+  @IsInt()
+  carrera_id: number;
 }

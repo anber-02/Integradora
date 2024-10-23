@@ -28,7 +28,10 @@ export class AuthService {
 
     registerDto = { ...registerDto, password: hashedPassword };
 
-    const { password, ...user } = await this.usersService.create(registerDto);
+    const { password, ...user } = await this.usersService.create({
+      rol: 'admin',
+      ...registerDto,
+    });
 
     const payload = { sub: user.id, username: user.nombre, rol: user.rol };
     const token = this.jwtService.sign(payload);

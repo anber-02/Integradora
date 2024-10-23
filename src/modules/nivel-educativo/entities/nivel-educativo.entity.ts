@@ -14,12 +14,14 @@ export class NivelEducativo {
   @Column()
   nombre: string;
 
-  @Column()
+  @Column('text')
   descripcion: string;
 
   @Column()
   tipo: string;
 
+  @Column()
+  carrera_id: number;
   //   Relacionar este entidad con carreras de muchos a uno
   @ManyToOne(() => Carrera, (carrera) => carrera.nivelEducativo, {
     nullable: false,

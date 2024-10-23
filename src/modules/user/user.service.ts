@@ -16,9 +16,15 @@ export class UserService {
   ) {}
 
   async create(createUserDto: CreateUserDto) {
-    const user = this.userRepository.create(createUserDto);
+    const { email, nombre, password, num_telefono } = createUserDto;
+    const user = this.userRepository.create({
+      email,
+      nombre,
+      password,
+      num_telefono,
+    });
     // Ay que verificar esta funcion
-    const userRole = await this.rolesService.findOneByName('empresa');
+    const userRole = await this.rolesService.findOneByName(createUserDto.rol);
 
     user.rol = userRole;
     await this.userRepository.save(user);
@@ -50,9 +56,13 @@ export class UserService {
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
+    const { email, nombre, password, num_telefono } = updateUserDto;
     const user = await this.userRepository.preload({
       id: id,
-      ...updateUserDto,
+      email,
+      nombre,
+      password,
+      num_telefono,
     });
     await this.userRepository.save(user);
 
