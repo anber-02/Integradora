@@ -13,7 +13,8 @@ Content-Type: application/json
 
 {
   "nombre": "Tecnologias de la informacion",
-  "clave": "TI",
+  "nomenclatura": "TI",
+  "nivel_educativo" : "TSU",
   "descripcion": "La carrera de Tecnologías de la Información se enfoca en el desarrollo y gestión de sistemas informáticos. Los estudiantes aprenden programación, redes y ciberseguridad, formando profesionales listos para enfrentar desafíos en un entorno digital en constante evolución."
 }
 
