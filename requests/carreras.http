@@ -30,7 +30,7 @@ Content-Type: application/json
 DELETE {{url}}/1
 
 
-#carrera [Aptitudes{}, Area_Desarrollo{}, Nivel_Educativo]a
+#carrera [Aptitudes{}, Area_Desarrollo{} ]
 
 
 ###
@@ -43,7 +43,10 @@ Content-Disposition: form-data; name="nombre"
 
 Gastronomia
 --boundary
-Content-Disposition: form-data; name="clave"
+Content-Disposition: form-data; name="nomenclatura"
+
+--boundary
+Content-Disposition: form-data; name="nivel_educativo"
 
 GA
 --boundary

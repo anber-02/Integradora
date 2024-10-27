@@ -23,6 +23,9 @@ export class Carrera {
   @Column('text')
   descripcion: string;
 
+  @Column()
+  nivel_educativo: string;
+
   @Column({ nullable: true })
   imageUrl?: string; // Para almacenar la URL de la imagen
 
