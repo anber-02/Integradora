@@ -17,6 +17,7 @@ export class CarreraService {
   ) {}
 
   async create(createCarreraDto: CreateCarreraDto) {
+    console.log(createCarreraDto);
     try {
       const Carrera = this.carreRepo.create(createCarreraDto);
       await this.carreRepo.save(Carrera);
@@ -29,7 +30,7 @@ export class CarreraService {
   findAll() {
     try {
       const Carrera = this.carreRepo.find({
-        relations: ['nivelEducativo', 'areaDesarrollo'],
+        relations: ['areaDesarrollo'],
       });
       return Carrera;
     } catch (error) {

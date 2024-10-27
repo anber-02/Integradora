@@ -1,5 +1,5 @@
 @url = http://localhost:3000/api/carrera
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6eyJpZCI6Miwicm9sIjoiYWRtaW4ifSwiaWF0IjoxNzI5NjA0NTU4LCJleHAiOjE3Mjk2OTA5NTh9.__ZbVqQS2I-US9L1S2bTOdNc3JUsy4KhPn4YDypYJbo
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6ImFkbWluIiwiaWF0IjoxNzMwMDE1MjI3LCJleHAiOjE3MzAxMDE2Mjd9.t28MLb__3YhK2VP83VpxD-0tSXN5m3TaH-hhqVtDDS8
 
 ###
 GET {{url}}/
@@ -10,6 +10,7 @@ GET {{url}}/1
 ###
 POST {{url}}/ 
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "nombre": "Tecnologias de la informacion",
@@ -41,22 +42,22 @@ Authorization: Bearer {{token}}
 --boundary
 Content-Disposition: form-data; name="nombre"
 
-Gastronomia
+Mecatronica
 --boundary
 Content-Disposition: form-data; name="nomenclatura"
 
+TI
 --boundary
 Content-Disposition: form-data; name="nivel_educativo"
 
-GA
+TSU
 --boundary
 Content-Disposition: form-data; name="descripcion"
 
-La carrera de Gastronomía enseña a crear y preparar platos, gestionar cocinas y entender la cultura alimentaria. Los graduados pueden trabajar en restaurantes, hoteles, catering, medios de comunicación, o emprender su propio negocio. Además, aplican técnicas culinarias, innovan en menús, gestionan recursos y promueven la sostenibilidad, contribuyendo así al bienestar y a las tendencias del sector alimentario.
-
+Se enfoca en adquirir conocimientos teóricos y prácticos en áreas como robótica y automatización. Participa en proyectos prácticos y laboratorios, desarrollando habilidades técnicas y de trabajo en equipo. Su formación está orientada a prepararse para el mercado laboral, abordando retos en diversas industrias que utilizan sistemas mecatrónicos. Ambos roles son fundamentales para la innovación y eficiencia en la tecnología actual.
 --boundary
 Content-Disposition: form-data; name="image"; filename="imagen.jpg"
 Content-Type: image/jpeg
 
-< C:\Users\newpr\Downloads\Wallpapers-master\Wallpapers-master\09.jpg
+< C:\Users\newpr\Downloads\Wallpapers-master\Wallpapers-master\11.jpg
 --boundary--

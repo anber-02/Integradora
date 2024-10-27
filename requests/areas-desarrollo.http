@@ -7,13 +7,12 @@ GET {{url}}/
 GET {{url}}/1
 
 ###
-POST {{url}}/category 
+POST {{url}}/ 
 Content-Type: application/json
 
 {
-  "nombre": "Cervezas",
-  "clave": "Selección de cervezas nacionales e internacionales",
-  "descripcion": "123",
+  "area": "cocina occidental",
+  "carrera_id": 1
 }
 
 ###

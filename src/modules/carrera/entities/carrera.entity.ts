@@ -1,15 +1,9 @@
 import { AreaDesarrollo } from 'src/modules/area-desarrollo/entities/area-desarrollo.entity';
 import { Proyecto } from 'src/modules/proyecto/entities/proyecto.entity';
-import {
-  Column,
-  Entity,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  Unique,
-} from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-@Unique(['nomenclatura'])
+// @Unique(['nomenclatura'])
 export class Carrera {
   @PrimaryGeneratedColumn()
   id: number;

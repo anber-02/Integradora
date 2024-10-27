@@ -33,7 +33,11 @@ export class AuthService {
       ...registerDto,
     });
 
-    const payload = { sub: user.id, username: user.nombre, rol: user.rol };
+    const payload = {
+      sub: user.id,
+      username: user.nombre,
+      rol: user.roles[0]?.rol ?? '',
+    };
     const token = this.jwtService.sign(payload);
 
     return {
@@ -48,6 +52,7 @@ export class AuthService {
   ): Promise<{ [key: string]: any }> {
     const { password, ...user } = await this.usersService.findByEmail(email);
 
+    console.log(user);
     if (!user) {
       throw new UnauthorizedException();
     }
@@ -56,7 +61,11 @@ export class AuthService {
     if (!passwordCorrect)
       throw new UnauthorizedException({ message: 'user / password incorrect' });
 
-    const payload = { sub: user.id, username: user.nombre, rol: user.rol };
+    const payload = {
+      sub: user.id,
+      username: user.nombre,
+      rol: user.roles[0]?.rol ?? '',
+    };
     const token = this.jwtService.sign(payload);
 
     response.cookie('token', token, { httpOnly: true });

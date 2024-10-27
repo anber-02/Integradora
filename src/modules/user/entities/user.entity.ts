@@ -1,7 +1,8 @@
 import {
   Column,
   Entity,
-  JoinColumn,
+  JoinTable,
+  ManyToMany,
   OneToOne,
   PrimaryGeneratedColumn,
   Unique,
@@ -36,7 +37,21 @@ export class User {
   @OneToOne(() => Empresa, (empresa) => empresa.usuario)
   empresa: Empresa;
 
-  @OneToOne(() => Role, (rol) => rol.user, { cascade: true })
-  @JoinColumn()
-  rol: Role;
+  // @OneToOne(() => Role, (rol) => rol.user, { cascade: true })
+  // @JoinColumn()
+  // rol: Role;
+
+  @ManyToMany(() => Role, (roles) => roles.users)
+  @JoinTable({
+    name: 'rol_user',
+    joinColumn: {
+      name: 'user_id',
+      referencedColumnName: 'id',
+    },
+    inverseJoinColumn: {
+      name: 'rol_id',
+      referencedColumnName: 'id',
+    },
+  })
+  roles: Role[];
 }
