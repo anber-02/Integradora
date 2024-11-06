@@ -1,3 +1,4 @@
+import { Aptitude } from 'src/modules/aptitudes/entities/aptitude.entity';
 import { AreaDesarrollo } from 'src/modules/area-desarrollo/entities/area-desarrollo.entity';
 import { Proyecto } from 'src/modules/proyecto/entities/proyecto.entity';
 import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
@@ -28,4 +29,7 @@ export class Carrera {
 
   @OneToMany(() => AreaDesarrollo, (areaDesarrollo) => areaDesarrollo.carrera)
   areaDesarrollo: AreaDesarrollo[];
+
+  @OneToMany(() => Aptitude, (aptitud) => aptitud.carrera)
+  aptitudes: Aptitude[];
 }
