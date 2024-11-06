@@ -1,16 +1,10 @@
+import { Aptitude } from 'src/modules/aptitudes/entities/aptitude.entity';
 import { AreaDesarrollo } from 'src/modules/area-desarrollo/entities/area-desarrollo.entity';
-import { NivelEducativo } from 'src/modules/nivel-educativo/entities/nivel-educativo.entity';
 import { Proyecto } from 'src/modules/proyecto/entities/proyecto.entity';
-import {
-  Column,
-  Entity,
-  OneToMany,
-  PrimaryGeneratedColumn,
-  Unique,
-} from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
-@Unique(['clave'])
+// @Unique(['nomenclatura'])
 export class Carrera {
   @PrimaryGeneratedColumn()
   id: number;
@@ -19,10 +13,13 @@ export class Carrera {
   nombre: string;
 
   @Column()
-  clave: string;
+  nomenclatura: string;
 
   @Column('text')
   descripcion: string;
+
+  @Column()
+  nivel_educativo: string;
 
   @Column({ nullable: true })
   imageUrl?: string; // Para almacenar la URL de la imagen
@@ -30,9 +27,9 @@ export class Carrera {
   @OneToMany(() => Proyecto, (proyecto) => proyecto.carrera)
   proyectos: Proyecto[];
 
-  @OneToMany(() => NivelEducativo, (nivelEducativo) => nivelEducativo.carrera)
-  nivelEducativo: NivelEducativo[];
-
   @OneToMany(() => AreaDesarrollo, (areaDesarrollo) => areaDesarrollo.carrera)
   areaDesarrollo: AreaDesarrollo[];
+
+  @OneToMany(() => Aptitude, (aptitud) => aptitud.carrera)
+  aptitudes: Aptitude[];
 }
