@@ -1,4 +1,11 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Carrera } from 'src/modules/carrera/entities/carrera.entity';
+import {
+  Column,
+  Entity,
+  JoinColumn,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 
 @Entity('aptitud')
 export class Aptitude {
@@ -7,4 +14,10 @@ export class Aptitude {
 
   @Column()
   aptitud: string;
+
+  @ManyToOne(() => Carrera, (carrera) => carrera.aptitudes, {
+    nullable: false,
+  })
+  @JoinColumn({ name: 'carrera_id' })
+  carrera: Carrera;
 }

@@ -16,6 +16,7 @@ import { AreaDesarrolloModule } from './modules/area-desarrollo/area-desarrollo.
 import { ObservacionModule } from './modules/observacion/observacion.module';
 import { SolicitanteModule } from './modules/solicitante/solicitante.module';
 import { ImagesModule } from './shared/images/images.module';
+import { AptitudesModule } from './modules/aptitudes/aptitudes.module';
 
 @Module({
   imports: [
@@ -43,6 +44,7 @@ import { ImagesModule } from './shared/images/images.module';
     ObservacionModule,
     SolicitanteModule,
     ImagesModule,
+    AptitudesModule,
   ],
   controllers: [AppController],
   providers: [AppService],
