@@ -12,11 +12,11 @@ import { EmpresaModule } from './modules/empresa/empresa.module';
 import { HabilidadModule } from './modules/habilidad/habilidad.module';
 import { ProyectoModule } from './modules/proyecto/proyecto.module';
 import { DocumentosModule } from './modules/documentos/documentos.module';
-import { NivelEducativoModule } from './modules/nivel-educativo/nivel-educativo.module';
 import { AreaDesarrolloModule } from './modules/area-desarrollo/area-desarrollo.module';
 import { ObservacionModule } from './modules/observacion/observacion.module';
 import { SolicitanteModule } from './modules/solicitante/solicitante.module';
 import { ImagesModule } from './shared/images/images.module';
+import { AptitudesModule } from './modules/aptitudes/aptitudes.module';
 
 @Module({
   imports: [
@@ -40,11 +40,11 @@ import { ImagesModule } from './shared/images/images.module';
     HabilidadModule,
     ProyectoModule,
     DocumentosModule,
-    NivelEducativoModule,
     AreaDesarrolloModule,
     ObservacionModule,
     SolicitanteModule,
     ImagesModule,
+    AptitudesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -7,10 +7,13 @@ export class CreateCarreraDto {
 
   @IsString()
   @MaxLength(5)
-  clave: string;
+  nomenclatura: string;
 
   @IsString()
   descripcion: string;
+
+  @IsString()
+  nivel_educativo: string;
 
   @IsString()
   @IsOptional()

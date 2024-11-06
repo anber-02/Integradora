@@ -15,6 +15,8 @@ export class AreaDesarrollo {
   @Column()
   area: string;
 
+  @Column()
+  carrera_id: number;
   // Relacionar esta tabla con carreras de muchos a unos
   @ManyToOne(() => Carrera, (carrera) => carrera.areaDesarrollo, {
     nullable: false,

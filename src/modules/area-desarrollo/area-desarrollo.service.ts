@@ -4,19 +4,26 @@ import { UpdateAreaDesarrolloDto } from './dto/update-area-desarrollo.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AreaDesarrollo } from './entities/area-desarrollo.entity';
 import { Repository } from 'typeorm';
+import { CarreraService } from '../carrera/carrera.service';
 
 @Injectable()
 export class AreaDesarrolloService {
   constructor(
     @InjectRepository(AreaDesarrollo)
     private areaDesarrolloRepo: Repository<AreaDesarrollo>,
+    private carreraService: CarreraService,
   ) {}
 
   async create(createAreaDesarrolloDto: CreateAreaDesarrolloDto) {
     try {
+      const carrera_id = createAreaDesarrolloDto.carrera_id;
       const areaDesarrollo = this.areaDesarrolloRepo.create(
         createAreaDesarrolloDto,
       );
+
+      const carrera = await this.carreraService.findOne(carrera_id);
+
+      areaDesarrollo.carrera = carrera;
       await this.areaDesarrolloRepo.save(areaDesarrollo);
       return areaDesarrollo;
     } catch (error) {
