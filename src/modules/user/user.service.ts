@@ -24,16 +24,17 @@ export class UserService {
       num_telefono,
     });
     // Ay que verificar esta funcion
-    const userRole = await this.rolesService.findOneByName(createUserDto.rol);
-
-    user.rol = userRole;
+    const userRole = await this.rolesService.findOneByName('admin');
+    if (userRole) {
+      user.roles = [userRole];
+    }
     await this.userRepository.save(user);
     return user;
   }
 
   findAll() {
     return this.userRepository.find({
-      relations: { rol: true },
+      relations: { roles: true },
     });
   }
 
@@ -41,7 +42,7 @@ export class UserService {
     return this.userRepository.findOne({
       where: { id: id },
       relations: {
-        rol: true,
+        roles: true,
       },
     });
   }
@@ -50,7 +51,7 @@ export class UserService {
     return this.userRepository.findOne({
       where: { email },
       relations: {
-        rol: true,
+        roles: true,
       },
     });
   }
@@ -82,7 +83,7 @@ export class UserService {
     const { user_id, rol_id } = data;
     const user = await this.userRepository.findOne({
       where: { id: user_id },
-      relations: { rol: true },
+      relations: { roles: true },
     });
     if (!user) {
       throw new Error('User not found');
@@ -93,7 +94,7 @@ export class UserService {
       throw new Error('Role not found');
     }
 
-    user.rol = role;
+    user.roles.push(role);
     await this.userRepository.save(user);
 
     return { message: 'Role assigned successfully' };

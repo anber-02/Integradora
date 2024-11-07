@@ -6,24 +6,16 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-@Entity()
-export class NivelEducativo {
+
+@Entity('aptitud')
+export class Aptitude {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
-  nombre: string;
+  aptitud: string;
 
-  @Column('text')
-  descripcion: string;
-
-  @Column()
-  tipo: string;
-
-  @Column()
-  carrera_id: number;
-  //   Relacionar este entidad con carreras de muchos a uno
-  @ManyToOne(() => Carrera, (carrera) => carrera.nivelEducativo, {
+  @ManyToOne(() => Carrera, (carrera) => carrera.aptitudes, {
     nullable: false,
   })
   @JoinColumn({ name: 'carrera_id' })
