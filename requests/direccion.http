@@ -7,7 +7,7 @@ GET {{url}}/
 GET {{url}}/1
 
 ###
-POST {{url}}/category 
+POST {{url}} 
 Content-Type: application/json
 
 {

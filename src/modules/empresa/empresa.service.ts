@@ -8,19 +8,32 @@ import { UpdateEmpresaDto } from './dto/update-empresa.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Empresa } from './entities/empresa.entity';
 import { Repository } from 'typeorm';
+import { Direccion } from '../direccion/entities/direccion.entity';
 
 @Injectable()
 export class EmpresaService {
   constructor(
     @InjectRepository(Empresa)
     private empresaRepo: Repository<Empresa>,
+
+    @InjectRepository(Direccion)
+    private direccionRepo: Repository<Direccion>,
   ) {}
 
-  async create(createEmpresaDto: CreateEmpresaDto) {
+  async create(createEmpresaDto: CreateEmpresaDto): Promise<Empresa> {
     try {
-      const Empresa = this.empresaRepo.create(createEmpresaDto);
-      await this.empresaRepo.save(Empresa);
-      return Empresa;
+      // Primero creamos la dirección
+      const direccion = this.direccionRepo.create(createEmpresaDto.direccion);
+      const savedDireccion = await this.direccionRepo.save(direccion);
+
+      // Luego, creamos la empresa
+      const empresa = this.empresaRepo.create({
+        ...createEmpresaDto,
+        direccion: savedDireccion, // Asignamos la dirección creada
+        usuario_id: createEmpresaDto.usuario_id,
+      });
+
+      return this.empresaRepo.save(empresa);
     } catch (error) {
       throw new InternalServerErrorException(error);
     }

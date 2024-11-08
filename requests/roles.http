@@ -11,7 +11,7 @@ POST {{url}}/roles
 Content-Type: application/json
 
 {
-  "rol" : "admin"
+  "rol" : "empresa"
 }
 
 ###

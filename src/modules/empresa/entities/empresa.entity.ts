@@ -10,7 +10,7 @@ import {
 } from 'typeorm';
 
 import { Direccion } from 'src/modules/direccion/entities/direccion.entity';
-import { Solicitante } from 'src/modules/solicitante/entities/solicitante.entity';
+// import { Solicitante } from 'src/modules/solicitante/entities/solicitante.entity';
 import { Documento } from 'src/modules/documentos/entities/documento.entity';
 import { Proyecto } from 'src/modules/proyecto/entities/proyecto.entity';
 import { User } from 'src/modules/user/entities/user.entity';
@@ -29,9 +29,7 @@ export class Empresa {
   @Column()
   razon_social: string;
   @Column()
-  solicitante_id: number;
-  @Column()
-  sector_id: number;
+  sector: string;
   @Column()
   direccion_id: number;
   @Column()
@@ -41,6 +39,9 @@ export class Empresa {
   @Column()
   ubicacion: string;
 
+  @Column()
+  usuario_id: number;
+
   @OneToOne(() => User, (usuario) => usuario.empresa, { nullable: false })
   @JoinColumn({ name: 'usuario_id' })
   usuario: User;
@@ -49,9 +50,9 @@ export class Empresa {
   @JoinColumn({ name: 'direccion_id' })
   direccion: Direccion;
 
-  @OneToOne(() => Solicitante, (solicitante) => solicitante.empresa)
-  @JoinColumn({ name: 'solicitante_id' })
-  solicitante: Solicitante;
+  // @OneToOne(() => Solicitante, (solicitante) => solicitante.empresa)
+  // @JoinColumn({ name: 'solicitante_id' })
+  // solicitante: Solicitante;
 
   @OneToMany(() => Documento, (documento) => documento.empresa)
   documentos: Documento[];

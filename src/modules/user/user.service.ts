@@ -24,7 +24,7 @@ export class UserService {
       num_telefono,
     });
     // Ay que verificar esta funcion
-    const userRole = await this.rolesService.findOneByName('admin');
+    const userRole = await this.rolesService.findOneByName('empresa');
     if (userRole) {
       user.roles = [userRole];
     }

@@ -6,7 +6,7 @@ Content-Type: application/json
 {
   "nombre": "anberto",
   "num_telefono": "+52 951 289 09 30",
-  "email": "ann@gmail.com",
+  "email": "annn@gmail.com",
   "password": "12345678"
 }
 
@@ -16,6 +16,6 @@ POST http://localhost:3000/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "ann@gmail.com",
+  "email": "annn@gmail.com",
   "pass": "12345678"
 }
