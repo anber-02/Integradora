@@ -1,4 +1,4 @@
-@url = http://localhost:3000/api/area-desarrollo
+@url = http://localhost:3000/api/aptitudes
 
 ###
 GET {{url}}/
@@ -11,8 +11,8 @@ POST {{url}}/
 Content-Type: application/json
 
 {
-  "nombre": "Desarrollo de Software",
-  "descripcion": "Diseño y desarrollo de aplicaciones y sistemas informáticos"
+  "nombre": "Automatización Industrial",
+  "descripcion": "Desarrollo de sistemas automáticos en la industria"
 }
 
 ###

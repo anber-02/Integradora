@@ -7,10 +7,12 @@ import { ImagesModule } from 'src/shared/images/images.module';
 import { MulterModule } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { AuthModule } from '../auth/auth.module';
+import { Aptitude } from '../aptitudes/entities/aptitude.entity';
+import { AreaDesarrollo } from '../area-desarrollo/entities/area-desarrollo.entity';
 
 @Module({
   imports: [
-    TypeOrmModule.forFeature([Carrera]),
+    TypeOrmModule.forFeature([Carrera, Aptitude, AreaDesarrollo]),
     // MULTER
     MulterModule.register({
       storage: diskStorage({

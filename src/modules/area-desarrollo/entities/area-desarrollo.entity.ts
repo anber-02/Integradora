@@ -1,11 +1,5 @@
 import { Carrera } from 'src/modules/carrera/entities/carrera.entity';
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity()
 export class AreaDesarrollo {
@@ -13,14 +7,11 @@ export class AreaDesarrollo {
   id: number;
 
   @Column()
-  area: string;
+  nombre: string;
 
   @Column()
-  carrera_id: number;
-  // Relacionar esta tabla con carreras de muchos a unos
-  @ManyToOne(() => Carrera, (carrera) => carrera.areaDesarrollo, {
-    nullable: false,
-  })
-  @JoinColumn({ name: 'carrera_id' })
-  carrera: Carrera;
+  descripcion: string;
+
+  @ManyToMany(() => Carrera, (carrera) => carrera.areaDesarrollo)
+  carreras: Carrera[];
 }

@@ -17,6 +17,8 @@ import { FileInterceptor } from '@nestjs/platform-express';
 import { ImagesService } from 'src/shared/images/images.service';
 import { Auth } from '../auth/decorator/auth.decorator';
 import { Role } from '../auth/enums/rol.enum';
+import { AssignAptitudToCareerDto } from './dto/assign-aptitud-to-career.dto';
+import { AssignAreaToCareerDto } from './dto/assign-area-to-career.dto';
 
 @Controller('carrera')
 export class CarreraController {
@@ -64,5 +66,20 @@ export class CarreraController {
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.carreraService.remove(+id);
+  }
+
+  // Ruta para asignar aptitudes a una carrera
+  @Post('assign-aptitudes')
+  async assignAptitudes(
+    @Body() assignAptitudesToCareerDto: AssignAptitudToCareerDto,
+  ) {
+    return this.carreraService.assignAptitudesToCareer(
+      assignAptitudesToCareerDto,
+    );
+  }
+  // Ruta para asignar areas de desarrollo a una carrera
+  @Post('assign-areas')
+  async assignAreas(@Body() assignAreaToCareerDto: AssignAreaToCareerDto) {
+    return this.carreraService.assignAreasToCareer(assignAreaToCareerDto);
   }
 }

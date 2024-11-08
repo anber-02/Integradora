@@ -1,5 +1,5 @@
 @url = http://localhost:3000/api/carrera
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6ImFkbWluIiwiaWF0IjoxNzMwMDE1MjI3LCJleHAiOjE3MzAxMDE2Mjd9.t28MLb__3YhK2VP83VpxD-0tSXN5m3TaH-hhqVtDDS8
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6ImFkbWluIiwiaWF0IjoxNzMxMDM5MjU0LCJleHAiOjE3MzExMjU2NTR9.k5CxbKhYrZQi_tmdC698cpJuMGSus9hZrceW13NfTHE
 
 ###
 GET {{url}}/
@@ -61,3 +61,15 @@ Content-Type: image/jpeg
 
 < C:\Users\newpr\Downloads\Wallpapers-master\Wallpapers-master\11.jpg
 --boundary--
+
+
+
+###
+# APTITUDES TO CARRERA
+POST {{url}}/assign-areas
+Content-Type: application/json
+
+{
+  "carreraId": 1,
+  "areaDesarrolloIds": [1, 2]
+}

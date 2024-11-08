@@ -1,9 +1,9 @@
-import { IsNumber, IsString } from 'class-validator';
+import { IsString } from 'class-validator';
 
 export class CreateAreaDesarrolloDto {
   @IsString()
-  area: string;
+  nombre: string;
 
-  @IsNumber()
-  carrera_id: number;
+  @IsString()
+  descripcion: string;
 }
