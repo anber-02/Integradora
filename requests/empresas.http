@@ -1,5 +1,7 @@
 @url = http://localhost:3000/api/empresa
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6ImVtcHJlc2EiLCJpYXQiOjE3MzEwODQxMjMsImV4cCI6MTczMTE3MDUyM30.YIKqWvn2aN3L4kbdVQD68saW708JBFykkWK_6Nz7wWM
 
+###
 ###
 GET {{url}}/
 
@@ -9,15 +11,24 @@ GET {{url}}/1
 ###
 POST {{url}}/
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "nombre": "Ejemplo Nombre",
   "tipo": "Tipo Ejemplo",
   "giro": "Giro Ejemplo",
   "razon_social": "Razón Social Ejemplo",
-  "empleador_id": 1,
-  "sector_id": 2,
-  "direccion_id": 3,
+  "sector": "Primario",
+  "direccion": {
+    "calle": "Cervezas",
+    "num_interior": "Selección de cervezas nacionales e internacionales",
+    "num_exterior": "123",
+    "colonia": "Centro",
+    "municipio": "Municipio Ejemplo",
+    "estado": "Estado Ejemplo",
+    "pais": "México",
+    "codigo_postal": 12345
+  },
   "verificada": true,
   "size": "Mediana",
   "ubicacion": "Ubicación Ejemplo"

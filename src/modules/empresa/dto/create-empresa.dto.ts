@@ -1,11 +1,11 @@
+import { Type } from 'class-transformer';
 import {
   IsBoolean,
-  IsNumber,
-  IsPositive,
   IsString,
-  Min,
   MinLength,
+  ValidateNested,
 } from 'class-validator';
+import { CreateDireccionDto } from 'src/modules/direccion/dto/create-direccion.dto';
 
 export class CreateEmpresaDto {
   @IsString()
@@ -24,20 +24,12 @@ export class CreateEmpresaDto {
   @MinLength(3)
   razon_social: string;
 
-  @IsNumber()
-  @IsPositive()
-  @Min(1)
-  empleador_id: number;
+  @IsString()
+  sector: string;
 
-  @IsNumber()
-  @IsPositive()
-  @Min(1)
-  sector_id: number;
-
-  @IsNumber()
-  @IsPositive()
-  @Min(1)
-  direccion_id: number;
+  @ValidateNested()
+  @Type(() => CreateDireccionDto)
+  direccion: CreateDireccionDto;
 
   @IsBoolean()
   verificada: boolean;
@@ -49,4 +41,6 @@ export class CreateEmpresaDto {
   @IsString()
   @MinLength(5)
   ubicacion: string;
+
+  usuario_id: number;
 }

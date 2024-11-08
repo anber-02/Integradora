@@ -1,6 +1,4 @@
-import { Empresa } from 'src/modules/empresa/entities/empresa.entity';
-import { Column, Entity, OneToOne, PrimaryGeneratedColumn } from 'typeorm';
-
+import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class Solicitante {
   @PrimaryGeneratedColumn()
@@ -14,6 +12,6 @@ export class Solicitante {
   @Column()
   num_telefono: string;
 
-  @OneToOne(() => Empresa, (empresa) => empresa.solicitante)
-  empresa: Empresa;
+  // @OneToOne(() => Empresa, (empresa) => empresa.solicitante)
+  // empresa: Empresa;
 }

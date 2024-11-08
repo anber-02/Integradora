@@ -1,21 +1,14 @@
-import {
-  IsNumber,
-  IsPositive,
-  IsString,
-  MaxLength,
-  Min,
-  MinLength,
-} from 'class-validator';
+import { IsNumber, IsString, Min, MinLength } from 'class-validator';
 
 export class CreateDireccionDto {
   @IsString()
   @MinLength(5)
   calle: string;
   @IsString()
-  @MinLength(5)
+  @MinLength(1)
   num_interior: string;
   @IsString()
-  @MinLength(5)
+  @MinLength(1)
   num_exterior: string;
   @IsString()
   @MinLength(5)

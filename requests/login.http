@@ -4,10 +4,10 @@ POST http://localhost:3000/api/auth/register
 Content-Type: application/json
 
 {
-  "nombre": "Ramses",
-  "num_telefono": "+529513748375",
-  "email": "ramsex@outlook.com",
-  "password": "ramsesguapo"
+  "nombre": "anberto",
+  "num_telefono": "+52 951 289 09 30",
+  "email": "annn@gmail.com",
+  "password": "12345678"
 }
 
 # LOGIN
@@ -16,6 +16,6 @@ POST http://localhost:3000/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "victorsjm@outlook.com",
-  "pass": "quientepregunto03"
+  "email": "annn@gmail.com",
+  "pass": "12345678"
 }

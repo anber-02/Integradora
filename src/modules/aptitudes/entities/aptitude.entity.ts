@@ -1,11 +1,5 @@
 import { Carrera } from 'src/modules/carrera/entities/carrera.entity';
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  ManyToOne,
-  PrimaryGeneratedColumn,
-} from 'typeorm';
+import { Column, Entity, ManyToMany, PrimaryGeneratedColumn } from 'typeorm';
 
 @Entity('aptitud')
 export class Aptitude {
@@ -13,11 +7,11 @@ export class Aptitude {
   id: number;
 
   @Column()
-  aptitud: string;
+  nombre: string;
 
-  @ManyToOne(() => Carrera, (carrera) => carrera.aptitudes, {
-    nullable: false,
-  })
-  @JoinColumn({ name: 'carrera_id' })
-  carrera: Carrera;
+  @Column()
+  descripcion: string;
+
+  @ManyToMany(() => Carrera, (carrera) => carrera.aptitudes)
+  carreras: Carrera[];
 }

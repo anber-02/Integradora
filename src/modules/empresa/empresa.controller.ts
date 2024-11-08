@@ -10,13 +10,18 @@ import {
 import { EmpresaService } from './empresa.service';
 import { CreateEmpresaDto } from './dto/create-empresa.dto';
 import { UpdateEmpresaDto } from './dto/update-empresa.dto';
+import { GetUser } from '../auth/decorator/get-user.decorator';
+import { Role } from '../auth/enums/rol.enum';
+import { Auth } from '../auth/decorator/auth.decorator';
 
 @Controller('empresa')
 export class EmpresaController {
   constructor(private readonly empresaService: EmpresaService) {}
 
+  @Auth(Role.EMPRESA)
   @Post()
-  create(@Body() createEmpresaDto: CreateEmpresaDto) {
+  create(@Body() createEmpresaDto: CreateEmpresaDto, @GetUser() user) {
+    createEmpresaDto.usuario_id = user.sub;
     return this.empresaService.create(createEmpresaDto);
   }
 
