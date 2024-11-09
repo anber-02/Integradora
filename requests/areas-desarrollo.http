@@ -7,13 +7,43 @@ GET {{url}}/
 GET {{url}}/1
 
 ###
+POST {{url}}/
+Content-Type: application/json
+
+{
+  "nombre": "Diseño y fabricación de prototipos",
+  "descripcion": "Un área clave donde el TSU puede desarrollarse es en el diseño, fabricación y prueba de prototipos de sistemas mecatrónicos, involucrando desde el diseño CAD hasta la integración de sistemas electrónicos y mecánicos."
+}
+
+###
 POST {{url}}/ 
 Content-Type: application/json
 
 {
-  "nombre": "Desarrollo de Software",
-  "descripcion": "Diseño y desarrollo de aplicaciones y sistemas informáticos"
+  "nombre": "Automatización industrial",
+   "descripcion": "En este campo, el TSU en Mecatrónica puede avanzar en la implementación de soluciones automatizadas para mejorar procesos productivos, reduciendo costos y mejorando la eficiencia en fábricas y plantas industriales."
 }
+
+###
+POST {{url}}/ 
+Content-Type: application/json
+
+{
+  "nombre": "Mantenimiento preventivo y correctivo",
+   "descripcion": "El TSU en Mecatrónica puede especializarse en el mantenimiento de sistemas mecatrónicos, asegurando su correcto funcionamiento mediante la implementación de programas de mantenimiento preventivo, así como intervenciones correctivas cuando sea necesario."
+}
+
+###
+POST {{url}}/ 
+Content-Type: application/json
+
+{
+  "nombre": "Robótica",
+  "descripcion": "Una de las áreas más dinámicas es la robótica, donde un TSU en Mecatrónica puede desarrollarse diseñando, programando y manteniendo robots industriales, colaborativos y autónomos para tareas específicas en diferentes sectores."
+}
+
+
+
 
 ###
 PATCH {{url}}/1

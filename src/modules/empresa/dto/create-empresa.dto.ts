@@ -1,6 +1,7 @@
 import { Type } from 'class-transformer';
 import {
   IsBoolean,
+  IsOptional,
   IsString,
   MinLength,
   ValidateNested,
@@ -31,6 +32,7 @@ export class CreateEmpresaDto {
   @Type(() => CreateDireccionDto)
   direccion: CreateDireccionDto;
 
+  @IsOptional()
   @IsBoolean()
   verificada: boolean;
 
@@ -40,7 +42,7 @@ export class CreateEmpresaDto {
 
   @IsString()
   @MinLength(5)
-  ubicacion: string;
+  alcance_geografico: string;
 
   usuario_id: number;
 }

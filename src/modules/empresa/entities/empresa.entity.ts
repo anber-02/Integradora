@@ -32,12 +32,12 @@ export class Empresa {
   sector: string;
   @Column()
   direccion_id: number;
-  @Column()
+  @Column({ default: false })
   verificada: boolean;
   @Column()
   size: string;
   @Column()
-  ubicacion: string;
+  alcance_geografico: string;
 
   @Column()
   usuario_id: number;

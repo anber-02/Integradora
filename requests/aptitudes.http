@@ -6,14 +6,47 @@ GET {{url}}/
 ###
 GET {{url}}/1
 
+# APTITUDES DE UN TSU EN MECATRONICA
 ###
 POST {{url}}/ 
 Content-Type: application/json
 
 {
-  "nombre": "Automatización Industrial",
-  "descripcion": "Desarrollo de sistemas automáticos en la industria"
+  "nombre": "Habilidades en programación",
+   "descripcion": "Tiene la capacidad de programar y configurar sistemas electrónicos y controladores automáticos utilizando diferentes lenguajes de programación como C, C++, Python, entre otros."
 }
+
+###
+POST {{url}}/ 
+Content-Type: application/json
+
+{
+  "nombre": "Conocimiento en sistemas de control",
+  "descripcion": "Es capaz de diseñar, implementar y mantener sistemas de control automatizados para el manejo eficiente de máquinas y procesos industriales, utilizando controladores lógicos programables (PLC) y otros dispositivos electrónicos."
+}
+
+###
+POST {{url}}/ 
+Content-Type: application/json
+
+{
+  "nombre": "Manejo de herramientas y equipos",
+  "descripcion": "Posee la habilidad para manejar herramientas mecánicas, eléctricas y electrónicas para la construcción, mantenimiento y reparación de sistemas mecatrónicos, como robots, sistemas de automatización, entre otros."
+}
+
+###
+POST {{url}}/ 
+Content-Type: application/json
+
+{
+  "nombre": "Trabajo en equipo",
+  "descripcion": "Es capaz de trabajar en equipo multidisciplinario, comunicarse de manera efectiva con otros profesionales como ingenieros, técnicos y operarios para alcanzar objetivos comunes en proyectos de automatización y robótica."
+}
+
+# ======================================================
+
+
+
 
 ###
 PATCH {{url}}/1

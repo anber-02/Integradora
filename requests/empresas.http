@@ -1,5 +1,5 @@
 @url = http://localhost:3000/api/empresa
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6ImVtcHJlc2EiLCJpYXQiOjE3MzEwODgyMTEsImV4cCI6MTczMTE3NDYxMX0.W3nWPUl6xiZMg72UV1HhqDO9I7rNjx1BOB-tzeAiT_Q
+@empresa = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInVzZXJuYW1lIjoiZW1wcmVzYSIsInJvbCI6ImVtcHJlc2EiLCJpYXQiOjE3MzExNzExMTEsImV4cCI6MTczMTI1NzUxMX0.DhMG_DroOnESyjujtkGfnsoHsr9nG9XJxfDyzwVRMIA
 @admin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6ImFkbWluIiwiaWF0IjoxNzMxMTE0NjE0LCJleHAiOjE3MzEyMDEwMTR9.yqFb54He6dmoJSQHoI66s_o6c2GJHmmzXZVD4JRXhYQ
 ###
 ###
@@ -8,38 +8,38 @@ Authorization: Bearer {{admin}}
 
 ###
 GET {{url}}/1
-Authorization: Bearer {{admin}}
+Authorization: Bearer {{empresa}}
 
 ###
 POST {{url}}/
 Content-Type: application/json
-Authorization: Bearer {{token}}
+Authorization: Bearer {{empresa}}
 
 {
-  "nombre": "Ejemplo Nombre",
-  "tipo": "Tipo Ejemplo",
-  "giro": "Giro Ejemplo",
-  "razon_social": "Razón Social Ejemplo",
-  "sector": "Primario",
+  "nombre": "Cervezas El Buen Sabor",
+  "tipo": "Productora y distribuidora",
+  "giro": "Fabricación y comercialización de bebidas alcohólicas",
+  "razon_social": "Cervezas El Buen Sabor, S.A. de C.V.",
+  "sector": "Secundario",
   "direccion": {
-    "calle": "Cervezas",
-    "num_interior": "Selección de cervezas nacionales e internacionales",
-    "num_exterior": "123",
-    "colonia": "Centro",
-    "municipio": "Municipio Ejemplo",
-    "estado": "Estado Ejemplo",
+    "calle": "Avenida de la Cerveza",
+    "num_interior": "Apto 202",
+    "num_exterior": "456",
+    "colonia": "Zona Industrial",
+    "municipio": "Guadalajara",
+    "estado": "Jalisco",
     "pais": "México",
-    "codigo_postal": 12345
+    "codigo_postal": 44500
   },
-  "verificada": true,
   "size": "Mediana",
-  "ubicacion": "Ubicación Ejemplo"
+  "alcance_geografico": "Nacional"
 }
+
 
 ###
 PATCH  {{url}}/direccion/1
 Content-Type: application/json
-Authorization: Bearer {{token}}
+Authorization: Bearer {{empresa}}
 
 {
   "calle": "Cervezas 2"

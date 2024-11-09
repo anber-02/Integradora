@@ -1,5 +1,5 @@
 @url = http://localhost:3000/api/carrera
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6ImFkbWluIiwiaWF0IjoxNzMxMDM5MjU0LCJleHAiOjE3MzExMjU2NTR9.k5CxbKhYrZQi_tmdC698cpJuMGSus9hZrceW13NfTHE
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6ImFkbWluIiwiaWF0IjoxNzMxMTcxMDg2LCJleHAiOjE3MzEyNTc0ODZ9.lonwHLxYpjpJvMtqnYq2JyMGBBCNu4wONINvWw_1tEA
 
 ###
 GET {{url}}/
@@ -46,7 +46,7 @@ Mecatronica
 --boundary
 Content-Disposition: form-data; name="nomenclatura"
 
-TI
+MT
 --boundary
 Content-Disposition: form-data; name="nivel_educativo"
 
@@ -59,17 +59,29 @@ Se enfoca en adquirir conocimientos teóricos y prácticos en áreas como robót
 Content-Disposition: form-data; name="image"; filename="imagen.jpg"
 Content-Type: image/jpeg
 
-< C:\Users\newpr\Downloads\Wallpapers-master\Wallpapers-master\11.jpg
+< C:\Users\newpr\Desktop\MT.png
 --boundary--
 
 
-
+# C:\Users\newpr\Desktop
 ###
-# APTITUDES TO CARRERA
+# Areas TO CARRERA
 POST {{url}}/assign-areas
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
   "carreraId": 1,
-  "areaDesarrolloIds": [1, 2]
+  "areaDesarrolloIds": [1, 2, 3, 4]
+}
+
+###
+# APTITUDES TO CARRERA
+POST {{url}}/assign-aptitudes
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "carreraId": 1,
+  "aptitudesIds": [1, 2, 3, 4]
 }

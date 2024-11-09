@@ -69,6 +69,7 @@ export class CarreraController {
   }
 
   // Ruta para asignar aptitudes a una carrera
+  @Auth(Role.ADMIN)
   @Post('assign-aptitudes')
   async assignAptitudes(
     @Body() assignAptitudesToCareerDto: AssignAptitudToCareerDto,
@@ -78,6 +79,7 @@ export class CarreraController {
     );
   }
   // Ruta para asignar areas de desarrollo a una carrera
+  @Auth(Role.ADMIN)
   @Post('assign-areas')
   async assignAreas(@Body() assignAreaToCareerDto: AssignAreaToCareerDto) {
     return this.carreraService.assignAreasToCareer(assignAreaToCareerDto);
