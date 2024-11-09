@@ -1,12 +1,14 @@
 @url = http://localhost:3000/api/empresa
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6ImVtcHJlc2EiLCJpYXQiOjE3MzEwODQxMjMsImV4cCI6MTczMTE3MDUyM30.YIKqWvn2aN3L4kbdVQD68saW708JBFykkWK_6Nz7wWM
-
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjMsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6ImVtcHJlc2EiLCJpYXQiOjE3MzEwODgyMTEsImV4cCI6MTczMTE3NDYxMX0.W3nWPUl6xiZMg72UV1HhqDO9I7rNjx1BOB-tzeAiT_Q
+@admin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6ImFkbWluIiwiaWF0IjoxNzMxMTE0NjE0LCJleHAiOjE3MzEyMDEwMTR9.yqFb54He6dmoJSQHoI66s_o6c2GJHmmzXZVD4JRXhYQ
 ###
 ###
 GET {{url}}/
+Authorization: Bearer {{admin}}
 
 ###
 GET {{url}}/1
+Authorization: Bearer {{admin}}
 
 ###
 POST {{url}}/
@@ -35,11 +37,21 @@ Authorization: Bearer {{token}}
 }
 
 ###
-PATCH {{url}}/6
+PATCH  {{url}}/direccion/1
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
-  "nombre": "Red Osmo"
+  "calle": "Cervezas 2"
+}
+
+###
+PATCH {{url}}/1
+Content-Type: application/json
+Authorization: Bearer {{admin}}
+
+{
+  "nombre": "Red Osmo Enterprise"
 }
 
 ###

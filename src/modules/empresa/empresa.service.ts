@@ -8,7 +8,8 @@ import { UpdateEmpresaDto } from './dto/update-empresa.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Empresa } from './entities/empresa.entity';
 import { Repository } from 'typeorm';
-import { Direccion } from '../direccion/entities/direccion.entity';
+import { DireccionService } from '../direccion/direccion.service';
+import { UpdateDireccionDto } from '../direccion/dto/update-direccion.dto';
 
 @Injectable()
 export class EmpresaService {
@@ -16,20 +17,20 @@ export class EmpresaService {
     @InjectRepository(Empresa)
     private empresaRepo: Repository<Empresa>,
 
-    @InjectRepository(Direccion)
-    private direccionRepo: Repository<Direccion>,
+    private direccionService: DireccionService,
   ) {}
 
   async create(createEmpresaDto: CreateEmpresaDto): Promise<Empresa> {
     try {
       // Primero creamos la dirección
-      const direccion = this.direccionRepo.create(createEmpresaDto.direccion);
-      const savedDireccion = await this.direccionRepo.save(direccion);
+      const direccion = await this.direccionService.create(
+        createEmpresaDto.direccion,
+      );
 
       // Luego, creamos la empresa
       const empresa = this.empresaRepo.create({
         ...createEmpresaDto,
-        direccion: savedDireccion, // Asignamos la dirección creada
+        direccion: direccion, // Asignamos la dirección creada
         usuario_id: createEmpresaDto.usuario_id,
       });
 
@@ -41,7 +42,9 @@ export class EmpresaService {
 
   async findAll() {
     try {
-      const Empresa = this.empresaRepo.find();
+      const Empresa = await this.empresaRepo.find({
+        relations: ['direccion'],
+      });
       return Empresa;
     } catch (error) {
       throw new InternalServerErrorException(error);
@@ -50,6 +53,7 @@ export class EmpresaService {
 
   async findOne(id: number) {
     const Empresa = await this.empresaRepo.findOne({
+      relations: ['direccion'],
       where: {
         id,
       },
@@ -63,29 +67,50 @@ export class EmpresaService {
 
   async update(id: number, updateEmpresaDto: UpdateEmpresaDto) {
     try {
-      const Empresa = await this.empresaRepo.preload({
-        id,
-        ...updateEmpresaDto,
+      // Buscamos la empresa por su ID, incluyendo la relación con la dirección
+      const empresa = await this.empresaRepo.findOne({
+        where: { id },
+        relations: ['direccion'],
       });
-      await this.empresaRepo.save(Empresa);
-      return Empresa;
+
+      if (!empresa) {
+        throw new NotFoundException('Empresa no encontrada');
+      }
+
+      // Actualizamos los campos de la empresa
+      Object.assign(empresa, updateEmpresaDto);
+
+      // Guardamos la empresa con los nuevos valores
+      return await this.empresaRepo.save(empresa);
     } catch (error) {
       throw new InternalServerErrorException(error);
     }
   }
 
   async remove(id: number) {
-    const Empresa = await this.empresaRepo.findOne({
-      where: {
-        id,
-      },
-    });
-    if (!Empresa) {
-      throw new NotFoundException('producto no encontrado');
+    try {
+      const empresa = await this.empresaRepo.findOne({
+        where: { id },
+        relations: ['direccion'],
+      });
+
+      if (!empresa) {
+        throw new NotFoundException('Empresa no encontrada');
+      }
+
+      if (empresa.direccion) {
+        await this.direccionService.remove(empresa.direccion.id); // Eliminamos la dirección asociada
+      }
+
+      await this.empresaRepo.delete(id);
+
+      return { Message: 'Empresa y su dirección han sido eliminadas' };
+    } catch (error) {
+      throw new InternalServerErrorException(error);
     }
-    await this.empresaRepo.delete(id);
-    return {
-      Message: 'Se a eliminado',
-    };
+  }
+
+  async updateAdress(id: number, updateDireccionDto: UpdateDireccionDto) {
+    return this.direccionService.update(id, updateDireccionDto);
   }
 }

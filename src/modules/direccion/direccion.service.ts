@@ -26,26 +26,21 @@ export class DireccionService {
     }
   }
 
-  async findAll() {
+  async findOne(id: number) {
     try {
-      const Direccion = this.addressRepo.find();
+      const Direccion = await this.addressRepo.findOne({
+        where: {
+          id,
+        },
+      });
+      if (!Direccion) {
+        throw new NotFoundException('producto no encontrado');
+      }
+
       return Direccion;
     } catch (error) {
       throw new InternalServerErrorException(error);
     }
-  }
-
-  async findOne(id: number) {
-    const Direccion = await this.addressRepo.findOne({
-      where: {
-        id,
-      },
-    });
-    if (!Direccion) {
-      throw new NotFoundException('producto no encontrado');
-    }
-
-    return Direccion;
   }
 
   async update(id: number, updateDireccionDto: UpdateDireccionDto) {
@@ -62,17 +57,21 @@ export class DireccionService {
   }
 
   async remove(id: number) {
-    const Direccion = await this.addressRepo.findOne({
-      where: {
-        id,
-      },
-    });
-    if (!Direccion) {
-      throw new NotFoundException('producto no encontrado');
+    try {
+      const Direccion = await this.addressRepo.findOne({
+        where: {
+          id,
+        },
+      });
+      if (!Direccion) {
+        throw new NotFoundException('producto no encontrado');
+      }
+      await this.addressRepo.delete(id);
+      return {
+        Message: 'Se a eliminado',
+      };
+    } catch (error) {
+      throw new InternalServerErrorException(error);
     }
-    await this.addressRepo.delete(id);
-    return {
-      Message: 'Se a eliminado',
-    };
   }
 }
