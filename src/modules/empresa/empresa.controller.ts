@@ -13,6 +13,7 @@ import { UpdateEmpresaDto } from './dto/update-empresa.dto';
 import { GetUser } from '../auth/decorator/get-user.decorator';
 import { Role } from '../auth/enums/rol.enum';
 import { Auth } from '../auth/decorator/auth.decorator';
+import { UpdateDireccionDto } from '../direccion/dto/update-direccion.dto';
 
 @Controller('empresa')
 export class EmpresaController {
@@ -24,22 +25,34 @@ export class EmpresaController {
     createEmpresaDto.usuario_id = user.sub;
     return this.empresaService.create(createEmpresaDto);
   }
+  @Auth(Role.EMPRESA)
+  @Patch('/direccion/:id')
+  updateAddress(
+    @Param('id') id: string,
+    @Body() updateDireccionDto: UpdateDireccionDto,
+  ) {
+    return this.empresaService.updateAdress(+id, updateDireccionDto);
+  }
 
+  @Auth(Role.ADMIN)
   @Get()
   findAll() {
     return this.empresaService.findAll();
   }
 
+  @Auth(Role.ADMIN)
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.empresaService.findOne(+id);
   }
 
+  @Auth(Role.ADMIN)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateEmpresaDto: UpdateEmpresaDto) {
     return this.empresaService.update(+id, updateEmpresaDto);
   }
 
+  @Auth(Role.ADMIN)
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.empresaService.remove(+id);
