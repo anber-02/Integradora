@@ -1,17 +1,22 @@
-@url = http://18.232.79.132:3000/api
+@url = http://localhost:3000/api
+@admin=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6ImFkbWluIiwiaWF0IjoxNzMxMTcxMDg2LCJleHAiOjE3MzEyNTc0ODZ9.lonwHLxYpjpJvMtqnYq2JyMGBBCNu4wONINvWw_1tEA
+
+@empresa=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInVzZXJuYW1lIjoiZW1wcmVzYSIsInJvbCI6ImVtcHJlc2EiLCJpYXQiOjE3MzExNzExMTEsImV4cCI6MTczMTI1NzUxMX0.DhMG_DroOnESyjujtkGfnsoHsr9nG9XJxfDyzwVRMIA
 
 ###
 GET {{url}}/roles
+Authorization: Bearer {{admin}}
 
 ###
 GET {{url}}/roles/1
+Authorization: Bearer {{admin}}
 
 ###
 POST {{url}}/roles 
 Content-Type: application/json
 
 {
-  "rol" : "empresa"
+  "rol" : "admin"
 }
 
 ###
