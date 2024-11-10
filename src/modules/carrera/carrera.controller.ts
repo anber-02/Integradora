@@ -7,13 +7,15 @@ import {
   Param,
   Delete,
   UseInterceptors,
-  UploadedFile,
   InternalServerErrorException,
+  Query,
+  UploadedFiles,
+  UploadedFile,
 } from '@nestjs/common';
 import { CarreraService } from './carrera.service';
 import { CreateCarreraDto } from './dto/create-carrera.dto';
 import { UpdateCarreraDto } from './dto/update-carrera.dto';
-import { FileInterceptor } from '@nestjs/platform-express';
+import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
 import { ImagesService } from 'src/shared/images/images.service';
 import { Auth } from '../auth/decorator/auth.decorator';
 import { Role } from '../auth/enums/rol.enum';
@@ -29,16 +31,17 @@ export class CarreraController {
 
   @Auth(Role.ADMIN)
   @Post()
-  @UseInterceptors(FileInterceptor('image'))
+  @UseInterceptors(FilesInterceptor('images'))
   async create(
-    @UploadedFile() file: Express.Multer.File,
     @Body() createCarreraDto: CreateCarreraDto,
+    @UploadedFiles() files: Express.Multer.File[],
   ) {
     try {
-      if (file) {
-        console.log(file.path);
-        const result = await this.imageService.uploadImage(file.path); // Sube la imagen a Cloudinary
-        createCarreraDto.imageUrl = result.secure_url; // Almacena la URL en el DTO
+      if (files) {
+        const iconResult = await this.imageService.uploadImage(files[0].path);
+        const imageResult = await this.imageService.uploadImage(files[1].path);
+        createCarreraDto.icon = iconResult.secure_url; // Almacena la URL en el DTO
+        createCarreraDto.image_url = imageResult.secure_url; // Almacena la URL en el DTO
       }
 
       return this.carreraService.create(createCarreraDto);
@@ -46,9 +49,19 @@ export class CarreraController {
       throw new InternalServerErrorException(error);
     }
   }
+
   @Get()
-  findAll() {
-    return this.carreraService.findAll();
+  findAll(@Query('nivel_educativo') nivelEducativo: string) {
+    let niveles: string[] = [];
+
+    if (!nivelEducativo) return this.carreraService.findAll(niveles);
+
+    if (nivelEducativo.includes('/')) {
+      niveles = nivelEducativo.split('/');
+    } else {
+      niveles = [nivelEducativo];
+    }
+    return this.carreraService.findAll(niveles);
   }
 
   @Get(':id')
@@ -83,5 +96,45 @@ export class CarreraController {
   @Post('assign-areas')
   async assignAreas(@Body() assignAreaToCareerDto: AssignAreaToCareerDto) {
     return this.carreraService.assignAreasToCareer(assignAreaToCareerDto);
+  }
+
+  // Endpoint para actualizar solo el icono de la carrera
+  @Auth(Role.ADMIN)
+  @Patch(':id/icon')
+  @UseInterceptors(FileInterceptor('icon', { dest: './uploads' })) // El campo se llama 'icon'
+  async updateIcon(
+    @Param('id') id: string,
+    @UploadedFile() file: Express.Multer.File, // Recibe el archivo cargado
+  ) {
+    try {
+      if (file) {
+        const iconResult = await this.imageService.uploadImage(file.path);
+        return this.carreraService.update(+id, { icon: iconResult.secure_url });
+      }
+      throw new InternalServerErrorException('No se ha cargado ninguna imagen');
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
+  }
+
+  // Endpoint para actualizar solo la imagen de la carrera
+  @Auth(Role.ADMIN)
+  @Patch(':id/image')
+  @UseInterceptors(FileInterceptor('image', { dest: './uploads' })) // El campo se llama 'image'
+  async updateImage(
+    @Param('id') id: string,
+    @UploadedFile() file: Express.Multer.File, // Recibe el archivo cargado
+  ) {
+    try {
+      if (file) {
+        const imageResult = await this.imageService.uploadImage(file.path);
+        return this.carreraService.update(+id, {
+          image_url: imageResult.secure_url,
+        });
+      }
+      throw new InternalServerErrorException('No se ha cargado ninguna imagen');
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
   }
 }

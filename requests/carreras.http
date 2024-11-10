@@ -2,7 +2,7 @@
 @token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6ImFkbWluIiwiaWF0IjoxNzMxMTcxMDg2LCJleHAiOjE3MzEyNTc0ODZ9.lonwHLxYpjpJvMtqnYq2JyMGBBCNu4wONINvWw_1tEA
 
 ###
-GET {{url}}/
+GET {{url}}/?nivel_educativo=ing
 
 ###
 GET {{url}}/1
@@ -33,7 +33,7 @@ DELETE {{url}}/1
 
 #carrera [Aptitudes{}, Area_Desarrollo{} ]
 
-
+# PARA insertar una carrera la primera imagen siempre tiene que ser el icon y la segunda la imagen a cargar
 ###
 POST {{url}}/
 Content-Type: multipart/form-data; boundary=boundary
@@ -42,25 +42,33 @@ Authorization: Bearer {{token}}
 --boundary
 Content-Disposition: form-data; name="nombre"
 
-Mecatronica
+Tecnologías de la Información
 --boundary
 Content-Disposition: form-data; name="nomenclatura"
 
-MT
+TI
 --boundary
 Content-Disposition: form-data; name="nivel_educativo"
 
-TSU
+ING
 --boundary
 Content-Disposition: form-data; name="descripcion"
 
-Se enfoca en adquirir conocimientos teóricos y prácticos en áreas como robótica y automatización. Participa en proyectos prácticos y laboratorios, desarrollando habilidades técnicas y de trabajo en equipo. Su formación está orientada a prepararse para el mercado laboral, abordando retos en diversas industrias que utilizan sistemas mecatrónicos. Ambos roles son fundamentales para la innovación y eficiencia en la tecnología actual.
+Un Ingeniero en Tecnologías de la Información (TI) se especializa en el diseño, desarrollo, implementación y gestión de sistemas informáticos y redes. Domina lenguajes de programación, bases de datos, ciberseguridad y soluciones tecnológicas, optimizando procesos empresariales y mejorando la eficiencia organizacional.
 --boundary
-Content-Disposition: form-data; name="image"; filename="imagen.jpg"
+Content-Disposition: form-data; name="images"; filename="TI.png"
 Content-Type: image/jpeg
 
-< C:\Users\newpr\Desktop\MT.png
+< C:\Users\newpr\Desktop\TI.png
+--boundary
+Content-Disposition: form-data; name="images"; filename="TI.png"
+Content-Type: image/jpeg
+
+< C:\Users\newpr\Downloads\Wallpapers-master\Wallpapers-master\21.jpg
 --boundary--
+
+
+
 
 
 # C:\Users\newpr\Desktop

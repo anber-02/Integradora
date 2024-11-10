@@ -6,7 +6,7 @@ import {
 import { CreateCarreraDto } from './dto/create-carrera.dto';
 import { UpdateCarreraDto } from './dto/update-carrera.dto';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { Carrera } from './entities/carrera.entity';
 import { Aptitude } from '../aptitudes/entities/aptitude.entity';
 import { AssignAptitudToCareerDto } from './dto/assign-aptitud-to-career.dto';
@@ -37,10 +37,20 @@ export class CarreraService {
     }
   }
 
-  findAll() {
+  findAll(nivelEducativo?: string[]) {
     try {
+      if (nivelEducativo.length === 0) {
+        const Carrera = this.carreRepo.find({
+          relations: ['areaDesarrollo', 'aptitudes'],
+        });
+        return Carrera;
+      }
+
       const Carrera = this.carreRepo.find({
         relations: ['areaDesarrollo', 'aptitudes'],
+        where: {
+          nivel_educativo: In(nivelEducativo),
+        },
       });
       return Carrera;
     } catch (error) {

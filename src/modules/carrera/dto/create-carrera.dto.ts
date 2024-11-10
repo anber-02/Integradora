@@ -17,5 +17,9 @@ export class CreateCarreraDto {
 
   @IsString()
   @IsOptional()
-  imageUrl?: string; // Para almacenar la URL de la imagen
+  icon?: string; // Para almacenar la URL de la imagen
+
+  @IsString()
+  @IsOptional()
+  image_url?: string; // Para almacenar la URL de la imagen
 }

@@ -29,7 +29,10 @@ export class Carrera {
   nivel_educativo: string;
 
   @Column({ nullable: true })
-  imageUrl?: string; // Para almacenar la URL de la imagen
+  icon?: string; // Para almacenar la URL de la imagen
+
+  @Column({ nullable: true })
+  image_url?: string; // Para almacenar la URL de la imagen
 
   @OneToMany(() => Proyecto, (proyecto) => proyecto.carrera)
   proyectos: Proyecto[];
