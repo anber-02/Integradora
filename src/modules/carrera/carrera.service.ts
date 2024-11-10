@@ -60,6 +60,7 @@ export class CarreraService {
 
   async findOne(id: number) {
     const Carrera = await this.carreRepo.findOne({
+      relations: ['areaDesarrollo', 'aptitudes'],
       where: {
         id,
       },
