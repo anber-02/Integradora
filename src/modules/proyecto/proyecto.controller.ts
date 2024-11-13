@@ -10,11 +10,14 @@ import {
 import { ProyectoService } from './proyecto.service';
 import { CreateProyectoDto } from './dto/create-proyecto.dto';
 import { UpdateProyectoDto } from './dto/update-proyecto.dto';
+import { Auth } from '../auth/decorator/auth.decorator';
+import { Role } from '../auth/enums/rol.enum';
 
 @Controller('proyecto')
 export class ProyectoController {
   constructor(private readonly proyectoService: ProyectoService) {}
 
+  @Auth(Role.EMPRESA)
   @Post()
   create(@Body() createProyectoDto: CreateProyectoDto) {
     return this.proyectoService.create(createProyectoDto);

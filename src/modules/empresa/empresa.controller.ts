@@ -25,6 +25,7 @@ export class EmpresaController {
     createEmpresaDto.usuario_id = user.sub;
     return this.empresaService.create(createEmpresaDto);
   }
+
   @Auth(Role.EMPRESA)
   @Patch('/direccion/:id')
   updateAddress(
@@ -34,9 +35,12 @@ export class EmpresaController {
     return this.empresaService.updateAdress(+id, updateDireccionDto);
   }
 
-  @Auth(Role.ADMIN)
+  @Auth(Role.ADMIN, Role.EMPRESA)
   @Get()
-  findAll() {
+  findAll(@GetUser() user) {
+    if (user.rol === Role.EMPRESA) {
+      return this.empresaService.findEmpresasByUser(user.sub); // Solo devuelve la empresa asociada con el id del usuario
+    }
     return this.empresaService.findAll();
   }
 

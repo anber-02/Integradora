@@ -16,7 +16,7 @@ export class UserService {
   ) {}
 
   async create(createUserDto: CreateUserDto) {
-    const { email, nombre, password, num_telefono } = createUserDto;
+    const { email, nombre, password, num_telefono, rol } = createUserDto;
     const user = this.userRepository.create({
       email,
       nombre,
@@ -24,7 +24,7 @@ export class UserService {
       num_telefono,
     });
     // Ay que verificar esta funcion
-    const userRole = await this.rolesService.findOneByName('empresa');
+    const userRole = await this.rolesService.findOneByName(rol);
     if (userRole) {
       user.roles = [userRole];
     }

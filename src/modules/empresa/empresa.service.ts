@@ -113,4 +113,18 @@ export class EmpresaService {
   async updateAdress(id: number, updateDireccionDto: UpdateDireccionDto) {
     return this.direccionService.update(id, updateDireccionDto);
   }
+
+  async findEmpresasByUser(id: number) {
+    const Empresa = await this.empresaRepo.find({
+      relations: ['direccion'],
+      where: {
+        usuario_id: id,
+      },
+    });
+    if (!Empresa) {
+      throw new NotFoundException('Empresas no encontrados');
+    }
+
+    return Empresa;
+  }
 }

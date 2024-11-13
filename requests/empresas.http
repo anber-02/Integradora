@@ -1,23 +1,24 @@
 @url = http://localhost:3000/api/empresa
-@empresa = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInVzZXJuYW1lIjoiZW1wcmVzYSIsInJvbCI6ImVtcHJlc2EiLCJpYXQiOjE3MzExNzExMTEsImV4cCI6MTczMTI1NzUxMX0.DhMG_DroOnESyjujtkGfnsoHsr9nG9XJxfDyzwVRMIA
-@admin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6ImFkbWluIiwiaWF0IjoxNzMxMTE0NjE0LCJleHAiOjE3MzEyMDEwMTR9.yqFb54He6dmoJSQHoI66s_o6c2GJHmmzXZVD4JRXhYQ
+@empresa = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInVzZXJuYW1lIjoiZW1wcmVzYSIsInJvbCI6ImVtcHJlc2EiLCJpYXQiOjE3MzE0NzYwOTIsImV4cCI6MTczMTU2MjQ5Mn0.amn9-T9hCtISsUBBWFSyrsXXlN8lU2YixxVK2dnt-8E
+@empresa2 = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjUsInVzZXJuYW1lIjoiZW1wcmVzYSAyIiwicm9sIjoiZW1wcmVzYSIsImlhdCI6MTczMTUyMjUxNywiZXhwIjoxNzMxNjA4OTE3fQ.bEpmqSEQgcTV5H0q9g5zJbQqLnH8zQj3fPLL13M1XSw
+@admin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6ImFkbWluIiwiaWF0IjoxNzMxNDc0ODkwLCJleHAiOjE3MzE1NjEyOTB9.LrSYSojAhIBzEkrnymJ3Ey_wo4oC034-loBP1LvRX1U
 ###
 ###
 GET {{url}}/
-Authorization: Bearer {{admin}}
+Authorization: Bearer {{empresa}}
 
 ###
 GET {{url}}/1
-Authorization: Bearer {{empresa}}
+Authorization: Bearer {{admin}}
 
 ###
 POST {{url}}/
 Content-Type: application/json
-Authorization: Bearer {{empresa}}
+Authorization: Bearer {{empresa2}}
 
 {
-  "nombre": "Cervezas El Buen Sabor",
-  "tipo": "Productora y distribuidora",
+  "nombre": "Cervezas El Buen Sabor 2",
+  "tipo": "Productora y distribuidora y otro",
   "giro": "Fabricación y comercialización de bebidas alcohólicas",
   "razon_social": "Cervezas El Buen Sabor, S.A. de C.V.",
   "sector": "Secundario",
