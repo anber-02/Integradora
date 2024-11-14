@@ -1,5 +1,5 @@
 @url = http://localhost:3000/api/habilidad
-@admin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6ImFkbWluIiwiaWF0IjoxNzMxNDc0ODkwLCJleHAiOjE3MzE1NjEyOTB9.LrSYSojAhIBzEkrnymJ3Ey_wo4oC034-loBP1LvRX1U
+@admin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6ImFkbWluIiwiaWF0IjoxNzMxNTgwMDA0LCJleHAiOjE3MzE2NjY0MDR9.kAkit8fdz5i2gB3hfpIuWaTLzGXtsUci3MAdhL61yt4
 ###
 GET {{url}}/
 Authorization: Bearer {{admin}}
@@ -7,41 +7,234 @@ Authorization: Bearer {{admin}}
 ###
 GET {{url}}/1
 
-# APTITUDES DE UN TSU EN MECATRONICA
+# Habilidades fuertes y blandas
 ###
 POST {{url}}/ 
 Content-Type: application/json
+Authorization: Bearer {{admin}}
 
 {
-  "nombre": "Habilidades en programación",
-   "descripcion": "Tiene la capacidad de programar y configurar sistemas electrónicos y controladores automáticos utilizando diferentes lenguajes de programación como C, C++, Python, entre otros."
+  "nombre": "Técnicas de cocina avanzada"
 }
 
 ###
+
 POST {{url}}/ 
 Content-Type: application/json
+Authorization: Bearer {{admin}}
 
 {
-  "nombre": "Conocimiento en sistemas de control",
-  "descripcion": "Es capaz de diseñar, implementar y mantener sistemas de control automatizados para el manejo eficiente de máquinas y procesos industriales, utilizando controladores lógicos programables (PLC) y otros dispositivos electrónicos."
+  "nombre": "Gestión de cocina y equipo"
 }
 
 ###
+
 POST {{url}}/ 
 Content-Type: application/json
+Authorization: Bearer {{admin}}
 
 {
-  "nombre": "Manejo de herramientas y equipos",
-  "descripcion": "Posee la habilidad para manejar herramientas mecánicas, eléctricas y electrónicas para la construcción, mantenimiento y reparación de sistemas mecatrónicos, como robots, sistemas de automatización, entre otros."
+  "nombre": "Control de calidad alimentaria"
 }
 
 ###
+
 POST {{url}}/ 
 Content-Type: application/json
+Authorization: Bearer {{admin}}
 
 {
-  "nombre": "Trabajo en equipo",
-  "descripcion": "Es capaz de trabajar en equipo multidisciplinario, comunicarse de manera efectiva con otros profesionales como ingenieros, técnicos y operarios para alcanzar objetivos comunes en proyectos de automatización y robótica."
+  "nombre": "Desarrollo de software"
+}
+
+###
+
+POST {{url}}/ 
+Content-Type: application/json
+Authorization: Bearer {{admin}}
+
+{
+  "nombre": "Administración de bases de datos"
+}
+
+###
+
+POST {{url}}/ 
+Content-Type: application/json
+Authorization: Bearer {{admin}}
+
+{
+  "nombre": "Ciberseguridad"
+}
+
+###
+
+POST {{url}}/ 
+Content-Type: application/json
+Authorization: Bearer {{admin}}
+
+{
+  "nombre": "Programación de PLC"
+}
+
+###
+
+POST {{url}}/ 
+Content-Type: application/json
+Authorization: Bearer {{admin}}
+
+{
+  "nombre": "Diseño de sistemas robóticos"
+}
+
+###
+
+POST {{url}}/ 
+Content-Type: application/json
+Authorization: Bearer {{admin}}
+
+{
+  "nombre": "Sensores y actuadores"
+}
+
+###
+
+POST {{url}}/ 
+Content-Type: application/json
+Authorization: Bearer {{admin}}
+
+{
+  "nombre": "Estrategia de negocios"
+}
+
+###
+
+POST {{url}}/ 
+Content-Type: application/json
+Authorization: Bearer {{admin}}
+
+{
+  "nombre": "Negociación y comunicación efectiva"
+}
+
+###
+
+POST {{url}}/ 
+Content-Type: application/json
+Authorization: Bearer {{admin}}
+
+{
+  "nombre": "Gestión de proyectos"
+}
+
+###
+
+POST {{url}}/ 
+Content-Type: application/json
+Authorization: Bearer {{admin}}
+
+{
+  "nombre": "Energías renovables"
+}
+
+###
+
+POST {{url}}/ 
+Content-Type: application/json
+Authorization: Bearer {{admin}}
+
+{
+  "nombre": "Eficiencia energética"
+}
+
+###
+
+POST {{url}}/ 
+Content-Type: application/json
+Authorization: Bearer {{admin}}
+
+{
+  "nombre": "Gestión de proyectos de energía"
+}
+
+###
+
+POST {{url}}/ 
+Content-Type: application/json
+Authorization: Bearer {{admin}}
+
+{
+  "nombre": "Trabajo en equipo"
+}
+
+###
+
+POST {{url}}/ 
+Content-Type: application/json
+Authorization: Bearer {{admin}}
+
+{
+  "nombre": "Aprendizaje rápido"
+}
+
+###
+
+POST {{url}}/ 
+Content-Type: application/json
+Authorization: Bearer {{admin}}
+
+{
+  "nombre": "Comunicación efectiva"
+}
+
+###
+
+POST {{url}}/ 
+Content-Type: application/json
+Authorization: Bearer {{admin}}
+
+{
+  "nombre": "Resolución de problemas"
+}
+
+###
+
+POST {{url}}/ 
+Content-Type: application/json
+Authorization: Bearer {{admin}}
+
+{
+  "nombre": "Liderazgo"
+}
+
+###
+
+POST {{url}}/ 
+Content-Type: application/json
+Authorization: Bearer {{admin}}
+
+{
+  "nombre": "Adaptabilidad"
+}
+
+###
+
+POST {{url}}/ 
+Content-Type: application/json
+Authorization: Bearer {{admin}}
+
+{
+  "nombre": "Gestión del tiempo"
+}
+
+###
+
+POST {{url}}/ 
+Content-Type: application/json
+Authorization: Bearer {{admin}}
+
+{
+  "nombre": "Creatividad"
 }
 
 # ======================================================

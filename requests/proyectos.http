@@ -1,5 +1,5 @@
 @url = http://localhost:3000/api/proyecto
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoibHVodWhqIiwiaWF0IjoxNzIxMjM4NzA5LCJleHAiOjE3MjEzMjUxMDl9.41aORqmkyPX-De2mRFZNcGAbd8OgVcvFhRO_kxxNKQ4
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6ImFkbWluIiwiaWF0IjoxNzMxNTgwMDA0LCJleHAiOjE3MzE2NjY0MDR9.kAkit8fdz5i2gB3hfpIuWaTLzGXtsUci3MAdhL61yt4
 
 ###
 GET {{url}}/
@@ -11,16 +11,20 @@ GET {{url}}/
 ###
 POST {{url}}/ 
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
-  "nombre": "Nombre del Proyecto",
-  "descripcion": "Descripción del Proyecto",
+  "nombre": "Desarrollo de App Móvil",
+  "descripcion": "Este proyecto tiene como objetivo el desarrollo de una aplicación móvil para gestionar tareas.",
   "participantes_requeridos": 5,
-  "empresa_id": 1
+  "habilidades_ids": [1, 2, 3, 4],
+  "empresa_id": 1,
+  "carrera_id": 4
 }
 
+
 ###
-PATCH {{url}}/1
+PATCH {{url}}/
 Content-Type: application/json
 
 {

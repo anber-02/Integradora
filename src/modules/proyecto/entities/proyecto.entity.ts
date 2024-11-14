@@ -29,6 +29,9 @@ export class Proyecto {
   @Column()
   empresa_id: number;
 
+  @Column()
+  carrera_id: number;
+
   @ManyToOne(() => Empresa, (empresa) => empresa.proyectos)
   @JoinColumn({ name: 'empresa_id' })
   empresa: Empresa;
@@ -43,5 +46,5 @@ export class Proyecto {
 
   @ManyToMany(() => Habilidad, (habilidad) => habilidad.proyectos)
   @JoinTable({ name: 'proyecto_habilidad' })
-  habilidades: Observacion[];
+  habilidades: Habilidad[];
 }

@@ -8,19 +8,33 @@ import { UpdateProyectoDto } from './dto/update-proyecto.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Proyecto } from './entities/proyecto.entity';
 import { Repository } from 'typeorm';
+import { Habilidad } from '../habilidad/entities/habilidad.entity';
 
 @Injectable()
 export class ProyectoService {
   constructor(
     @InjectRepository(Proyecto)
     private proyeRepo: Repository<Proyecto>,
+    @InjectRepository(Habilidad)
+    private habilidadRepo: Repository<Habilidad>,
   ) {}
 
   async create(createProyectoDto: CreateProyectoDto) {
     try {
-      const Proyecto = this.proyeRepo.create(createProyectoDto);
-      await this.proyeRepo.save(Proyecto);
-      return Proyecto;
+      const proyecto = this.proyeRepo.create(createProyectoDto);
+      const habilidades = await this.habilidadRepo.findByIds(
+        createProyectoDto.habilidades_ids,
+      );
+      if (habilidades.length !== createProyectoDto.habilidades_ids.length) {
+        throw new NotFoundException(
+          'Una o más habilidades no fueron encontradas',
+        );
+      }
+
+      proyecto.habilidades = habilidades;
+
+      await this.proyeRepo.save(proyecto);
+      return proyecto;
     } catch (error) {
       throw new InternalServerErrorException(error);
     }
@@ -28,7 +42,19 @@ export class ProyectoService {
 
   findAll() {
     try {
-      const Proyecto = this.proyeRepo.find();
+      const Proyecto = this.proyeRepo.find({
+        relations: ['carrera', 'habilidades'],
+        select: {
+          carrera: {
+            id: true,
+            nombre: true,
+          },
+          habilidades: {
+            id: true,
+            nombre: true,
+          },
+        },
+      });
       return Proyecto;
     } catch (error) {
       throw new InternalServerErrorException(error);
