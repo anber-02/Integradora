@@ -1,9 +1,9 @@
 @url = http://localhost:3000/api/proyecto
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6ImFkbWluIiwiaWF0IjoxNzMxNTgwMDA0LCJleHAiOjE3MzE2NjY0MDR9.kAkit8fdz5i2gB3hfpIuWaTLzGXtsUci3MAdhL61yt4
+@tokenEmpresa=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInVzZXJuYW1lIjoiZW1wcmVzYSIsInJvbCI6ImVtcHJlc2EiLCJpYXQiOjE3MzE3ODU0NDUsImV4cCI6MTczMTg3MTg0NX0.tkI7rkm5i9CLyV3a6HHa9uaYrW73TcW15-XRu67e6QE
 
 ###
-GET {{url}}/
-Authorization: Bearer {{token}}
+GET {{url}}/empresa/3?status=en%20proceso
+Authorization: Bearer {{tokenEmpresa}}
 
 ###
 GET {{url}}/
@@ -11,7 +11,7 @@ GET {{url}}/
 ###
 POST {{url}}/ 
 Content-Type: application/json
-Authorization: Bearer {{token}}
+Authorization: Bearer {{tokenEmpresa}}
 
 {
   "nombre": "Desarrollo de App Móvil",
@@ -20,6 +20,19 @@ Authorization: Bearer {{token}}
   "habilidades_ids": [1, 2, 3, 4],
   "empresa_id": 1,
   "carrera_id": 4
+}
+###
+POST {{url}}/ 
+Content-Type: application/json
+Authorization: Bearer {{tokenEmpresa}}
+
+{
+  "nombre": "Desarrollo de un Robot Autónomo para Inspección Industrial",
+  "descripcion": "Este proyecto tiene como objetivo el diseño y la construcción de un robot autónomo capaz de realizar inspecciones en entornos industriales. El robot utilizará sensores de proximidad y cámaras para detectar fallas en máquinas y equipos, y enviará los datos recopilados a una plataforma para su análisis y mantenimiento preventivo.",
+  "participantes_requeridos": 3,
+  "habilidades_ids": [8, 9, 16, 17],
+  "empresa_id": 3,
+  "carrera_id": 1
 }
 
 

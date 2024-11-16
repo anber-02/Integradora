@@ -40,9 +40,38 @@ export class ProyectoService {
     }
   }
 
-  findAll() {
+  findAll(status: string) {
     try {
       const Proyecto = this.proyeRepo.find({
+        where: { status },
+        relations: ['carrera', 'habilidades', 'empresa'],
+        select: {
+          carrera: {
+            id: true,
+            nombre: true,
+          },
+          habilidades: {
+            id: true,
+            nombre: true,
+          },
+          empresa: {
+            id: true,
+            nombre: true,
+          },
+        },
+      });
+      return Proyecto;
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
+  }
+  findByEmpresa(empresa_id: number, status: string) {
+    try {
+      const Proyecto = this.proyeRepo.find({
+        where: {
+          empresa: { id: empresa_id },
+          ...(status ? { status } : {}),
+        },
         relations: ['carrera', 'habilidades'],
         select: {
           carrera: {
@@ -101,4 +130,22 @@ export class ProyectoService {
       Message: 'Se a eliminado',
     };
   }
+
+  // public async findBy({
+  //   key,
+  //   value,
+  // }: {
+  //   key: keyof CreateProyectoDto;
+  //   value: any;
+  // }) {
+  //   try {
+  //     const user = await this.proyeRepo.find({
+  //       where: { [key]: value },
+  //     });
+
+  //     return user;
+  //   } catch (error) {
+  //     throw new InternalServerErrorException(error);
+  //   }
+  // }
 }

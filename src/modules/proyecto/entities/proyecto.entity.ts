@@ -11,6 +11,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Status } from '../enums/status.enum';
 
 @Entity()
 export class Proyecto {
@@ -31,6 +32,13 @@ export class Proyecto {
 
   @Column()
   carrera_id: number;
+
+  @Column({
+    type: 'enum',
+    enum: Status,
+    default: Status.EN_PROCESO,
+  })
+  status: string;
 
   @ManyToOne(() => Empresa, (empresa) => empresa.proyectos)
   @JoinColumn({ name: 'empresa_id' })

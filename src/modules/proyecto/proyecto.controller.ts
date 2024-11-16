@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { ProyectoService } from './proyecto.service';
 import { CreateProyectoDto } from './dto/create-proyecto.dto';
@@ -23,9 +24,16 @@ export class ProyectoController {
     return this.proyectoService.create(createProyectoDto);
   }
 
-  @Get()
-  findAll() {
-    return this.proyectoService.findAll();
+  @Get('/')
+  findAll(@Query('status') status: string) {
+    return this.proyectoService.findAll(status);
+  }
+  @Get('/empresa/:id')
+  findByEmpresa(
+    @Param('id') empresa_id: number,
+    @Query('status') status: string,
+  ) {
+    return this.proyectoService.findByEmpresa(empresa_id, status);
   }
 
   @Get(':id')
@@ -33,15 +41,16 @@ export class ProyectoController {
     return this.proyectoService.findOne(+id);
   }
 
-  @Patch(':id')
+  @Patch('/empresa/:empresaId/:proyectoId')
   update(
-    @Param('id') id: string,
+    @Param('empresaId') empresaId: string,
+    @Param('proyectoId') proyectoId: string,
     @Body() updateProyectoDto: UpdateProyectoDto,
   ) {
-    return this.proyectoService.update(+id, updateProyectoDto);
+    return this.proyectoService.update(+empresaId, updateProyectoDto);
   }
 
-  @Delete(':id')
+  @Delete('/empresa/:id')
   remove(@Param('id') id: string) {
     return this.proyectoService.remove(+id);
   }
