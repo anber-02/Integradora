@@ -77,6 +77,7 @@ export class ProyectoService {
           carrera: {
             id: true,
             nombre: true,
+            nivel_educativo: true,
           },
           habilidades: {
             id: true,
