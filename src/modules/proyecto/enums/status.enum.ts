@@ -1,5 +1,5 @@
 export enum Status {
   VERIFICADO = 'verificado',
-  EN_PROCESO = 'en proceso',
+  EN_PROCESO = 'pendiente',
   RECHAZADO = 'rechazado',
 }

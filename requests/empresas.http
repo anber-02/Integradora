@@ -14,7 +14,7 @@ Authorization: Bearer {{admin}}
 ###
 POST {{url}}/
 Content-Type: application/json
-Authorization: Bearer {{empresa2}}
+Authorization: Bearer {{admin}}
 
 {
   "nombre": "Cervezas El Buen Sabor 2",

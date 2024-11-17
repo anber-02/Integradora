@@ -1,11 +1,14 @@
 import {
   IsArray,
+  IsEnum,
   IsInt,
   IsNumber,
   IsString,
   Min,
   MinLength,
 } from 'class-validator';
+import { Status } from '../enums/status.enum';
+import { Transform } from 'class-transformer';
 
 export class CreateProyectoDto {
   @IsString()
@@ -31,4 +34,12 @@ export class CreateProyectoDto {
   @IsNumber()
   @Min(1)
   carrera_id: number;
+
+  @IsEnum(Status, {
+    message:
+      'El estado debe ser uno de los siguientes valores: ' +
+      Object.values(Status).join(', '),
+  })
+  @Transform(({ value }) => value?.toLowerCase())
+  status: string;
 }

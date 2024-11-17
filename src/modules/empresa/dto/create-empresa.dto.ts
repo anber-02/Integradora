@@ -1,12 +1,14 @@
-import { Type } from 'class-transformer';
+import { Transform, Type } from 'class-transformer';
 import {
   IsBoolean,
+  IsEnum,
   IsOptional,
   IsString,
   MinLength,
   ValidateNested,
 } from 'class-validator';
 import { CreateDireccionDto } from 'src/modules/direccion/dto/create-direccion.dto';
+import { Alcance } from '../enums/enums';
 
 export class CreateEmpresaDto {
   @IsString()
@@ -40,8 +42,10 @@ export class CreateEmpresaDto {
   @MinLength(5)
   size: string;
 
-  @IsString()
-  @MinLength(5)
+  @IsEnum(Alcance, {
+    message: `alcance_geografico debe ser uno de los siguientes valores: ${Object.values(Alcance).join(', ')}`,
+  })
+  @Transform(({ value }) => value?.toLowerCase())
   alcance_geografico: string;
 
   usuario_id: number;

@@ -54,12 +54,22 @@ export class EmpresaService {
   async findOne(id: number) {
     const Empresa = await this.empresaRepo.findOne({
       relations: ['direccion', 'usuario'],
+      select: {
+        usuario: {
+          id: true,
+          nombre: true,
+          cargo: true,
+          email: true,
+          num_telefono: true,
+          area_trabajo: true,
+        },
+      },
       where: {
         id,
       },
     });
     if (!Empresa) {
-      throw new NotFoundException('producto no encontrado');
+      throw new NotFoundException('empresa no encontrada');
     }
 
     return Empresa;

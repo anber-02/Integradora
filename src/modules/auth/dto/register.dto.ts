@@ -17,4 +17,10 @@ export class RegisterDto {
 
   @IsPhoneNumber()
   num_telefono: string;
+
+  @IsString()
+  cargo: string;
+
+  @IsString()
+  area_trabajo: string;
 }

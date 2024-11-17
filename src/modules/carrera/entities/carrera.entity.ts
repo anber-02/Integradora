@@ -9,6 +9,7 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { NivelEducativo } from '../enums/nivel-educativo.enum';
 
 @Entity()
 // @Unique(['nomenclatura'])
@@ -25,7 +26,10 @@ export class Carrera {
   @Column('text')
   descripcion: string;
 
-  @Column()
+  @Column({
+    type: 'enum',
+    enum: NivelEducativo,
+  })
   nivel_educativo: string;
 
   @Column({ nullable: true })

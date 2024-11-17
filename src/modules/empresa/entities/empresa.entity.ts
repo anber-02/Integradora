@@ -10,11 +10,11 @@ import {
 } from 'typeorm';
 
 import { Direccion } from 'src/modules/direccion/entities/direccion.entity';
-// import { Solicitante } from 'src/modules/solicitante/entities/solicitante.entity';
 import { Documento } from 'src/modules/documentos/entities/documento.entity';
 import { Proyecto } from 'src/modules/proyecto/entities/proyecto.entity';
 import { User } from 'src/modules/user/entities/user.entity';
 import { Observacion } from 'src/modules/observacion/entities/observacion.entity';
+import { Alcance } from '../enums/enums';
 
 @Entity()
 export class Empresa {
@@ -36,7 +36,10 @@ export class Empresa {
   verificada: boolean;
   @Column()
   size: string;
-  @Column()
+  @Column({
+    type: 'enum',
+    enum: Alcance,
+  })
   alcance_geografico: string;
 
   @Column()
@@ -49,10 +52,6 @@ export class Empresa {
   @OneToOne(() => Direccion, (direccion) => direccion.empresa)
   @JoinColumn({ name: 'direccion_id' })
   direccion: Direccion;
-
-  // @OneToOne(() => Solicitante, (solicitante) => solicitante.empresa)
-  // @JoinColumn({ name: 'solicitante_id' })
-  // solicitante: Solicitante;
 
   @OneToMany(() => Documento, (documento) => documento.empresa)
   documentos: Documento[];

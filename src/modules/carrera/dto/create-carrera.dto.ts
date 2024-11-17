@@ -1,4 +1,12 @@
-import { IsOptional, IsString, MaxLength, MinLength } from 'class-validator';
+import {
+  IsEnum,
+  IsOptional,
+  IsString,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
+import { NivelEducativo } from '../enums/nivel-educativo.enum';
+import { Transform } from 'class-transformer';
 
 export class CreateCarreraDto {
   @IsString()
@@ -12,7 +20,12 @@ export class CreateCarreraDto {
   @IsString()
   descripcion: string;
 
-  @IsString()
+  @IsEnum(NivelEducativo, {
+    message:
+      'El nivel educativo debe ser uno de los siguientes valores: ' +
+      Object.values(NivelEducativo).join(', '),
+  })
+  @Transform(({ value }) => value?.toLowerCase())
   nivel_educativo: string;
 
   @IsString()

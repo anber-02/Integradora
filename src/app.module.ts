@@ -14,7 +14,6 @@ import { ProyectoModule } from './modules/proyecto/proyecto.module';
 import { DocumentosModule } from './modules/documentos/documentos.module';
 import { AreaDesarrolloModule } from './modules/area-desarrollo/area-desarrollo.module';
 import { ObservacionModule } from './modules/observacion/observacion.module';
-import { SolicitanteModule } from './modules/solicitante/solicitante.module';
 import { ImagesModule } from './shared/images/images.module';
 import { AptitudesModule } from './modules/aptitudes/aptitudes.module';
 
@@ -42,7 +41,6 @@ import { AptitudesModule } from './modules/aptitudes/aptitudes.module';
     DocumentosModule,
     AreaDesarrolloModule,
     ObservacionModule,
-    SolicitanteModule,
     ImagesModule,
     AptitudesModule,
   ],

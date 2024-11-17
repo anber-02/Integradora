@@ -28,6 +28,12 @@ export class User {
   @Column()
   num_telefono: string;
 
+  @Column()
+  cargo: string;
+
+  @Column()
+  area_trabajo: string;
+
   @Column({
     type: 'timestamp',
     default: () => 'CURRENT_TIMESTAMP',
@@ -36,10 +42,6 @@ export class User {
 
   @OneToOne(() => Empresa, (empresa) => empresa.usuario)
   empresa: Empresa;
-
-  // @OneToOne(() => Role, (rol) => rol.user, { cascade: true })
-  // @JoinColumn()
-  // rol: Role;
 
   @ManyToMany(() => Role, (roles) => roles.users)
   @JoinTable({
