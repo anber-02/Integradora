@@ -53,7 +53,7 @@ export class EmpresaService {
 
   async findOne(id: number) {
     const Empresa = await this.empresaRepo.findOne({
-      relations: ['direccion'],
+      relations: ['direccion', 'usuario'],
       where: {
         id,
       },
