@@ -51,7 +51,14 @@ export class UserService {
     return this.userRepository.findOne({
       where: { email },
       relations: {
+        empresa: true,
         roles: true,
+      },
+      select: {
+        empresa: {
+          id: true,
+          nombre: true,
+        },
       },
     });
   }

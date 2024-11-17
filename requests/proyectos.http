@@ -2,7 +2,7 @@
 @tokenEmpresa=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInVzZXJuYW1lIjoiZW1wcmVzYSIsInJvbCI6ImVtcHJlc2EiLCJpYXQiOjE3MzE3ODU0NDUsImV4cCI6MTczMTg3MTg0NX0.tkI7rkm5i9CLyV3a6HHa9uaYrW73TcW15-XRu67e6QE
 
 ###
-GET {{url}}/empresa/3?status=en%20proceso
+GET {{url}}/empresa/3
 Authorization: Bearer {{tokenEmpresa}}
 
 ###

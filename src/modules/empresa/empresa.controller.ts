@@ -35,6 +35,12 @@ export class EmpresaController {
     return this.empresaService.updateAdress(+id, updateDireccionDto);
   }
 
+  @Auth(Role.ADMIN)
+  @Get('estadisticas')
+  async obtenerEstadisticas() {
+    return this.empresaService.obtenerEstadisticas();
+  }
+
   @Auth(Role.ADMIN, Role.EMPRESA)
   @Get()
   findAll(@GetUser() user) {

@@ -45,6 +45,12 @@ export class Empresa {
   @Column()
   usuario_id: number;
 
+  @Column({
+    type: 'timestamp',
+    default: () => 'CURRENT_TIMESTAMP',
+  })
+  created_at: Date;
+
   @OneToOne(() => User, (usuario) => usuario.empresa, { nullable: false })
   @JoinColumn({ name: 'usuario_id' })
   usuario: User;

@@ -7,7 +7,7 @@ import { CreateEmpresaDto } from './dto/create-empresa.dto';
 import { UpdateEmpresaDto } from './dto/update-empresa.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Empresa } from './entities/empresa.entity';
-import { Repository } from 'typeorm';
+import { Between, Repository } from 'typeorm';
 import { DireccionService } from '../direccion/direccion.service';
 import { UpdateDireccionDto } from '../direccion/dto/update-direccion.dto';
 
@@ -136,5 +136,48 @@ export class EmpresaService {
     }
 
     return Empresa;
+  }
+
+  async obtenerEstadisticas() {
+    // Definir el rango de fechas para el periodo "enero - abril"
+    const inicioPeriodo = new Date('2024-01-01'); // Enero 1, 2024
+    const finPeriodo = new Date('2024-04-30'); // Abril 30, 2024
+
+    // Contar las empresas por cada tipo: locales, nacionales, internacionales
+    const estadisticas = {
+      periodo: 'enero - abril',
+      data: [],
+    };
+
+    // Contar empresas locales
+    const locales = await this.empresaRepo.count({
+      where: {
+        created_at: Between(inicioPeriodo, finPeriodo),
+        alcance_geografico: 'local',
+      },
+    });
+
+    // Contar empresas nacionales
+    const nacionales = await this.empresaRepo.count({
+      where: {
+        created_at: Between(inicioPeriodo, finPeriodo),
+        alcance_geografico: 'nacional',
+      },
+    });
+
+    // Contar empresas internacionales
+    const internacionales = await this.empresaRepo.count({
+      where: {
+        created_at: Between(inicioPeriodo, finPeriodo),
+        alcance_geografico: 'internacional',
+      },
+    });
+
+    // Crear el objeto final con las estadísticas
+    estadisticas.data.push({ locales });
+    estadisticas.data.push({ nacionales });
+    estadisticas.data.push({ internacionales });
+
+    return estadisticas;
   }
 }
