@@ -1,0 +1,30 @@
+@url = http://localhost:3000/api/observacion
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6ImFkbWluIiwiaWF0IjoxNzMxMTcxMDg2LCJleHAiOjE3MzEyNTc0ODZ9.lonwHLxYpjpJvMtqnYq2JyMGBBCNu4wONINvWw_1tEA
+
+###
+GET {{url}}/
+
+
+
+# C:\Users\newpr\Desktop
+###
+# observaciones para una projecto
+POST {{url}}/project
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "detalle": "El proyecto es muy simple para un estudiante de ingenieria",
+  "project_id": 3
+}
+
+###
+# observaciones para una empresa
+POST {{url}}/empresa
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+  {
+  "detalle": "Su empresa fue rechaza devido a un error en la ubicacion",
+  "empresa_id": 1
+}

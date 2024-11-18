@@ -1,23 +1,29 @@
-import {
-  Controller,
-  Get,
-  Post,
-  Body,
-  Patch,
-  Param,
-  Delete,
-} from '@nestjs/common';
+import { Controller, Get, Post, Body, Param, Delete } from '@nestjs/common';
 import { ObservacionService } from './observacion.service';
-import { CreateObservacionDto } from './dto/create-observacion.dto';
-import { UpdateObservacionDto } from './dto/update-observacion.dto';
+import { AssignObservacionToProjectDto } from './dto/assign-observacion-to-project.dto';
+// import { UpdateObservacionDto } from './dto/update-observacion.dto';
+import { AssignObservacionToEmpresaDto } from './dto/assign-observacion-to-empresa.dto';
 
 @Controller('observacion')
 export class ObservacionController {
   constructor(private readonly observacionService: ObservacionService) {}
 
-  @Post()
-  create(@Body() createObservacionDto: CreateObservacionDto) {
-    return this.observacionService.create(createObservacionDto);
+  @Post('/project')
+  assignObservacionToProject(
+    @Body() assignObservacionToProject: AssignObservacionToProjectDto,
+  ) {
+    return this.observacionService.assignObservacionToProject(
+      assignObservacionToProject,
+    );
+  }
+
+  @Post('/empresa')
+  assignObservacionToEmpresa(
+    @Body() assignObservacionToEmpresa: AssignObservacionToEmpresaDto,
+  ) {
+    return this.observacionService.assignObservacionToEmpresa(
+      assignObservacionToEmpresa,
+    );
   }
 
   @Get()
@@ -30,13 +36,13 @@ export class ObservacionController {
     return this.observacionService.findOne(+id);
   }
 
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateObservacionDto: UpdateObservacionDto,
-  ) {
-    return this.observacionService.update(+id, updateObservacionDto);
-  }
+  // @Patch(':id')
+  // update(
+  //   @Param('id') id: string,
+  //   @Body() updateObservacionDto: UpdateObservacionDto,
+  // ) {
+  //   return this.observacionService.update(+id, updateObservacionDto);
+  // }
 
   @Delete(':id')
   remove(@Param('id') id: string) {
