@@ -3,6 +3,7 @@ import {
   IsEnum,
   IsInt,
   IsNumber,
+  IsOptional,
   IsString,
   Min,
   MinLength,
@@ -35,6 +36,7 @@ export class CreateProyectoDto {
   @Min(1)
   carrera_id: number;
 
+  @IsOptional()
   @IsEnum(Status, {
     message:
       'El estado debe ser uno de los siguientes valores: ' +
