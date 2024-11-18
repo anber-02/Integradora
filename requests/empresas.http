@@ -4,7 +4,7 @@
 @admin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6ImFkbWluIiwiaWF0IjoxNzMxNzg2ODM4LCJleHAiOjE3MzE4NzMyMzh9.c3gBdqlQY5Az-c-DRhyVB7wKB_B_okOA_Xs3p7Mr6rI
 ###
 ###
-GET {{url}}/
+GET {{url}}/estadisticas
 Authorization: Bearer {{admin}}
 
 ###

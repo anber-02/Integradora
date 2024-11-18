@@ -6,6 +6,7 @@ import {
   Patch,
   Param,
   Delete,
+  Query,
 } from '@nestjs/common';
 import { HabilidadService } from './habilidad.service';
 import { CreateHabilidadDto } from './dto/create-habilidad.dto';
@@ -25,8 +26,8 @@ export class HabilidadController {
 
   @Auth(Role.ADMIN, Role.EMPRESA)
   @Get()
-  findAll() {
-    return this.habilidadService.findAll();
+  findAll(@Query('nombre') nombre: string = '') {
+    return this.habilidadService.findAll(nombre);
   }
 
   @Auth(Role.ADMIN, Role.EMPRESA)

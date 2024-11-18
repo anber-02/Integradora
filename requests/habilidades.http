@@ -1,8 +1,9 @@
 @url = http://localhost:3000/api/habilidad
-@admin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6ImFkbWluIiwiaWF0IjoxNzMxNTgwMDA0LCJleHAiOjE3MzE2NjY0MDR9.kAkit8fdz5i2gB3hfpIuWaTLzGXtsUci3MAdhL61yt4
+@admin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6ImFkbWluIiwiaWF0IjoxNzMxNzg2ODM4LCJleHAiOjE3MzE4NzMyMzh9.c3gBdqlQY5Az-c-DRhyVB7wKB_B_okOA_Xs3p7Mr6rI
+@empresa= eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInVzZXJuYW1lIjoiZW1wcmVzYSIsInJvbCI6ImVtcHJlc2EiLCJpYXQiOjE3MzE4OTA2ODcsImV4cCI6MTczMTk3NzA4N30.nOFsVlVl1CJAw2cAB8elOi5VOL7Extc0oHtI5QScIs0
 ###
 GET {{url}}/
-Authorization: Bearer {{admin}}
+Authorization: Bearer {{empresa}}
 
 ###
 GET {{url}}/1
