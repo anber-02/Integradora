@@ -15,6 +15,7 @@ import { Proyecto } from 'src/modules/proyecto/entities/proyecto.entity';
 import { User } from 'src/modules/user/entities/user.entity';
 import { Observacion } from 'src/modules/observacion/entities/observacion.entity';
 import { Alcance } from '../enums/enums';
+import { Status } from '../enums/status.enum';
 
 @Entity()
 export class Empresa {
@@ -32,8 +33,10 @@ export class Empresa {
   sector: string;
   @Column()
   direccion_id: number;
-  @Column({ default: false })
-  verificada: boolean;
+
+  @Column({ type: 'enum', enum: Status, default: Status.EN_PROCESO })
+  status: boolean;
+
   @Column()
   size: string;
   @Column({
@@ -43,7 +46,7 @@ export class Empresa {
   alcance_geografico: string;
 
   @Column({ default: true })
-  status: boolean;
+  activo: boolean;
 
   @Column()
   usuario_id: number;
