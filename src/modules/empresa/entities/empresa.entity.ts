@@ -42,6 +42,9 @@ export class Empresa {
   })
   alcance_geografico: string;
 
+  @Column({ default: true })
+  status: boolean;
+
   @Column()
   usuario_id: number;
 

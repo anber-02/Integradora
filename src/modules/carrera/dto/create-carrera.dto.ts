@@ -1,4 +1,5 @@
 import {
+  IsBoolean,
   IsEnum,
   IsOptional,
   IsString,
@@ -27,6 +28,10 @@ export class CreateCarreraDto {
   })
   @Transform(({ value }) => value?.toLowerCase())
   nivel_educativo: string;
+
+  @IsOptional()
+  @IsBoolean()
+  status: boolean;
 
   @IsString()
   @IsOptional()
