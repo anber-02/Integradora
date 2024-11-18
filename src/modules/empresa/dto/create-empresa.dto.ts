@@ -38,6 +38,10 @@ export class CreateEmpresaDto {
   @IsBoolean()
   verificada: boolean;
 
+  @IsOptional()
+  @IsBoolean()
+  status: boolean;
+
   @IsString()
   @MinLength(5)
   size: string;

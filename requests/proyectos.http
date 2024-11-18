@@ -1,5 +1,5 @@
 @url = http://localhost:3000/api/proyecto
-@tokenEmpresa=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInVzZXJuYW1lIjoiZW1wcmVzYSIsInJvbCI6ImVtcHJlc2EiLCJpYXQiOjE3MzE3ODU0NDUsImV4cCI6MTczMTg3MTg0NX0.tkI7rkm5i9CLyV3a6HHa9uaYrW73TcW15-XRu67e6QE
+@tokenEmpresa=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInVzZXJuYW1lIjoiZW1wcmVzYSIsInJvbCI6ImVtcHJlc2EiLCJpYXQiOjE3MzE4OTA2ODcsImV4cCI6MTczMTk3NzA4N30.nOFsVlVl1CJAw2cAB8elOi5VOL7Extc0oHtI5QScIs0
 
 ###
 GET {{url}}/empresa/3
@@ -16,7 +16,7 @@ Authorization: Bearer {{tokenEmpresa}}
 {
   "nombre": "Desarrollo de App Móvil",
   "descripcion": "Este proyecto tiene como objetivo el desarrollo de una aplicación móvil para gestionar tareas.",
-  "participantes_requeridos": 5,
+  "participantes_requeridos": "",
   "habilidades_ids": [1, 2, 3, 4],
   "empresa_id": 1,
   "carrera_id": 4

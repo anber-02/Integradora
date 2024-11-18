@@ -32,6 +32,9 @@ export class Carrera {
   })
   nivel_educativo: string;
 
+  @Column({ default: true })
+  status: boolean;
+
   @Column({ nullable: true })
   icon?: string; // Para almacenar la URL de la imagen
 

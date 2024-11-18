@@ -1,5 +1,5 @@
 @url = http://localhost:3000/api/habilidad
-@admin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6ImFkbWluIiwiaWF0IjoxNzMxNzg2ODM4LCJleHAiOjE3MzE4NzMyMzh9.c3gBdqlQY5Az-c-DRhyVB7wKB_B_okOA_Xs3p7Mr6rI
+@admin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6ImFkbWluIiwiaWF0IjoxNzMxODk0NTEyLCJleHAiOjE3MzE5ODA5MTJ9.QzszaXMeAVx4tBBCOkY7VP3sFkwoCwxcVjgRLyC8b6Q
 @empresa= eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInVzZXJuYW1lIjoiZW1wcmVzYSIsInJvbCI6ImVtcHJlc2EiLCJpYXQiOjE3MzE4OTA2ODcsImV4cCI6MTczMTk3NzA4N30.nOFsVlVl1CJAw2cAB8elOi5VOL7Extc0oHtI5QScIs0
 ###
 GET {{url}}/
@@ -15,7 +15,7 @@ Content-Type: application/json
 Authorization: Bearer {{admin}}
 
 {
-  "nombre": "Técnicas de cocina avanzada"
+  "nombre": "Angular"
 }
 
 ###
