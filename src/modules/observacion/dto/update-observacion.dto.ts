@@ -1,4 +1,6 @@
 import { PartialType } from '@nestjs/mapped-types';
-import { CreateObservacionDto } from './create-observacion.dto';
+import { AssignObservacionToProjectDto } from './assign-observacion-to-project.dto';
 
-export class UpdateObservacionDto extends PartialType(CreateObservacionDto) {}
+export class UpdateObservacionDto extends PartialType(
+  AssignObservacionToProjectDto,
+) {}
