@@ -9,6 +9,7 @@ import {
 } from 'class-validator';
 import { CreateDireccionDto } from 'src/modules/direccion/dto/create-direccion.dto';
 import { Alcance } from '../enums/enums';
+import { Status } from '../enums/status.enum';
 
 export class CreateEmpresaDto {
   @IsString()
@@ -36,10 +37,12 @@ export class CreateEmpresaDto {
 
   @IsOptional()
   @IsBoolean()
-  verificada: boolean;
+  activo: boolean;
 
   @IsOptional()
-  @IsBoolean()
+  @IsEnum(Status, {
+    message: `status debe ser uno de los siguientes valores: ${Object.values(Status).join(', ')}`,
+  })
   status: boolean;
 
   @IsString()
