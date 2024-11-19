@@ -43,7 +43,17 @@ export class EmpresaService {
   async findAll() {
     try {
       const Empresa = await this.empresaRepo.find({
-        relations: ['direccion'],
+        relations: ['direccion', 'usuario'],
+        select: {
+          usuario: {
+            id: true,
+            nombre: true,
+            cargo: true,
+            email: true,
+            num_telefono: true,
+            area_trabajo: true,
+          },
+        },
       });
       return Empresa;
     } catch (error) {
