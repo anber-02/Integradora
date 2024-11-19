@@ -27,8 +27,8 @@ Content-Type: application/json
 
 {
   "nombre": "empresa 2",
-  "num_telefono": "+52 951 289 09 32",
-  "email": "empresa2@gmail.com",
+  "num_telefono": "+339512890932",
+  "email": "empresa4@gmail.com",
   "password": "12345678",
   "cargo": "gerente",
   "area_trabajo": "recursos humanos"
