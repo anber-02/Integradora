@@ -8,7 +8,7 @@ GET {{url}}/estadisticas
 Authorization: Bearer {{admin}}
 
 ###
-GET {{url}}/1
+GET {{url}}/
 Authorization: Bearer {{admin}}
 
 ###
