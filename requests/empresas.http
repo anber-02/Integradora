@@ -1,5 +1,5 @@
 @url = http://localhost:3000/api/empresa
-@empresa = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInVzZXJuYW1lIjoiZW1wcmVzYSIsInJvbCI6ImVtcHJlc2EiLCJpYXQiOjE3MzE0NzYwOTIsImV4cCI6MTczMTU2MjQ5Mn0.amn9-T9hCtISsUBBWFSyrsXXlN8lU2YixxVK2dnt-8E
+@empresa = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInVzZXJuYW1lIjoiZW1wcmVzYSIsInJvbCI6ImVtcHJlc2EiLCJpYXQiOjE3MzIxNTM1ODUsImV4cCI6MTczMjIzOTk4NX0.VtzFFDhkSbb-Ts3qNgwB0rM4jD2Q2BNTGvrBDe1wv7Y
 @empresa2 = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjUsInVzZXJuYW1lIjoiZW1wcmVzYSAyIiwicm9sIjoiZW1wcmVzYSIsImlhdCI6MTczMTUyMjUxNywiZXhwIjoxNzMxNjA4OTE3fQ.bEpmqSEQgcTV5H0q9g5zJbQqLnH8zQj3fPLL13M1XSw
 @admin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6ImFkbWluIiwiaWF0IjoxNzMxOTg5MzM0LCJleHAiOjE3MzIwNzU3MzR9.iF9Q-qsHOk04prt-pQ3k4YdiLhEaCK24Mpl2l7bxRkw
 ###
@@ -9,7 +9,7 @@ Authorization: Bearer {{admin}}
 
 ###
 GET {{url}}/
-Authorization: Bearer {{admin}}
+Authorization: Bearer {{empresa}}
 
 ###
 POST {{url}}/
