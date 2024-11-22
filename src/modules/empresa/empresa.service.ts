@@ -160,8 +160,8 @@ export class EmpresaService {
 
   async obtenerEstadisticas() {
     // Definir el rango de fechas para el periodo "enero - abril"
-    const inicioPeriodo = new Date('2024-01-01'); // Enero 1, 2024
-    const finPeriodo = new Date('2024-04-30'); // Abril 30, 2024
+    const inicioPeriodo = new Date('2024-01-01T00:00:00Z'); // Enero 1, 2024 en UTC
+    const finPeriodo = new Date('2024-04-30T23:59:59Z'); // Abril 30, 2024 en UTC
 
     // Contar las empresas por cada tipo: locales, nacionales, internacionales
     const estadisticas = {
@@ -169,6 +169,7 @@ export class EmpresaService {
       data: [],
     };
 
+    console.log(inicioPeriodo, finPeriodo);
     // Contar empresas locales
     const locales = await this.empresaRepo.count({
       where: {
