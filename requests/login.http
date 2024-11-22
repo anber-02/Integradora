@@ -48,11 +48,8 @@ Content-Type: application/json
 ###
 patch http://localhost:3000/api/user/2
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInVzZXJuYW1lIjoiZW1wcmVzYSIsInJvbCI6ImVtcHJlc2EiLCJpYXQiOjE3MzIyNjA4ODksImV4cCI6MTczMjM0NzI4OX0.G0K4HmD3Eg_CGW6j3fHT3yMetRGNZJmibXUEkIYNWrc
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInVzZXJuYW1lIjoiTHVpcyBNZW5kb3phIFZhc3F1ZXoiLCJyb2wiOiJlbXByZXNhIiwiaWF0IjoxNzMyMzAwNzc5LCJleHAiOjE3MzIzODcxNzl9.TGGofwR2aBRzS8H7Kht9tKEHqUbEi41xA-2e0ojqN7Y
 
 {
-  "nombre": "Luis Mendoza Vasquez",
-  "email": "empresa@gmail.com",
-  "cargo": "gerente",
-  "area_trabajo": "recursos humanos"
+  "nombre": "Luis Anberto Mendoza Vasquez"
 }
