@@ -64,17 +64,20 @@ export class UserService {
   }
 
   async update(id: number, updateUserDto: UpdateUserDto) {
-    const { email, nombre, password, num_telefono } = updateUserDto;
+    // Buscar el usuario en la base de datos usando el id
     const user = await this.userRepository.preload({
-      id: id,
-      email,
-      nombre,
-      password,
-      num_telefono,
+      id, // Asegúrate de pasar el id aquí
+      ...updateUserDto, // El resto de los datos que quieres actualizar
     });
+
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    // Guardar el usuario actualizado
     await this.userRepository.save(user);
 
-    return user;
+    return user; // Devolver el usuario actualizado
   }
 
   remove(id: number) {

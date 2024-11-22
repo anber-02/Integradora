@@ -43,3 +43,16 @@ Content-Type: application/json
   "email": "empresa@gmail.com",
   "pass": "12345678"
 }
+
+
+###
+patch http://localhost:3000/api/user/2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInVzZXJuYW1lIjoiZW1wcmVzYSIsInJvbCI6ImVtcHJlc2EiLCJpYXQiOjE3MzIyNjA4ODksImV4cCI6MTczMjM0NzI4OX0.G0K4HmD3Eg_CGW6j3fHT3yMetRGNZJmibXUEkIYNWrc
+
+{
+  "nombre": "Luis Mendoza Vasquez",
+  "email": "empresa@gmail.com",
+  "cargo": "gerente",
+  "area_trabajo": "recursos humanos"
+}
