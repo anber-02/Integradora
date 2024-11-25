@@ -7,7 +7,7 @@ import { CreateEmpresaDto } from './dto/create-empresa.dto';
 import { UpdateEmpresaDto } from './dto/update-empresa.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Empresa } from './entities/empresa.entity';
-import { Between, Repository } from 'typeorm';
+import { Repository, Between, Like, Not, LessThan, Equal, getRepository } from 'typeorm';
 import { DireccionService } from '../direccion/direccion.service';
 import { UpdateDireccionDto } from '../direccion/dto/update-direccion.dto';
 
@@ -150,8 +150,104 @@ export class EmpresaService {
 
   async obtenerEstadisticas() {
     // Definir el rango de fechas para el periodo "enero - abril"
+
+    // const inicioPeriodo = new Date(Date.UTC(2024, 0, 1)); // Enero 1, 2024 (UTC)
+    // const finPeriodo = new Date(Date.UTC(2024, 3, 30, 23, 59, 59)); // Abril 30, 2024 (UTC)
+
+    // const locales = await this.empresaRepo.count({
+    //   where: {
+    //     created_at: Between(inicioPeriodo, finPeriodo),
+    //     alcance_geografico: 'local',
+    //   },
+    // });
+  
+    // const nacionales = await this.empresaRepo.count({
+    //   where: {
+    //     created_at: Between(inicioPeriodo, finPeriodo),
+    //     alcance_geografico: 'nacional',
+    //   },
+    // });
+  
+    // const internacionales = await this.empresaRepo.count({
+    //   where: {
+    //     created_at: Between(inicioPeriodo, finPeriodo),
+    //     alcance_geografico: 'internacional',
+    //   },
+    // });
+  
+    // return {
+    //   periodo: 'enero - abril',
+    //   data: [
+    //     { tipo: 'locales', cantidad: locales },
+    //     { tipo: 'nacionales', cantidad: nacionales },
+    //     { tipo: 'internacionales', cantidad: internacionales },
+    //   ],
+    // };
+
+
+  //   const qb = getRepository(Empresa).createQueryBuilder('empresa');
+  
+  // qb.where('empresa.created_at BETWEEN :startDate AND :endDate', {
+  //   startDate: new Date('2024-01-01'),
+  //   endDate: new Date('2024-04-30')
+  // });
+
+  // const locales = await qb.where('empresa.alcance_geografico = :geografico', { geografico: 'local' }).getCount();
+  // const nacionales = await qb.where('empresa.alcance_geografico = :geografico', { geografico: 'nacional' }).getCount();
+  // const internacionales = await qb.where('empresa.alcance_geografico = :geografico', { geografico: 'internacional' }).getCount();
+
+
+  //   const inicioPeriodo = new Date('2024-01-01');
+  // const finPeriodo = new Date('2024-04-30');
+
+  // // Contar empresas locales
+  // const locales = await getRepository(Empresa).count({
+  //   where: {
+  //     created_at: Between(inicioPeriodo, finPeriodo),
+  //     alcance_geografico: 'local'
+  //   }
+  // });
+
+  // // Contar empresas nacionales
+  // const nacionales = await getRepository(Empresa).count({
+  //   where: {
+  //     created_at: Between(inicioPeriodo, finPeriodo),
+  //     alcance_geografico: 'nacional'
+  //   }
+  // });
+
+  // // Contar empresas internacionales
+  // const internacionales = await getRepository(Empresa).count({
+  //   where: {
+  //     created_at: Between(inicioPeriodo, finPeriodo),
+  //     alcance_geografico: 'internacional'
+  //   }
+  // });
+
+  // // Crear el objeto final con las estadísticas
+  // const estadisticas = {
+  //   periodo: 'enero - abril',
+  //   data: {
+  //     locales,
+  //     nacionales,
+  //     internacionales,
+  //   },
+  // };
+
+  // return estadisticas;
+
+
+
     const inicioPeriodo = new Date('2024-01-01'); // Enero 1, 2024
     const finPeriodo = new Date('2024-04-30'); // Abril 30, 2024
+
+    //-- no jala las fechas de la bd
+
+    //-- OCUPAR TO LOCAL STRING
+    //-- HACER LA CONSULTA EN LA BD, NO HAY ERROR PERO NO RETORNA NADA
+    //-- Hacer 3 triggers cuando se haga actualizacion direccion, se cambia el estatus de la empresa a pendiente(OPCIONAL)
+
+    //generar una funcion de archivos que reciba un arreglo de objetos donde se tanga una key, nombre, data(data de la imagen y que reciba 5) y que se suba a cloudynary, que se genere url y que la guardes en la base de datos de documentos
 
     // Contar las empresas por cada tipo: locales, nacionales, internacionales
     const estadisticas = {
