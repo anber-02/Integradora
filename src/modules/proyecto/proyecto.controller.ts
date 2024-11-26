@@ -41,14 +41,15 @@ export class ProyectoController {
     return this.proyectoService.findOne(+id);
   }
 
-  @Patch('/empresa/:empresaId/:proyectoId')
+  @Patch(':id')
+  @Auth(Role.EMPRESA)
   update(
-    @Param('empresaId') empresaId: string,
-    @Param('proyectoId') proyectoId: string,
-    @Body() updateProyectoDto: UpdateProyectoDto,
-  ) {
-    return this.proyectoService.update(+empresaId, updateProyectoDto);
-  }
+  @Param('id') id: string,
+  @Body() body: Partial<CreateProyectoDto>,
+) {
+  return this.proyectoService.patch(id, body);
+}
+
 
   @Delete('/empresa/:id')
   remove(@Param('id') id: string) {
