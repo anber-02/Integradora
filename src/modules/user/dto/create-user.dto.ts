@@ -24,4 +24,10 @@ export class CreateUserDto {
   @IsString()
   @IsOptional()
   rol: string;
+
+  @IsString()
+  cargo: string;
+
+  @IsString()
+  area_trabajo: string;
 }

@@ -1,7 +1,7 @@
 import {
   CanActivate,
   ExecutionContext,
-  ForbiddenException,
+  // ForbiddenException,
   Injectable,
 } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
@@ -27,14 +27,14 @@ export class RolesGuard implements CanActivate {
       return true;
     }
 
-    if (user.rol === Role.EMPRESA) {
-      const idParam = request.params.id;
-      if (idParam && user.id !== idParam) {
-        throw new ForbiddenException(
-          'No tienes permiso para acceder a los datos de otra empresa',
-        );
-      }
-    }
+    // if (user.rol === Role.EMPRESA) {
+    //   const idParam = request.params.id;
+    //   if (idParam && user.id !== idParam) {
+    //     throw new ForbiddenException(
+    //       'No tienes permiso para acceder a los datos de otra empresa',
+    //     );
+    //   }
+    // }
 
     return rol.some((role) => role === user.rol);
   }

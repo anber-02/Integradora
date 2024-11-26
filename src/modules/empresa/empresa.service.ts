@@ -136,7 +136,17 @@ export class EmpresaService {
 
   async findEmpresasByUser(id: number) {
     const Empresa = await this.empresaRepo.find({
-      relations: ['direccion'],
+      relations: ['direccion', 'usuario'],
+      select: {
+        usuario: {
+          id: true,
+          nombre: true,
+          cargo: true,
+          email: true,
+          num_telefono: true,
+          area_trabajo: true,
+        },
+      },
       where: {
         usuario_id: id,
       },
@@ -151,95 +161,13 @@ export class EmpresaService {
   async obtenerEstadisticas() {
     // Definir el rango de fechas para el periodo "enero - abril"
 
-    // const inicioPeriodo = new Date(Date.UTC(2024, 0, 1)); // Enero 1, 2024 (UTC)
-    // const finPeriodo = new Date(Date.UTC(2024, 3, 30, 23, 59, 59)); // Abril 30, 2024 (UTC)
-
-    // const locales = await this.empresaRepo.count({
-    //   where: {
-    //     created_at: Between(inicioPeriodo, finPeriodo),
-    //     alcance_geografico: 'local',
-    //   },
-    // });
-  
-    // const nacionales = await this.empresaRepo.count({
-    //   where: {
-    //     created_at: Between(inicioPeriodo, finPeriodo),
-    //     alcance_geografico: 'nacional',
-    //   },
-    // });
-  
-    // const internacionales = await this.empresaRepo.count({
-    //   where: {
-    //     created_at: Between(inicioPeriodo, finPeriodo),
-    //     alcance_geografico: 'internacional',
-    //   },
-    // });
-  
-    // return {
-    //   periodo: 'enero - abril',
-    //   data: [
-    //     { tipo: 'locales', cantidad: locales },
-    //     { tipo: 'nacionales', cantidad: nacionales },
-    //     { tipo: 'internacionales', cantidad: internacionales },
-    //   ],
-    // };
-
-
-  //   const qb = getRepository(Empresa).createQueryBuilder('empresa');
-  
-  // qb.where('empresa.created_at BETWEEN :startDate AND :endDate', {
-  //   startDate: new Date('2024-01-01'),
-  //   endDate: new Date('2024-04-30')
-  // });
-
-  // const locales = await qb.where('empresa.alcance_geografico = :geografico', { geografico: 'local' }).getCount();
-  // const nacionales = await qb.where('empresa.alcance_geografico = :geografico', { geografico: 'nacional' }).getCount();
-  // const internacionales = await qb.where('empresa.alcance_geografico = :geografico', { geografico: 'internacional' }).getCount();
-
-
-  //   const inicioPeriodo = new Date('2024-01-01');
-  // const finPeriodo = new Date('2024-04-30');
-
-  // // Contar empresas locales
-  // const locales = await getRepository(Empresa).count({
-  //   where: {
-  //     created_at: Between(inicioPeriodo, finPeriodo),
-  //     alcance_geografico: 'local'
-  //   }
-  // });
-
-  // // Contar empresas nacionales
-  // const nacionales = await getRepository(Empresa).count({
-  //   where: {
-  //     created_at: Between(inicioPeriodo, finPeriodo),
-  //     alcance_geografico: 'nacional'
-  //   }
-  // });
-
-  // // Contar empresas internacionales
-  // const internacionales = await getRepository(Empresa).count({
-  //   where: {
-  //     created_at: Between(inicioPeriodo, finPeriodo),
-  //     alcance_geografico: 'internacional'
-  //   }
-  // });
-
-  // // Crear el objeto final con las estadísticas
-  // const estadisticas = {
-  //   periodo: 'enero - abril',
-  //   data: {
-  //     locales,
-  //     nacionales,
-  //     internacionales,
-  //   },
-  // };
-
-  // return estadisticas;
-
 
 
     const inicioPeriodo = new Date('2024-01-01'); // Enero 1, 2024
     const finPeriodo = new Date('2024-04-30'); // Abril 30, 2024
+
+    const inicioPeriodo = new Date('2024-01-01T00:00:00Z'); // Enero 1, 2024 en UTC
+    const finPeriodo = new Date('2024-04-30T23:59:59Z'); // Abril 30, 2024 en UTC
 
     //-- no jala las fechas de la bd
 
@@ -255,6 +183,7 @@ export class EmpresaService {
       data: [],
     };
 
+    console.log(inicioPeriodo, finPeriodo);
     // Contar empresas locales
     const locales = await this.empresaRepo.count({
       where: {
