@@ -7,7 +7,15 @@ import { CreateEmpresaDto } from './dto/create-empresa.dto';
 import { UpdateEmpresaDto } from './dto/update-empresa.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Empresa } from './entities/empresa.entity';
-import { Repository, Between, Like, Not, LessThan, Equal, getRepository } from 'typeorm';
+import {
+  Repository,
+  Between,
+  Like,
+  Not,
+  LessThan,
+  Equal,
+  getRepository,
+} from 'typeorm';
 import { DireccionService } from '../direccion/direccion.service';
 import { UpdateDireccionDto } from '../direccion/dto/update-direccion.dto';
 
@@ -161,13 +169,11 @@ export class EmpresaService {
   async obtenerEstadisticas() {
     // Definir el rango de fechas para el periodo "enero - abril"
 
-
-
     const inicioPeriodo = new Date('2024-01-01'); // Enero 1, 2024
     const finPeriodo = new Date('2024-04-30'); // Abril 30, 2024
 
-    const inicioPeriodo = new Date('2024-01-01T00:00:00Z'); // Enero 1, 2024 en UTC
-    const finPeriodo = new Date('2024-04-30T23:59:59Z'); // Abril 30, 2024 en UTC
+    // const inicioPeriodo = new Date('2024-01-01T00:00:00Z'); // Enero 1, 2024 en UTC
+    // const finPeriodo = new Date('2024-04-30T23:59:59Z'); // Abril 30, 2024 en UTC
 
     //-- no jala las fechas de la bd
 
