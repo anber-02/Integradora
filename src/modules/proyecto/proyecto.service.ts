@@ -117,18 +117,30 @@ export class ProyectoService {
     }
   }
 
-  async remove(id: number) {
-    const Proyecto = await this.proyeRepo.findOne({
+  async remove(empresaId: number, proyectoId: number) {
+    // Buscar el proyecto relacionado con la empresa (se usa `empresaId` y `proyectoId`)
+    const proyecto = await this.proyeRepo.findOne({
       where: {
-        id,
+        id: proyectoId,
+        empresa_id: empresaId, // Verifica que proyecto pertenece a esa empresa
       },
     });
-    if (!Proyecto) {
-      throw new NotFoundException('producto no encontrado');
+
+    if (!proyecto) {
+      throw new NotFoundException('Proyecto no encontrado para esta empresa');
     }
-    await this.proyeRepo.delete(id);
+
+    // Eliminar las relaciones de la tabla intermedia proyecto_habilidades (sin entidad creada)
+    await this.proyeRepo.query(
+      `DELETE FROM proyecto_habilidad WHERE proyectoId = $1 AND empresaId = $2`,
+      [proyectoId, empresaId],
+    );
+
+    // Eliminar el proyecto
+    await this.proyeRepo.delete(proyectoId);
+
     return {
-      Message: 'Se a eliminado',
+      message: 'Proyecto y sus relaciones han sido eliminados correctamente',
     };
   }
 

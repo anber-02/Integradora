@@ -50,8 +50,12 @@ export class ProyectoController {
     return this.proyectoService.update(+empresaId, updateProyectoDto);
   }
 
-  @Delete('/empresa/:id')
-  remove(@Param('id') id: string) {
-    return this.proyectoService.remove(+id);
+  @Auth(Role.EMPRESA)
+  @Delete('/empresa/:empresaId/:proyectoId')
+  remove(
+    @Param('empresaId') empresaId: string,
+    @Param('proyectoId') proyectoId: string,
+  ) {
+    return this.proyectoService.remove(+empresaId, +proyectoId);
   }
 }
