@@ -150,25 +150,26 @@ export class ProyectoService {
         where: { id: parseInt(proyectoId) },
         relations: ['habilidades'],
       });
-  
+
       if (!proyecto) {
         throw new NotFoundException('Proyecto no encontrado');
       }
-  
+
       Object.assign(proyecto, body);
-  
+
       if ('habilidades_ids' in body) {
-        const nuevasHabilidades = await this.habilidadRepo.findByIds(body.habilidades_ids);
+        const nuevasHabilidades = await this.habilidadRepo.findByIds(
+          body.habilidades_ids,
+        );
         proyecto.habilidades = nuevasHabilidades;
       }
-  
+
       await this.proyeRepo.save(proyecto);
       return proyecto;
     } catch (error) {
       throw new InternalServerErrorException(error);
     }
   }
-  
 
   // public async findBy({
   //   key,

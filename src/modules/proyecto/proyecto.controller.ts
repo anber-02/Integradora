@@ -43,13 +43,9 @@ export class ProyectoController {
 
   @Patch(':id')
   @Auth(Role.EMPRESA)
-  update(
-  @Param('id') id: string,
-  @Body() body: Partial<CreateProyectoDto>,
-) {
-  return this.proyectoService.patch(id, body);
-}
-
+  update(@Param('id') id: string, @Body() body: Partial<CreateProyectoDto>) {
+    return this.proyectoService.patch(id, body);
+  }
 
   @Auth(Role.EMPRESA)
   @Delete('/empresa/:empresaId/:proyectoId')
