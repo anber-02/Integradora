@@ -17,8 +17,13 @@ import { ObservacionModule } from './modules/observacion/observacion.module';
 import { ImagesModule } from './shared/images/images.module';
 import { AptitudesModule } from './modules/aptitudes/aptitudes.module';
 
+import { MulterModule } from '@nestjs/platform-express';
+
 @Module({
   imports: [
+    MulterModule.register({
+      dest: './uploads',
+    }),
     ConfigModule.forRoot({ isGlobal: true }),
     TypeOrmModule.forRoot({
       type: 'mysql',

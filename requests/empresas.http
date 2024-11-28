@@ -1,10 +1,12 @@
 @url = http://localhost:3000/api/empresa
+
 @empresa = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInVzZXJuYW1lIjoiZW1wcmVzYSIsInJvbCI6ImVtcHJlc2EiLCJpYXQiOjE3MzIyNTg2ODksImV4cCI6MTczMjM0NTA4OX0.UNSfmyrjJ0JgvdaxmamIgK2kkr1vQBbHbXhGEcRdA5g
 @empresa2 = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjUsInVzZXJuYW1lIjoiZW1wcmVzYSAyIiwicm9sIjoiZW1wcmVzYSIsImlhdCI6MTczMTUyMjUxNywiZXhwIjoxNzMxNjA4OTE3fQ.bEpmqSEQgcTV5H0q9g5zJbQqLnH8zQj3fPLL13M1XSw
 @admin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6ImFkbWluIiwiaWF0IjoxNzMyMTYzMTkzLCJleHAiOjE3MzIyNDk1OTN9.xoTntsf4SzClBsx9wtxikVnm5exUl7Mx-3yplc7PRPA
+
 ###
 ###
-GET {{url}}
+GET {{url}}/estadisticas
 Authorization: Bearer {{admin}}
 
 ###
