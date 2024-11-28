@@ -56,7 +56,7 @@ export class EmpresaController {
     return this.empresaService.findOne(+id);
   }
 
-  @Auth(Role.ADMIN)
+  @Auth(Role.EMPRESA)
   @Patch(':id')
   update(@Param('id') id: string, @Body() updateEmpresaDto: UpdateEmpresaDto) {
     return this.empresaService.update(+id, updateEmpresaDto);

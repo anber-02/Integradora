@@ -1,15 +1,17 @@
 @url = http://localhost:3000/api/empresa
-@empresa = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInVzZXJuYW1lIjoiZW1wcmVzYSIsInJvbCI6ImVtcHJlc2EiLCJpYXQiOjE3MzE0NzYwOTIsImV4cCI6MTczMTU2MjQ5Mn0.amn9-T9hCtISsUBBWFSyrsXXlN8lU2YixxVK2dnt-8E
+
+@empresa = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInVzZXJuYW1lIjoiZW1wcmVzYSIsInJvbCI6ImVtcHJlc2EiLCJpYXQiOjE3MzIyNTg2ODksImV4cCI6MTczMjM0NTA4OX0.UNSfmyrjJ0JgvdaxmamIgK2kkr1vQBbHbXhGEcRdA5g
 @empresa2 = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjUsInVzZXJuYW1lIjoiZW1wcmVzYSAyIiwicm9sIjoiZW1wcmVzYSIsImlhdCI6MTczMTUyMjUxNywiZXhwIjoxNzMxNjA4OTE3fQ.bEpmqSEQgcTV5H0q9g5zJbQqLnH8zQj3fPLL13M1XSw
-@admin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6ImFkbWluIiwiaWF0IjoxNzMxOTg5MzM0LCJleHAiOjE3MzIwNzU3MzR9.iF9Q-qsHOk04prt-pQ3k4YdiLhEaCK24Mpl2l7bxRkw
+@admin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6ImFkbWluIiwiaWF0IjoxNzMyMTYzMTkzLCJleHAiOjE3MzIyNDk1OTN9.xoTntsf4SzClBsx9wtxikVnm5exUl7Mx-3yplc7PRPA
+
 ###
 ###
-GET {{url}}
+GET {{url}}/estadisticas
 Authorization: Bearer {{admin}}
 
 ###
-GET {{url}}/1
-Authorization: Bearer {{admin}}
+GET {{url}}/
+Authorization: Bearer {{empresa}}
 
 ###
 POST {{url}}/
@@ -43,16 +45,19 @@ Content-Type: application/json
 Authorization: Bearer {{empresa}}
 
 {
-  "calle": "Cervezas 2"
+  "calle": "Avenida de la Cerveza 2"
 }
 
 ###
 PATCH {{url}}/1
 Content-Type: application/json
-Authorization: Bearer {{admin}}
+Authorization: Bearer {{empresa}}
 
 {
-  "nombre": "Red Osmo Enterprise"
+  "nombre": "Red Osmo Enterprise",
+  "direccion": {
+    "calle": "Avenida de la Cerveza 2" 
+  }
 }
 
 ###

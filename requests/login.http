@@ -16,7 +16,7 @@ POST http://localhost:3000/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "annn@gmail.com",
+  "email": "ann@gmail.com",
   "pass": "12345678"
 }
 
@@ -29,17 +29,27 @@ Content-Type: application/json
   "nombre": "empresa 2",
   "num_telefono": "+339512890932",
   "email": "empresa4@gmail.com",
-  "password": "12345678",
+  "password": "9513543530",
   "cargo": "gerente",
   "area_trabajo": "recursos humanos"
 }
 
 # LOGIN EMPRESA
 ###
-POST http://localhost:3000/api/auth/login
+POST https://integradora-jq91.onrender.com/api/auth/login
 Content-Type: application/json
 
 {
   "email": "empresa@gmail.com",
   "pass": "12345678"
+}
+
+
+###
+patch http://localhost:3000/api/user/2
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInVzZXJuYW1lIjoiTHVpcyBNZW5kb3phIFZhc3F1ZXoiLCJyb2wiOiJlbXByZXNhIiwiaWF0IjoxNzMyMzAwNzc5LCJleHAiOjE3MzIzODcxNzl9.TGGofwR2aBRzS8H7Kht9tKEHqUbEi41xA-2e0ojqN7Y
+
+{
+  "cargo": "luis"
 }
