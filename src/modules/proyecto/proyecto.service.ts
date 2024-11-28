@@ -131,10 +131,10 @@ export class ProyectoService {
     }
 
     // Eliminar las relaciones de la tabla intermedia proyecto_habilidades (sin entidad creada)
-    await this.proyeRepo.query(
-      `DELETE FROM proyecto_habilidad WHERE proyectoId = $1 AND empresaId = $2`,
-      [proyectoId, empresaId],
-    );
+    // await this.proyeRepo.query(
+    //   `DELETE FROM proyecto_habilidad WHERE proyectoId = $1 AND empresaId = $2`,
+    //   [proyectoId, empresaId],
+    // );
 
     // Eliminar el proyecto
     await this.proyeRepo.delete(proyectoId);
