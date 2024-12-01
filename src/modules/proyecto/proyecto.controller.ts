@@ -10,9 +10,9 @@ import {
 } from '@nestjs/common';
 import { ProyectoService } from './proyecto.service';
 import { CreateProyectoDto } from './dto/create-proyecto.dto';
-import { UpdateProyectoDto } from './dto/update-proyecto.dto';
 import { Auth } from '../auth/decorator/auth.decorator';
 import { Role } from '../auth/enums/rol.enum';
+import { UpdateProjectStatusDto } from './dto/update-project-status.dto';
 
 @Controller('proyecto')
 export class ProyectoController {
@@ -28,6 +28,7 @@ export class ProyectoController {
   findAll(@Query('status') status: string) {
     return this.proyectoService.findAll(status);
   }
+
   @Get('/empresa/:id')
   findByEmpresa(
     @Param('id') empresa_id: number,
@@ -44,7 +45,17 @@ export class ProyectoController {
   @Patch(':id')
   @Auth(Role.EMPRESA)
   update(@Param('id') id: string, @Body() body: Partial<CreateProyectoDto>) {
-    return this.proyectoService.patch(id, body);
+    return this.proyectoService.patch(+id, body);
+  }
+
+  @Patch(':id/status')
+  @Auth(Role.ADMIN)
+  async changeStatus(
+    @Param('id') id: number,
+    @Body() updateProjectStatusDto: UpdateProjectStatusDto,
+  ) {
+    const { status } = updateProjectStatusDto;
+    return this.proyectoService.changeStatus(id, status);
   }
 
   @Auth(Role.EMPRESA)

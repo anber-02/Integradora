@@ -9,6 +9,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Proyecto } from './entities/proyecto.entity';
 import { Repository } from 'typeorm';
 import { Habilidad } from '../habilidad/entities/habilidad.entity';
+import { Status } from './enums/status.enum';
 
 @Injectable()
 export class ProyectoService {
@@ -144,10 +145,24 @@ export class ProyectoService {
     };
   }
 
-  async patch(proyectoId: string, body: Partial<CreateProyectoDto>) {
+  async changeStatus(id: number, status: Status) {
+    const project = await this.proyeRepo.findOne({
+      where: { id },
+    });
+
+    if (!project) {
+      throw new Error(`Proyecto con ID ${id} no encontrado.`);
+    }
+
+    project.status = status;
+    await this.proyeRepo.save(project);
+    return project;
+  }
+
+  async patch(proyectoId: number, body: Partial<CreateProyectoDto>) {
     try {
       const proyecto = await this.proyeRepo.findOne({
-        where: { id: parseInt(proyectoId) },
+        where: { id: proyectoId },
         relations: ['habilidades'],
       });
 
@@ -170,22 +185,4 @@ export class ProyectoService {
       throw new InternalServerErrorException(error);
     }
   }
-
-  // public async findBy({
-  //   key,
-  //   value,
-  // }: {
-  //   key: keyof CreateProyectoDto;
-  //   value: any;
-  // }) {
-  //   try {
-  //     const user = await this.proyeRepo.find({
-  //       where: { [key]: value },
-  //     });
-
-  //     return user;
-  //   } catch (error) {
-  //     throw new InternalServerErrorException(error);
-  //   }
-  // }
 }

@@ -1,5 +1,5 @@
 @url = http://localhost:3000/api/proyecto
-@tokenEmpresa=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInVzZXJuYW1lIjoiTHVpcyBBbmJlcnRvIE1lbmRvemEgVmFzcXVleiBkb3MiLCJyb2wiOiJlbXByZXNhIiwiaWF0IjoxNzMyMzA0NTg5LCJleHAiOjE3MzIzOTA5ODl9.JUvoASM5ZkquJr6U3py60AJ8kL0tX4V6g_swyjg99i4
+@tokenEmpresa=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6ImFkbWluIiwiaWF0IjoxNzMzMDg2MjQ2LCJleHAiOjE3MzMxNzI2NDZ9.elKvt_QmHJr4X8FKXtsv2zrJhtxz1Jj34aZuBYL13ko
 
 ###
 GET {{url}}/empresa/3
@@ -51,11 +51,12 @@ Authorization: Bearer {{tokenEmpresa}}
 
 
 ###
-PATCH {{url}}/
+PATCH {{url}}/1/status
+Authorization: Bearer {{tokenEmpresa}}
 Content-Type: application/json
 
 {
-  "status": false
+  "status": "verificado"
 }
 
 ###
