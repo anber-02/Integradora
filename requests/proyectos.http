@@ -56,7 +56,7 @@ Authorization: Bearer {{tokenEmpresa}}
 Content-Type: application/json
 
 {
-  "status": "verificado"
+  "status": "rechazado"
 }
 
 ###

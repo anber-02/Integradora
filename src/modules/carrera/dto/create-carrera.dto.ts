@@ -1,6 +1,8 @@
 import {
+  IsArray,
   IsBoolean,
   IsEnum,
+  IsInt,
   IsOptional,
   IsString,
   MaxLength,
@@ -32,6 +34,14 @@ export class CreateCarreraDto {
   @IsOptional()
   @IsBoolean()
   status: boolean;
+
+  @IsArray()
+  @IsInt({ each: true })
+  aptitudesIds: number[];
+
+  @IsArray()
+  @IsInt({ each: true })
+  areaDesarrolloIds: number[];
 
   @IsString()
   @IsOptional()

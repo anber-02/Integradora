@@ -27,11 +27,27 @@ export class CarreraService {
   ) {}
 
   async create(createCarreraDto: CreateCarreraDto) {
-    console.log(createCarreraDto);
+    const { aptitudesIds, areaDesarrolloIds } = createCarreraDto;
+
     try {
-      const Carrera = this.carreRepo.create(createCarreraDto);
-      await this.carreRepo.save(Carrera);
-      return Carrera;
+      const aptitudes = await this.aptitudRepo.find({
+        where: {
+          id: In(aptitudesIds),
+        },
+      });
+
+      const areasDesarrollo = await this.aptitudRepo.find({
+        where: {
+          id: In(areaDesarrolloIds),
+        },
+      });
+
+      const carrera = this.carreRepo.create(createCarreraDto);
+
+      carrera.areaDesarrollo = areasDesarrollo;
+      carrera.aptitudes = aptitudes;
+      await this.carreRepo.save(carrera);
+      return carrera;
     } catch (error) {
       throw new InternalServerErrorException(error);
     }
