@@ -7,15 +7,7 @@ import { CreateEmpresaDto } from './dto/create-empresa.dto';
 import { UpdateEmpresaDto } from './dto/update-empresa.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Empresa } from './entities/empresa.entity';
-import {
-  Repository,
-  Between,
-  Like,
-  Not,
-  LessThan,
-  Equal,
-  getRepository,
-} from 'typeorm';
+import { Repository, Between } from 'typeorm';
 import { DireccionService } from '../direccion/direccion.service';
 import { UpdateDireccionDto } from '../direccion/dto/update-direccion.dto';
 
@@ -35,11 +27,13 @@ export class EmpresaService {
         createEmpresaDto.direccion,
       );
 
+      const currentDate: number = new Date().getTime();
       // Luego, creamos la empresa
       const empresa = this.empresaRepo.create({
         ...createEmpresaDto,
         direccion: direccion, // Asignamos la dirección creada
         usuario_id: createEmpresaDto.usuario_id,
+        created_at: currentDate,
       });
 
       return this.empresaRepo.save(empresa);
@@ -167,29 +161,17 @@ export class EmpresaService {
   }
 
   async obtenerEstadisticas() {
-    // Definir el rango de fechas para el periodo "enero - abril"
+    const inicioPeriodo = new Date('2024-01-01').getTime(); // Enero 1, 2024 en milisegundos
+    const finPeriodo = new Date('2024-04-30').getTime(); // Abril 30, 2024 en milisegundos
 
-    const inicioPeriodo = new Date('2024-01-01'); // Enero 1, 2024
-    const finPeriodo = new Date('2024-04-30'); // Abril 30, 2024
+    console.log(inicioPeriodo, finPeriodo);
 
-    // const inicioPeriodo = new Date('2024-01-01T00:00:00Z'); // Enero 1, 2024 en UTC
-    // const finPeriodo = new Date('2024-04-30T23:59:59Z'); // Abril 30, 2024 en UTC
-
-    //-- no jala las fechas de la bd
-
-    //-- OCUPAR TO LOCAL STRING
-    //-- HACER LA CONSULTA EN LA BD, NO HAY ERROR PERO NO RETORNA NADA
-    //-- Hacer 3 triggers cuando se haga actualizacion direccion, se cambia el estatus de la empresa a pendiente(OPCIONAL)
-
-    //generar una funcion de archivos que reciba un arreglo de objetos donde se tanga una key, nombre, data(data de la imagen y que reciba 5) y que se suba a cloudynary, que se genere url y que la guardes en la base de datos de documentos
-
-    // Contar las empresas por cada tipo: locales, nacionales, internacionales
+    // Generar las estadísticas
     const estadisticas = {
       periodo: 'enero - abril',
       data: [],
     };
 
-    console.log(inicioPeriodo, finPeriodo);
     // Contar empresas locales
     const locales = await this.empresaRepo.count({
       where: {
