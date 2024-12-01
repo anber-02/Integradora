@@ -89,15 +89,47 @@ export class CarreraService {
   }
 
   async update(id: number, updateCarreraDto: UpdateCarreraDto) {
+    const { aptitudesIds, areaDesarrolloIds } = updateCarreraDto;
+
     try {
-      const Carrera = await this.carreRepo.preload({
+      // Cargar la Carrera existente por su ID
+      const carrera = await this.carreRepo.preload({
         id,
         ...updateCarreraDto,
       });
-      await this.carreRepo.save(Carrera);
-      return Carrera;
+
+      if (!carrera) {
+        throw new Error('Carrera no encontrada');
+      }
+
+      const aptitudes = await this.aptitudRepo.find({
+        where: {
+          id: In(aptitudesIds),
+        },
+      });
+
+      const areasDesarrollo = await this.areaDesarrolloRepo.find({
+        where: {
+          id: In(areaDesarrolloIds),
+        },
+      });
+
+      carrera.aptitudes = carrera.aptitudes.filter((aptitud) =>
+        aptitudesIds.includes(aptitud.id),
+      );
+
+      carrera.areaDesarrollo = carrera.areaDesarrollo.filter((area) =>
+        areaDesarrolloIds.includes(area.id),
+      );
+
+      carrera.aptitudes = [...carrera.aptitudes, ...aptitudes];
+      carrera.areaDesarrollo = [...carrera.areaDesarrollo, ...areasDesarrollo];
+
+      await this.carreRepo.save(carrera);
+
+      return carrera; // Retorna la carrera actualizada
     } catch (error) {
-      throw new InternalServerErrorException(error);
+      throw new InternalServerErrorException(error.message || error);
     }
   }
 
