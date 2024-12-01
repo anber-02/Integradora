@@ -71,8 +71,23 @@ export class CarreraController {
 
   @Auth(Role.ADMIN)
   @Patch(':id')
-  update(@Param('id') id: string, @Body() updateCarreraDto: UpdateCarreraDto) {
-    return this.carreraService.update(+id, updateCarreraDto);
+  @UseInterceptors(FilesInterceptor('images'))
+  async update(
+    @Param('id') id: string,
+    @Body() updateCarreraDto: UpdateCarreraDto,
+    @UploadedFiles() files: Express.Multer.File[],
+  ) {
+    try {
+      if (files) {
+        const iconResult = await this.imageService.uploadImage(files[0].path);
+        const imageResult = await this.imageService.uploadImage(files[1].path);
+        updateCarreraDto.icon = iconResult.secure_url; // Almacena la URL en el DTO
+        updateCarreraDto.image_url = imageResult.secure_url; // Almacena la URL en el DTO
+      }
+      return this.carreraService.update(+id, updateCarreraDto);
+    } catch (error) {
+      throw new InternalServerErrorException(error);
+    }
   }
 
   @Auth(Role.ADMIN)
