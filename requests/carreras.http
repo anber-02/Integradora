@@ -1,11 +1,11 @@
 @url = http://localhost:3000/api/carrera
-@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6ImFkbWluIiwiaWF0IjoxNzMxMTcxMDg2LCJleHAiOjE3MzEyNTc0ODZ9.lonwHLxYpjpJvMtqnYq2JyMGBBCNu4wONINvWw_1tEA
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6ImFkbWluIiwiaWF0IjoxNzMzMDkxMjkxLCJleHAiOjE3MzMxNzc2OTF9.pjMMP2UrE4CLWIFp4Y7hpYqblvpup-0ZfOKM9YF6g-Y
 
 ###
 GET {{url}}/
 
 ###
-GET {{url}}/1
+GET {{url}}/28
 
 ###
 POST {{url}}/ 
@@ -20,11 +20,14 @@ Authorization: Bearer {{token}}
 }
 
 ###
-PATCH {{url}}/1
+PATCH {{url}}/28
 Content-Type: application/json
+Authorization: Bearer {{token}}
 
 {
-  "calle": "calle de las rosas",
+  "nombre": "Artes y Humanidades",
+  "areaDesarrolloIds": [1, 2, 4, 5, 18],
+  "aptitudesIds" : [1]
 }
 
 ###

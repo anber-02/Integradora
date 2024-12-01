@@ -22,7 +22,7 @@ export class CarreraService {
     @InjectRepository(Aptitude)
     private aptitudRepo: Repository<Aptitude>,
 
-    @InjectRepository(Aptitude)
+    @InjectRepository(AreaDesarrollo)
     private areaDesarrolloRepo: Repository<AreaDesarrollo>,
   ) {}
 
@@ -89,45 +89,46 @@ export class CarreraService {
   }
 
   async update(id: number, updateCarreraDto: UpdateCarreraDto) {
-    const { aptitudesIds, areaDesarrolloIds } = updateCarreraDto;
+    const { aptitudesIds, areaDesarrolloIds, ...restProps } = updateCarreraDto;
+    console.log(updateCarreraDto);
 
     try {
-      // Cargar la Carrera existente por su ID
-      const carrera = await this.carreRepo.preload({
-        id,
-        ...updateCarreraDto,
+      const carrera = await this.carreRepo.findOne({
+        where: { id },
+        relations: ['areaDesarrollo', 'aptitudes'],
       });
 
       if (!carrera) {
         throw new Error('Carrera no encontrada');
       }
 
-      const aptitudes = await this.aptitudRepo.find({
-        where: {
-          id: In(aptitudesIds),
-        },
-      });
+      if (aptitudesIds && aptitudesIds.length > 0) {
+        const aptitudes = await this.aptitudRepo.find({
+          where: {
+            id: In(aptitudesIds),
+          },
+        });
 
-      const areasDesarrollo = await this.areaDesarrolloRepo.find({
-        where: {
-          id: In(areaDesarrolloIds),
-        },
-      });
+        carrera.aptitudes = [];
 
-      carrera.aptitudes = carrera.aptitudes.filter((aptitud) =>
-        aptitudesIds.includes(aptitud.id),
-      );
+        carrera.aptitudes = aptitudes;
+      }
 
-      carrera.areaDesarrollo = carrera.areaDesarrollo.filter((area) =>
-        areaDesarrolloIds.includes(area.id),
-      );
+      if (areaDesarrolloIds && areaDesarrolloIds.length > 0) {
+        const areasDesarrollo = await this.areaDesarrolloRepo.find({
+          where: {
+            id: In(areaDesarrolloIds),
+          },
+        });
 
-      carrera.aptitudes = [...carrera.aptitudes, ...aptitudes];
-      carrera.areaDesarrollo = [...carrera.areaDesarrollo, ...areasDesarrollo];
-
+        carrera.areaDesarrollo = [];
+        carrera.areaDesarrollo = areasDesarrollo;
+      }
+      // Actualizar la carrera
+      Object.assign(carrera, restProps);
       await this.carreRepo.save(carrera);
 
-      return carrera; // Retorna la carrera actualizada
+      return carrera;
     } catch (error) {
       throw new InternalServerErrorException(error.message || error);
     }
