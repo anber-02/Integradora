@@ -37,10 +37,12 @@ export class CreateCarreraDto {
 
   @IsArray()
   @IsInt({ each: true })
+  @Transform(({ value }) => value.map(Number))
   aptitudesIds: number[];
 
   @IsArray()
   @IsInt({ each: true })
+  @Transform(({ value }) => value.map(Number))
   areaDesarrolloIds: number[];
 
   @IsString()
