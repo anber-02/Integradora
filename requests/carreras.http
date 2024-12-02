@@ -25,9 +25,9 @@ Content-Type: application/json
 Authorization: Bearer {{token}}
 
 {
-  "nombre": "Artes y Humanidades",
-  "areaDesarrolloIds": [1, 2, 4, 5, 18],
-  "aptitudesIds" : [1]
+  "nombre": "Artes y Humanidades patch",
+  "areaDesarrolloIds": [1, 2, 20],
+  "status": false
 }
 
 ###

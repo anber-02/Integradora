@@ -33,6 +33,12 @@ export class CreateCarreraDto {
 
   @IsOptional()
   @IsBoolean()
+  @Transform(({ value }) => {
+    if (typeof value === 'string') {
+      return value.toLowerCase() === 'true'; // Convierte "true" a true y "false" a false
+    }
+    return value; // Si ya es booleano, se deja tal cual
+  })
   status: boolean;
 
   @IsArray()
