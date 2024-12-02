@@ -36,10 +36,11 @@ export class EmpresaController {
   }
 
   @Auth(Role.ADMIN)
-  @Get('estadisticas')
-  async obtenerEstadisticas() {
-    return this.empresaService.obtenerEstadisticas();
-  }
+@Get('estadisticas')
+async obtenerEstadisticas() {
+  return this.empresaService.obtenerEstadisticas();
+}
+
 
   @Auth(Role.ADMIN, Role.EMPRESA)
   @Get()

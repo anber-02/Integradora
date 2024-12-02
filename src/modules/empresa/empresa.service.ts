@@ -161,46 +161,95 @@ export class EmpresaService {
   }
 
   async obtenerEstadisticas() {
-    const inicioPeriodo = new Date('2024-01-01').getTime(); // Enero 1, 2024 en milisegundos
-    const finPeriodo = new Date('2024-04-30').getTime(); // Abril 30, 2024 en milisegundos
-
-    console.log(inicioPeriodo, finPeriodo);
-
-    // Generar las estadísticas
-    const estadisticas = {
-      periodo: 'enero - abril',
-      data: [],
+    const estadisticas = [
+      {
+        año: 2023,
+        total: 0,
+        data: [
+          {
+            periodo: 'Enero-Abril 2023',
+            cantidades: [],
+          },
+          {
+            periodo: 'Mayo-Agosto 2023',
+            cantidades: [],
+          },
+        ],
+      },
+      {
+        año: 2024,
+        total: 0,
+        data: [
+          {
+            periodo: 'Enero-Abril 2024',
+            cantidades: [],
+          },
+          {
+            periodo: 'Mayo-Agosto 2024',
+            cantidades: [],
+          },
+        ],
+      },
+    ];
+  
+    // Define períodos
+    const periodos = [
+      { inicio: '2023-01-01', fin: '2023-04-30' },
+      { inicio: '2023-05-01', fin: '2023-08-31' },
+      { inicio: '2024-01-01', fin: '2024-04-30' },
+      { inicio: '2024-05-01', fin: '2024-08-31' },
+    ];
+  
+    for (let i = 0; i < estadisticas.length; i++) {
+      const año = estadisticas[i].año;
+  
+      for (let j = 0; j < estadisticas[i].data.length; j++) {
+        const inicioPeriodo = new Date(periodos[i * 2 + j].inicio).getTime();
+        const finPeriodo = new Date(periodos[i * 2 + j].fin).getTime();
+  
+        const locales = await this.empresaRepo.count({
+          where: {
+            created_at: Between(inicioPeriodo, finPeriodo),
+            alcance_geografico: 'local',
+            activo: true,
+          },
+        });
+  
+        const nacionales = await this.empresaRepo.count({
+          where: {
+            created_at: Between(inicioPeriodo, finPeriodo),
+            alcance_geografico: 'nacional',
+            activo: true,
+          },
+        });
+  
+        const internacionales = await this.empresaRepo.count({
+          where: {
+            created_at: Between(inicioPeriodo, finPeriodo),
+            alcance_geografico: 'internacional',
+            activo: true,
+          },
+        });
+  
+        estadisticas[i].data[j].cantidades = [
+          { tipo: 'Locales', cantidad: locales },
+          { tipo: 'Nacionales', cantidad: nacionales },
+          { tipo: 'Internacionales', cantidad: internacionales },
+        ];
+  
+        estadisticas[i].total += locales + nacionales + internacionales;
+      }
+    }
+  
+    const total_global = estadisticas.reduce(
+      (sum, estadistica) => sum + estadistica.total,
+      0,
+    );
+  
+    return {
+      total_global,
+      estadisticas,
     };
-
-    // Contar empresas locales
-    const locales = await this.empresaRepo.count({
-      where: {
-        created_at: Between(inicioPeriodo, finPeriodo),
-        alcance_geografico: 'local',
-      },
-    });
-
-    // Contar empresas nacionales
-    const nacionales = await this.empresaRepo.count({
-      where: {
-        created_at: Between(inicioPeriodo, finPeriodo),
-        alcance_geografico: 'nacional',
-      },
-    });
-
-    // Contar empresas internacionales
-    const internacionales = await this.empresaRepo.count({
-      where: {
-        created_at: Between(inicioPeriodo, finPeriodo),
-        alcance_geografico: 'internacional',
-      },
-    });
-
-    // Crear el objeto final con las estadísticas
-    estadisticas.data.push({ locales });
-    estadisticas.data.push({ nacionales });
-    estadisticas.data.push({ internacionales });
-
-    return estadisticas;
   }
+  
 }
