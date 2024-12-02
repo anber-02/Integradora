@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Documento } from './entities/documento.entity';
 import { Repository } from 'typeorm';
 import { S3 } from 'src/provider/s3/s3';
+import { CreateDocumentoDto } from './dto/create-documento.dto';
 
 @Injectable()
 export class DocumentosService {
@@ -33,5 +34,15 @@ export class DocumentosService {
     }
 
     return documentos; // Retorna los documentos creados
+  }
+
+  async updateStatus(id: number, body: CreateDocumentoDto): Promise<Documento> {
+    const documento = await this.documentoRepository.findOne({ where: { id } });
+    if (!documento) {
+      throw new Error('Documento no encontrado');
+    }
+
+    documento.status = body.status;
+    return this.documentoRepository.save(documento);
   }
 }

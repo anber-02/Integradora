@@ -7,6 +7,7 @@ import {
   ManyToOne,
   PrimaryGeneratedColumn,
 } from 'typeorm';
+import { Status } from '../enums/status.enum';
 
 @Entity()
 export class Documento {
@@ -28,6 +29,13 @@ export class Documento {
 
   @Column()
   url: string;
+
+  @Column({
+    type: 'enum',
+    enum: Status,
+    default: Status.EN_PROCESO,
+  })
+  status: string;
 
   @Column()
   empresa_id: number;

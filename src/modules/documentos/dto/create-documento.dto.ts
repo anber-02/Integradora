@@ -1,9 +1,7 @@
-import { Transform } from 'class-transformer';
-import { IsNumber, IsPositive } from 'class-validator';
+import { IsEnum } from 'class-validator';
+import { Status } from '../enums/status.enum';
 
 export class CreateDocumentoDto {
-  @IsNumber()
-  @IsPositive()
-  @Transform(({ value }) => Number(value))
-  empresa_id: number;
+  @IsEnum(Status)
+  status: Status;
 }
