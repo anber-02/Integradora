@@ -24,6 +24,7 @@ export class S3 {
     const params = {
       Bucket: this.bucketName,
       Key: `uploads/${Date.now()}-${file.originalname}`, // Nombre único para evitar colisiones
+      ACL: 'public-read',
       Body: file.buffer,
       ContentType: file.mimetype,
     };
