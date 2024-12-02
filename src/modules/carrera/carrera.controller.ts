@@ -37,7 +37,7 @@ export class CarreraController {
     @UploadedFiles() files: Express.Multer.File[],
   ) {
     try {
-      if (files) {
+      if (files && files.length > 0) {
         const iconResult = await this.imageService.uploadImage(files[0].path);
         const imageResult = await this.imageService.uploadImage(files[1].path);
         createCarreraDto.icon = iconResult.secure_url; // Almacena la URL en el DTO
@@ -78,7 +78,7 @@ export class CarreraController {
     @UploadedFiles() files: Express.Multer.File[],
   ) {
     try {
-      if (files) {
+      if (files && files.length > 0) {
         const iconResult = await this.imageService.uploadImage(files[0].path);
         const imageResult = await this.imageService.uploadImage(files[1].path);
         updateCarreraDto.icon = iconResult.secure_url; // Almacena la URL en el DTO
@@ -86,6 +86,7 @@ export class CarreraController {
       }
       return this.carreraService.update(+id, updateCarreraDto);
     } catch (error) {
+      console.log(error);
       throw new InternalServerErrorException(error);
     }
   }
