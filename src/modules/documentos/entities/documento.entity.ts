@@ -29,6 +29,9 @@ export class Documento {
   @Column()
   url: string;
 
+  @Column()
+  empresa_id: number;
+
   @ManyToOne(() => Empresa, (empresa) => empresa.documentos)
   @JoinColumn({ name: 'empresa_id' })
   empresa: Empresa;

@@ -48,7 +48,7 @@ export class Proyecto {
   @JoinColumn({ name: 'carrera_id' })
   carrera: Carrera;
 
-  @ManyToMany(() => Observacion, (observacion) => observacion.empresas)
+  @ManyToMany(() => Observacion, (observacion) => observacion.proyectos)
   @JoinTable({ name: 'proyecto_observacion' })
   observaciones: Observacion[];
 

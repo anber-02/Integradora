@@ -1,45 +1,29 @@
 import {
   Controller,
-  Get,
   Post,
   Body,
-  Patch,
-  Param,
-  Delete,
+  UseInterceptors,
+  UploadedFiles,
 } from '@nestjs/common';
 import { DocumentosService } from './documentos.service';
+import { FilesInterceptor } from '@nestjs/platform-express';
 import { CreateDocumentoDto } from './dto/create-documento.dto';
-import { UpdateDocumentoDto } from './dto/update-documento.dto';
 
 @Controller('documentos')
 export class DocumentosController {
   constructor(private readonly documentosService: DocumentosService) {}
 
   @Post()
-  create(@Body() createDocumentoDto: CreateDocumentoDto) {
-    return this.documentosService.create(createDocumentoDto);
-  }
-
-  @Get()
-  findAll() {
-    return this.documentosService.findAll();
-  }
-
-  @Get(':id')
-  findOne(@Param('id') id: string) {
-    return this.documentosService.findOne(+id);
-  }
-
-  @Patch(':id')
-  update(
-    @Param('id') id: string,
-    @Body() updateDocumentoDto: UpdateDocumentoDto,
+  @UseInterceptors(FilesInterceptor('files', 3))
+  async uploadDocuments(
+    @UploadedFiles() files: Express.Multer.File[],
+    @Body() body: CreateDocumentoDto,
   ) {
-    return this.documentosService.update(+id, updateDocumentoDto);
-  }
-
-  @Delete(':id')
-  remove(@Param('id') id: string) {
-    return this.documentosService.remove(+id);
+    // Llamar al servicio de documentos para subir los archivos a S3 y guardar la URL en la base de datos
+    const documentos = await this.documentosService.uploadFiles(
+      files,
+      body.empresa_id,
+    );
+    return documentos; // Retorna los documentos guardados en la base de datos
   }
 }

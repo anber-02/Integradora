@@ -18,6 +18,7 @@ import { ImagesModule } from './shared/images/images.module';
 import { AptitudesModule } from './modules/aptitudes/aptitudes.module';
 
 import { MulterModule } from '@nestjs/platform-express';
+import { S3 } from './provider/s3/s3';
 
 @Module({
   imports: [
@@ -50,6 +51,6 @@ import { MulterModule } from '@nestjs/platform-express';
     AptitudesModule,
   ],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService, S3],
 })
 export class AppModule {}

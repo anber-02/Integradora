@@ -1,23 +1,9 @@
-import { IsNumber, IsPositive, IsString, MinLength } from 'class-validator';
+import { Transform } from 'class-transformer';
+import { IsNumber, IsPositive } from 'class-validator';
 
 export class CreateDocumentoDto {
-  @IsString()
-  @MinLength(5)
-  nombre_archivo: string;
-
-  @IsString()
-  @MinLength(5)
-  tipo_archivo: string;
-
-  // @IsDate()
-  // @IsOptional()
-  // fecha_subida: Date;
-
-  @IsString()
-  @MinLength(3)
-  url: string;
-
   @IsNumber()
   @IsPositive()
+  @Transform(({ value }) => Number(value))
   empresa_id: number;
 }

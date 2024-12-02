@@ -2,7 +2,7 @@
 
 @empresa = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjIsInVzZXJuYW1lIjoiZW1wcmVzYSIsInJvbCI6ImVtcHJlc2EiLCJpYXQiOjE3MzIyNTg2ODksImV4cCI6MTczMjM0NTA4OX0.UNSfmyrjJ0JgvdaxmamIgK2kkr1vQBbHbXhGEcRdA5g
 @empresa2 = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjUsInVzZXJuYW1lIjoiZW1wcmVzYSAyIiwicm9sIjoiZW1wcmVzYSIsImlhdCI6MTczMTUyMjUxNywiZXhwIjoxNzMxNjA4OTE3fQ.bEpmqSEQgcTV5H0q9g5zJbQqLnH8zQj3fPLL13M1XSw
-@admin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6ImFkbWluIiwiaWF0IjoxNzMzMDkzOTc5LCJleHAiOjE3MzMxODAzNzl9.mqhtRLQVqTEwdICP8sxctukPkFkXsfz7fTlob6rE1Mo
+@admin = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsInVzZXJuYW1lIjoiYW5iZXJ0byIsInJvbCI6ImFkbWluIiwiaWF0IjoxNzMzMTE5NzY5LCJleHAiOjE3MzMyMDYxNjl9.0c8Kb56ONz8IruBLrN3IdbwoHpdzCG7kX1a9JnG8Fs8
 
 ###
 ###
@@ -11,7 +11,7 @@ Authorization: Bearer {{admin}}
 
 ###
 GET {{url}}/
-Authorization: Bearer {{empresa}}
+Authorization: Bearer {{admin}}
 
 ###
 POST {{url}}/

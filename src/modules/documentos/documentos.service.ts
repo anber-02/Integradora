@@ -1,26 +1,37 @@
 import { Injectable } from '@nestjs/common';
-import { CreateDocumentoDto } from './dto/create-documento.dto';
-import { UpdateDocumentoDto } from './dto/update-documento.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Documento } from './entities/documento.entity';
+import { Repository } from 'typeorm';
+import { S3 } from 'src/provider/s3/s3';
 
 @Injectable()
 export class DocumentosService {
-  create(createDocumentoDto: CreateDocumentoDto) {
-    return 'This action adds a new documento';
-  }
+  constructor(
+    @InjectRepository(Documento)
+    private readonly documentoRepository: Repository<Documento>,
+    private readonly s3Provider: S3,
+  ) {}
 
-  findAll() {
-    return `This action returns all documentos`;
-  }
+  async uploadFiles(files: Express.Multer.File[], empresaId: number) {
+    const documentos: Documento[] = [];
 
-  findOne(id: number) {
-    return `This action returns a #${id} documento`;
-  }
+    for (const file of files) {
+      // Subir archivo a S3
+      const fileUrl = await this.s3Provider.uploadFile(file);
 
-  update(id: number, updateDocumentoDto: UpdateDocumentoDto) {
-    return `This action updates a #${id} documento`;
-  }
+      // Crear una entrada en la base de datos con la URL del archivo
+      const documento = this.documentoRepository.create({
+        nombre_archivo: file.originalname, // Nombre original del archivo
+        tipo_archivo: file.mimetype, // Tipo de archivo (PDF, etc.)
+        url: fileUrl.Location, // La URL de S3
+        empresa_id: empresaId, // Relacionar con la empresa
+      });
 
-  remove(id: number) {
-    return `This action removes a #${id} documento`;
+      // Guardar el documento en la base de datos
+      await this.documentoRepository.save(documento);
+      documentos.push(documento);
+    }
+
+    return documentos; // Retorna los documentos creados
   }
 }

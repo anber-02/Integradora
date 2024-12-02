@@ -45,7 +45,7 @@ export class EmpresaService {
   async findAll() {
     try {
       const Empresa = await this.empresaRepo.find({
-        relations: ['direccion', 'usuario'],
+        relations: ['direccion', 'usuario', 'documentos'],
         select: {
           usuario: {
             id: true,
@@ -65,7 +65,7 @@ export class EmpresaService {
 
   async findOne(id: number) {
     const Empresa = await this.empresaRepo.findOne({
-      relations: ['direccion', 'usuario'],
+      relations: ['direccion', 'usuario', 'documentos'],
       select: {
         usuario: {
           id: true,
@@ -138,7 +138,7 @@ export class EmpresaService {
 
   async findEmpresasByUser(id: number) {
     const Empresa = await this.empresaRepo.find({
-      relations: ['direccion', 'usuario'],
+      relations: ['direccion', 'usuario', 'documentos'],
       select: {
         usuario: {
           id: true,

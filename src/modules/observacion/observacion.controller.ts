@@ -36,14 +36,6 @@ export class ObservacionController {
     return this.observacionService.findOne(+id);
   }
 
-  // @Patch(':id')
-  // update(
-  //   @Param('id') id: string,
-  //   @Body() updateObservacionDto: UpdateObservacionDto,
-  // ) {
-  //   return this.observacionService.update(+id, updateObservacionDto);
-  // }
-
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.observacionService.remove(+id);

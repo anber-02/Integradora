@@ -23,22 +23,64 @@ export class ObservacionService {
     assignObservacionToProject: AssignObservacionToProjectDto,
   ) {
     const { project_id, detalle } = assignObservacionToProject;
-    const observacion = this.observacionRepository.create({ detalle });
-    const project = await this.proyectoRepository.findOneBy({ id: project_id });
-    observacion.proyectos = [project];
-    this.observacionRepository.save(observacion);
-    return observacion;
+    console.log({ project_id, detalle });
+    try {
+      const project = await this.proyectoRepository.findOne({
+        where: { id: project_id },
+      });
+
+      if (!project) {
+        throw new Error('Proyecto no encontrado');
+      }
+      console.log(project);
+      // Crear una nueva observación
+      const observacion = this.observacionRepository.create({ detalle });
+
+      // Asignar el proyecto a la observación
+      observacion.proyectos = [project];
+
+      // Guardar la observación
+      await this.observacionRepository.save(observacion);
+
+      return observacion;
+    } catch (error) {
+      // Manejo de error
+      throw new Error(
+        `Error al asignar la observación al proyecto: ${error.message}`,
+      );
+    }
   }
 
   async assignObservacionToEmpresa(
     assignObservacionToEmpresa: AssignObservacionToEmpresaDto,
   ) {
     const { empresa_id, detalle } = assignObservacionToEmpresa;
-    const observacion = this.observacionRepository.create({ detalle });
-    const empresa = await this.empresaRepository.findOneBy({ id: empresa_id });
-    observacion.empresas = [empresa];
-    this.observacionRepository.save(observacion);
-    return observacion;
+
+    try {
+      // Buscar la empresa
+      const empresa = await this.empresaRepository.findOne({
+        where: { id: empresa_id },
+      });
+
+      if (!empresa) {
+        throw new Error('Empresa no encontrada');
+      }
+      // Crear una nueva observación
+      const observacion = this.observacionRepository.create({ detalle });
+
+      // Asignar la empresa a la observación
+      observacion.empresas = [empresa];
+
+      // Guardar la observación
+      await this.observacionRepository.save(observacion);
+
+      return observacion;
+    } catch (error) {
+      // Manejo de error
+      throw new Error(
+        `Error al asignar la observación a la empresa: ${error.message}`,
+      );
+    }
   }
 
   findAll() {
