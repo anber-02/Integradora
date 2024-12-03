@@ -197,7 +197,7 @@ export class EmpresaService {
       { inicio: '2023-01-01', fin: '2023-04-30' },
       { inicio: '2023-05-01', fin: '2023-08-31' },
       { inicio: '2024-01-01', fin: '2024-04-30' },
-      { inicio: '2024-05-01', fin: '2024-08-31' },
+      { inicio: '2024-09-01', fin: '2024-12-31' },
     ];
 
     for (let i = 0; i < estadisticas.length; i++) {
