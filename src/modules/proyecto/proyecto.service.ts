@@ -7,7 +7,7 @@ import { CreateProyectoDto } from './dto/create-proyecto.dto';
 import { UpdateProyectoDto } from './dto/update-proyecto.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Proyecto } from './entities/proyecto.entity';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { Habilidad } from '../habilidad/entities/habilidad.entity';
 import { Status } from './enums/status.enum';
 
@@ -173,9 +173,17 @@ export class ProyectoService {
       Object.assign(proyecto, body);
 
       if ('habilidades_ids' in body) {
-        const nuevasHabilidades = await this.habilidadRepo.findByIds(
-          body.habilidades_ids,
-        );
+        // Si el proyecto ya tiene habilidades, las eliminamos
+        proyecto.habilidades = []; // Limpia las habilidades existentes
+
+        // Buscar las nuevas habilidades por sus ids
+        const nuevasHabilidades = await this.habilidadRepo.find({
+          where: {
+            id: In(body.habilidades_ids),
+          },
+        });
+
+        // Asignar las nuevas habilidades al proyecto
         proyecto.habilidades = nuevasHabilidades;
       }
 
